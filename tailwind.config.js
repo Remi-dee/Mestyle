@@ -15,6 +15,9 @@ module.exports = {
         grayLight: "#d9d9d9", // Footer background color
         blackAlpha10: "rgba(18, 18, 18, 0.1)", // for the gradient dark background color
       },
+      fontFamily: {
+        lexend: ["var(--font-lexend)"],
+      },
     },
   },
   plugins: [],
