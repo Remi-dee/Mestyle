@@ -1,18 +1,21 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    './pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+      colors: {
+        grayDark: "#121212",
+        white: "#fff",
+        black: "#000",
+        grayNeutral: "#363939",
+        grayLight: "#d9d9d9", // Footer background color
+        blackAlpha10: "rgba(18, 18, 18, 0.1)", // for the gradient dark background color
       },
     },
   },
   plugins: [],
-}
+};
