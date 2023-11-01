@@ -12,11 +12,11 @@ function Overlay({ title = "", description = "", children, className = "" }) {
   const baseStyle =
     "relative backdrop-blur-md z-50 bg-black/25 dark:bg-white/30 " +
     "border border-solid border-black dark:border-white rounded-xl " +
-    "mx-4 shadow-lg antialiased select-none";
+    "shadow-lg antialiased select-none";
 
   return (
     <div className={`${baseStyle} ${className}`}>
-      <div className="flex flex-col items-center justify-center md:p-4 px-2 py-4 lg:p-4 xl:p-4 space-y-6 mx-auto">
+      <div className="flex flex-col items-center justify-center md:p-4 px-2 py-4 lg:p-4 xl:p-4 space-y-6 mx-auto font-lexend">
         {title && (
           <div className="space-y-2 w-full">
             <h2 className="text-2xl text-center capitalize md:text-3xl xl:text-3xl lg:text-3xl font-medium text-black dark:text-white">
@@ -29,7 +29,7 @@ function Overlay({ title = "", description = "", children, className = "" }) {
           </div>
         )}
         {description && (
-          <p className="text-black text-center dark:text-white text-xs md:text-xl lg:text-xl xl:text-xl">
+          <p className="text-black/60 text-center dark:text-white/70 text-xs md:text-xl lg:text-xl xl:text-xl">
             {description}
           </p>
         )}
