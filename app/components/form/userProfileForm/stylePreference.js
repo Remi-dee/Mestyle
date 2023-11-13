@@ -9,7 +9,7 @@ function StylePreference() {
 
   return (
     <div className="flex flex-col select-none items-center justify-center mx-auto">
-      <div className="grid grid-cols-1 space-y-2 lg:grid-cols-2 md:justify-between xl:justify-between">
+      <div className="grid grid-cols-1 lg:grid-cols-2 md:grid-cols-2 xl:grid-cols-2 space-y-2 lg:justify-between md:justify-between xl:justify-between">
         <div className="space-y-4">
           <fieldset>
             <legend className="text-base font-medium mb-2">Occasion</legend>
@@ -89,7 +89,7 @@ function StylePreference() {
               name="styleInspiration"
               value={formData.styleInspiration}
               onChange={handleChange}
-              className="appearance-none border-none focus:ring-0 w-full py-2 px-3 dark:bg-black bg-white bg-opacity-25 dark:bg-opacity-25 placeholder:text-black/50 dark:placeholder:text-white/50 focus-visible:text-black dark:focus-visible:text-white text-black dark:text-white leading-tight resize-none overflow-hidden hover:overflow-y-auto h-24"
+              className="appearance-none border-none focus:ring-0 w-full py-2 px-3 bg-white bg-opacity-25 placeholder:text-black/50 focus-visible:text-black leading-tight resize-none h-24"
               placeholder='Style is eternal. "What you wear is how you present yourself to the world, especially today, when human contacts are so quick."'
             />
             {errors.styleInspiration && (

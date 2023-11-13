@@ -8,7 +8,7 @@ function BodyType() {
 
   return (
     <div className="flex flex-col items-center justify-center select-none mx-auto">
-      <div className="grid lg:grid-cols-2 md:justify-between xl:justify-between space-y-2">
+      <div className="grid grid-cols-1 lg:grid-cols-2 md:grid-cols-2 xl:grid-cols-2 space-y-2 lg:justify-between md:justify-between xl:justify-between mx-auto">
         <div className="space-y-4">
           <fieldset className="mb-4">
             <legend className="text-base font-medium mb-2">Skin Tone</legend>
