@@ -53,9 +53,9 @@ class GenderValidator extends Validator {
 
 class StyleInspirationValidator extends Validator {
   validate(data, errors) {
-    errors.styleInspiration = isSafeText(data.styleInspiration)
-      ? ""
-      : errorMessages.styleInspiration;
+    if (data.styleInspiration && !isSafeText(data.styleInspiration)) {
+      errors.styleInspiration = errorMessages.styleInspiration;
+    }
     return super.validate(data, errors);
   }
 }

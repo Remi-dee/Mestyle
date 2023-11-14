@@ -1,36 +1,36 @@
 "use client";
 
-import React, { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
+
+import {
+  FORM_DESCRIPTIONS,
+  FORM_INITIAL_STATE,
+  FORM_TITLES,
+} from "@/app/components/form/userProfile/formConstants";
+
 import {
   validateBodyType,
   validateStylePreference,
-} from "../../../app/components/form/userProfileForm/validationStrategies";
+} from "@/app/components/form/userProfile/validation";
 
 const FormContext = createContext();
 
 function FormProvider({ children }) {
-  const formTitle = {
-    0: "Your Style Preferences",
-    1: "Your Body Type",
-  };
-
-  const formDescription = {
-    0: "Tell us about what styles you prefer for better outfit recommendations.",
-    1: "Tell us a bit about your body type for a tailored experience.",
-  };
-
   const [formStep, setFormStep] = useState(0);
-  const [formData, setFormData] = useState({
-    occasion: [],
-    ageGroup: [],
-    gender: [],
-    styleInspiration: "",
-    skinTone: [],
-    heightGroup: [],
-    bodyShape: [],
-    colorPreference: [],
-  });
+  const [formData, setFormData] = useState(FORM_INITIAL_STATE);
   const [errors, setErrors] = useState({});
+
+  useEffect(() => {
+    const handleBeforeUnload = (e) => {
+      if (Object.keys(formData).some((key) => formData[key].length > 0)) {
+        e.preventDefault();
+        e.returnValue = "";
+      }
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => window.removeEventListener("beforeunload", handleBeforeUnload);
+  }, [formData]);
 
   const handleChange = (e) => {
     const { name, value, checked, type } = e.target;
@@ -46,11 +46,12 @@ function FormProvider({ children }) {
     setErrors((prev) => ({ ...prev, [name]: "" }));
   };
 
-  const handleNext = () => {
-    const newErrors = validateCurrentStep();
+  const handleNext = (e) => {
+    e.preventDefault();
+    const newErrors = validateStylePreference(formData);
     if (
       Object.keys(newErrors).length === 0 &&
-      formStep < Object.keys(formTitle).length - 1
+      formStep < Object.keys(FORM_TITLES).length - 1
     ) {
       setFormStep((current) => current + 1);
     } else {
@@ -60,7 +61,7 @@ function FormProvider({ children }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newErrors = validateCurrentStep();
+    const newErrors = validateBodyType(formData);
     if (Object.keys(newErrors).length === 0) {
       console.log("FormData:", formData);
     } else {
@@ -68,19 +69,9 @@ function FormProvider({ children }) {
     }
   };
 
-  const validateCurrentStep = () => {
-    const inputsToValidate =
-      formStep === 0 && !formData.styleInspiration
-        ? { ...formData, styleInspiration: undefined }
-        : formData;
-    const validationFunction =
-      formStep === 0 ? validateStylePreference : validateBodyType;
-    return validationFunction(inputsToValidate);
-  };
-
   const contextValue = {
-    formTitle,
-    formDescription,
+    formTitle: FORM_TITLES[formStep],
+    formDescription: FORM_DESCRIPTIONS[formStep],
     formStep,
     setFormStep,
     formData,

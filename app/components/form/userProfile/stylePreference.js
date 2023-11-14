@@ -1,8 +1,8 @@
 import React from "react";
-import useFormData from "../../../../hooks/userProfile/userForm/useFormData";
+import useFormContext from "@/hooks/userProfile/useFormContext";
 
 function StylePreference() {
-  const { formData, handleChange, errors } = useFormData();
+  const { formData, handleChange, errors } = useFormContext();
 
   const checkboxClass =
     "form-checkbox md:h-5 md:w-5 xl:w-5 xl:h-5 lg:h-5 lg:w-5 focus:checked:bg-black checked:bg-black focus:ring-0 lg:rounded-md xl:rounded-md md:rounded-md rounded-sm hover:checked:bg-black";
