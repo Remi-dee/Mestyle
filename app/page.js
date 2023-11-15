@@ -1,5 +1,5 @@
-import { FormProvider } from "../context/form/userProfile/userFormContext";
-import UserForm from "./components/form/userProfileForm/template";
+import { FormProvider } from "../context/form/userProfile/FormContext";
+import Form from "./components/form/userProfile/template";
 import PersonaliseScreen from "./components/ui/personaliseScreen/template";
 
 export default function Home() {
@@ -10,7 +10,7 @@ export default function Home() {
         description={`At Mestyle, we're dedicated to helping you look and feel your best. To provide you with the most relevant outfit suggestions, please share some information with us. Rest assured that your data is kept secure and used only to enhance your style journey.`}
       >
         <FormProvider>
-          <UserForm />
+          <Form />
         </FormProvider>
       </PersonaliseScreen>
     </main>

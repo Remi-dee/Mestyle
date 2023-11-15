@@ -1,10 +1,10 @@
 import React from 'react';
-import useFormData from '../../../../hooks/userProfile/userForm/useFormData';
+import useFormContext from '@/hooks/userProfile/useFormContext';
 import BodyType from './bodyType';
 import StylePreference from './stylePreference';
 
 function FormSelector() {
-  const { formStep } = useFormData();
+  const { formStep } = useFormContext();
 
   const formComponents = {
     0: <StylePreference />,
