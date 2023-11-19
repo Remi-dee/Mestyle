@@ -1,4 +1,6 @@
 import localFont from "next/font/local";
+
+
 const lexend = localFont({
   src: [
     {
