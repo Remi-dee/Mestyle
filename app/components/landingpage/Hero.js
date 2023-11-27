@@ -7,7 +7,7 @@ register();
 function Hero() {
   return (
     <section className="w-full h-screen p-8 space-y-3 bg-black text-white text-center">
-      <div className="space-y-3 mt-8">
+      <div className="space-y-3 mt-4">
         <p className="md:text-5xl text-2xl font-lexend ">
           Get Your Confidence Again
         </p>
@@ -20,14 +20,23 @@ function Hero() {
         </button>
       </div>
 
-      <div className="flex">
+      <div className="flex items-center justify-center">
         <Image
           src="/images/attractive-afroamerican-models-posing-outdoors-4.png"
           alt="women style"
           width={300}
           height={300}
         />
-        {/* <swiper-container
+
+        <Image
+        src="/images/medium-shot-woman-with-yellow-suit-2.png"
+        alt="fashion icon"
+        width={270}
+        height={270}
+      />
+
+        {/* 
+        <swiper-container
             ref={swiperElRef}
           slides-per-view="1"
           navigation="false"
@@ -91,14 +100,14 @@ function Hero() {
             />
           </swiper-slide>
         </swiper-container>*/}
-        <div>
+      {/*  <div>
           <Image
             src="/images/attractive-afroamerican-models-posing-outdoors-5.png"
             alt="women style"
             width={300}
             height={300}
           />
-        </div>
+      </div>*/}
       </div>
     </section>
   );
