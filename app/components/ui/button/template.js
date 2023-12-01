@@ -9,6 +9,7 @@ function Button({
   const variants = {
     primary: "bg-white text-black",
     secondary: "bg-black text-white",
+    inverted: "bg-transparent "
   };
 
   const isVariant = variants[variant] || variants.primary;
