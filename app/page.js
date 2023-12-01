@@ -4,7 +4,8 @@ import PersonaliseScreen from "./components/ui/personaliseScreen/template";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen items-center  justify-center">
+    <main className="flex min-h-screen items-center bg-grayDark justify-center">
+     
       <PersonaliseScreen
         title="Get Personalized Outfit Recommendations"
         description={`At Mestyle, we're dedicated to helping you look and feel your best. To provide you with the most relevant outfit suggestions, please share some information with us. Rest assured that your data is kept secure and used only to enhance your style journey.`}
@@ -12,7 +13,7 @@ export default function Home() {
         <FormProvider>
           <Form />
         </FormProvider>
-      </PersonaliseScreen>
+      </PersonaliseScreen> 
     </main>
   );
 }
