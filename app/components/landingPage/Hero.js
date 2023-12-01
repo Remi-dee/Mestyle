@@ -11,7 +11,7 @@ function Hero() {
         <span className="text-white text-5xl font-normal ">Again</span>
       </div>
 
-      
+      fg
     </div>
   );
 }
