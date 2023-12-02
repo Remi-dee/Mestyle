@@ -9,7 +9,7 @@ import Button from "../ui/button/template";
 
 function Hero() {
   return (
-    <div className="text-center pb-10 bg-grayDark">
+    <div className="text-center pb-10 bg-grayDark h-screen">
       <div className="">
         <span className="text-white text-5xl font-normal ">Get Your</span>
         <span className="text-white text-5xl font-semibold mx-3 ">
@@ -19,7 +19,7 @@ function Hero() {
         <div className="text-white text-2xl font-normal leading-[30px] my-2">
           Discover the latest trends and showcase your unique style
         </div>
-        <Button type="button" onClick={"#"} className="mt-4">
+        <Button type="button" onClick={"#"} className="mt-4 text-base font-medium ">
           Get Started
         </Button>
       </div>
@@ -27,8 +27,8 @@ function Hero() {
       <div className="flex justify-center ">
         <div>
           <Image
-            width={452}
-            height={700}
+            width={400}
+            height={500}
             src={imageLeft}
             alt=""
             className="rounded-tl-[20px] rounded-tr-[20px]"
@@ -36,13 +36,13 @@ function Hero() {
         </div>
 
         <div className="mt-7 rounded-tl-[20px] rounded-tr-[20px]">
-          <Image width={350} src={imageCenter} alt="" />
+          <Image width={300} src={imageCenter} alt="" />
         </div>
 
         <div>
           <Image
-            width={452}
-            height={551}
+            width={400}
+            height={500}
             src={imageRight}
             alt=""
             className="rounded-tl-[20px] rounded-tr-[20px]"
@@ -51,7 +51,7 @@ function Hero() {
       </div>
 
       <div className=" flex justify-center mt-[-150px] ">
-        <Image width={350} height={214} src={polygon} alt="" />
+        <Image width={300} height={214} src={polygon} alt="" />
       </div>
     </div>
   );

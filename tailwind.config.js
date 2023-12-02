@@ -19,7 +19,7 @@ module.exports = {
         lexend: ["var(--font-lexend)"],
       },
       backgroundImage: {
-        "explore-bg": "url('/explore/explore_bg.png')",
+        "explore-bg": "url('/images/explore/explore_bg.png')",
         
       },
     },
