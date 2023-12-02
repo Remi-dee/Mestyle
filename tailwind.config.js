@@ -18,6 +18,10 @@ module.exports = {
       fontFamily: {
         lexend: ["var(--font-lexend)"],
       },
+      backgroundImage: {
+        "explore-bg": "url('/explore/explore_bg.png')",
+        
+      },
     },
   },
   plugins: [require("@tailwindcss/forms")],
