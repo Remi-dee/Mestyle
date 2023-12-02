@@ -9,8 +9,8 @@ import Button from "../ui/button/template";
 
 function Hero() {
   return (
-    <div className="text-center mb-10 bg-grayDark">
-      <div className="my-4">
+    <div className="text-center pb-10 bg-grayDark">
+      <div className="">
         <span className="text-white text-5xl font-normal ">Get Your</span>
         <span className="text-white text-5xl font-semibold mx-3 ">
           Confidence
@@ -24,7 +24,7 @@ function Hero() {
         </Button>
       </div>
 
-      <div className="flex">
+      <div className="flex justify-center ">
         <div>
           <Image
             width={452}
