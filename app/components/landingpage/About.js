@@ -25,12 +25,17 @@ function About() {
         </div>
       </section>
 
-      <section className="lg:flex gap-2 bg-black w-full h-screen lg:p-24 p-6">
-        <div className="w-6/12  mx-auto">
-          <Image src="/images/photobuck.png" alt="Creators" width={400} height={400} />
+      <section className="lg:flex gap-2 bg-black w-full h-screen space-y-4 lg:px-24 lg:pt-24 lg:pb-0 px-6 pt-6 pb-6">
+        <div className="mx-auto overflow-hidden">
+          <Image
+            src="/images/photobuck.png"
+            alt="Creators"
+            width={500}
+            height={500}
+          />
         </div>
         <div className="lg:w-6/12 w-10/12 flex justify-center items-center  mx-auto">
-          <div className=" space-y-4 text-white">
+          <div className=" space-y-8 text-white">
             <p className="text-2xl lg:text-4xl font-bold">
               Discover the Creator in You
             </p>
@@ -42,10 +47,31 @@ function About() {
               self-expression and creativity
             </p>
             <button
-              className="p-2 lg:p-3 text-xs lg:text-base bg-black text-white font-medium border"
+              className="p-2 lg:p-3 text-xs lg:text-base bg-black text-white font-medium border mx-auto"
               type="button"
             >
               Get Started As a Creator
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section className="w-full lg:h-screen lg:p-24 p-6 bg-[url('/images/bg-image-2.png')] bg-no-repeat bg-cover">
+        <div className="h-full w-full p-4 flex items-center">
+          <div className="lg:w-3/6 w-4/5 lg:space-y-6 space-y-4 text-white">
+            <p className="text-2xl lg:text-4xl font-bold">
+              Have Questions or FeedBack?
+            </p>
+            <p className="text-xs lg:text-2xl">
+              We&apos;re here to help! If you have any questions, feedback, or
+              inquiries, feel free to reach out to us. We value your input and
+              are committed to providing the best experience for our users.
+            </p>
+            <button
+              className="p-2 lg:p-3 text-xs lg:text-base bg-white text-black font-medium"
+              type="button"
+            >
+              Email Us
             </button>
           </div>
         </div>

@@ -100,14 +100,14 @@ function Hero() {
             />
           </swiper-slide>
         </swiper-container>*/}
-      {/*  <div>
+       <div>
           <Image
             src="/images/attractive-afroamerican-models-posing-outdoors-5.png"
             alt="women style"
             width={300}
             height={300}
           />
-      </div>*/}
+      </div>
       </div>
     </section>
   );

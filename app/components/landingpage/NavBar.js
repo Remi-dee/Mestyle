@@ -52,19 +52,19 @@ function NavBar() {
                   d="M1 1.12891H28"
                   stroke="white"
                   stroke-width="2"
-                  stroke-linecap="round"
+                  strokeLinecap="round"
                 />
                 <path
                   d="M1 11.5H28"
                   stroke="white"
                   stroke-width="2"
-                  stroke-linecap="round"
+                  strokeLinecap="round"
                 />
                 <path
                   d="M1 21.873H28"
                   stroke="white"
                   stroke-width="2"
-                  stroke-linecap="round"
+                  strokeLinecap="round"
                 />
               </svg>
             )}
