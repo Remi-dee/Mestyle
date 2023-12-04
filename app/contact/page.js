@@ -16,7 +16,7 @@ function Page() {
           </p>
         </div>
 
-        <div className="p-12 bg-white">
+        <div className="w-full md:w-10/12 lg:w-9/12 mx-auto p-12 bg-white">
           <form className="space-y-4 ">
             <div className="md:grid md:grid-cols-2 md:gap-10 mb:mb-8 gap-4 ">
               <input placeholder="First Name" className="col-span-1 w-full" />
@@ -30,6 +30,16 @@ function Page() {
               <input placeholder="Object" className="w-full" />
             </div>
             <textarea placeholder="Message" className="w-full" />
+
+            <div className="mx-auto w-1/12">
+            
+            <button
+              className="p-2 lg:p-3 text-xs lg:text-base bg-black text-white font-medium border mx-auto text-center"
+              type="button"
+            >
+              Send
+            </button>
+            </div>
           </form>
         </div>
       </section>

@@ -3,7 +3,7 @@ import { oregano } from "../../localFonts/oregano/oregano";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#D9D9D9] lg:px-24 px-4 w-full flex justify-between items-center">
+    <footer className="bg-[#D9D9D9] lg:px-24 py-2 px-4 w-full flex justify-between items-center">
       <p style={oregano.style} className="md:text-5xl text-2xl">Mestyle</p>
       <div className="flex space-x-4 text-xl">
         <div> © {new Date().getFullYear()}</div>
@@ -12,8 +12,8 @@ const Footer = () => {
       <div>
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="69"
-          height="64"
+          width="38"
+          height="38"
           viewBox="0 0 69 64"
           fill="none"
         >

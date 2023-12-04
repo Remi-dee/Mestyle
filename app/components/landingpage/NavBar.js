@@ -100,7 +100,7 @@ function NavBar() {
 
       {/* Web View */}
 
-      <nav className="hidden sticky top-0 z-[150] mx-auto px-8 py-4 lg:flex items-center justify-between bg-black text-white">
+      <nav className="hidden sticky top-0 z-[150] mx-auto px-24 py-4 lg:flex items-center justify-between bg-black text-white">
         <p style={oregano.style} className="logo-text text-5xl">
           MeStyle
         </p>
