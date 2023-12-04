@@ -18,7 +18,7 @@ const navData = [
   {
     id: "3",
     text: "Contact Us",
-    href: "/contact-us",
+    href: "/contact",
   },
 ];
 
