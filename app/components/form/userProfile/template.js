@@ -3,7 +3,7 @@
 import useFormContext from "@/hooks/userProfile/useFormContext";
 import Button from "@/app/components/ui/button/template";
 import Overlay from "@/app/components/ui/overlay/template";
-import FormSelector from "./formSelector";
+import FormSelector from "./utils/FormSelector";
 
 function Form() {
   const { formTitle, formDescription, formStep, handleSubmit, handleNext } =
