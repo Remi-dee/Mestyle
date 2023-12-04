@@ -1,5 +1,5 @@
 import { FormProvider } from "../context/form/userProfile/FormContext";
-import Form from "./components/form/userProfile/Template";
+import Form from "./components/form/userProfile/template";
 import PersonaliseScreen from "./components/ui/personaliseScreen/template";
 
 export default function Home() {
