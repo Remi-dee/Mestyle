@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { oregano } from "../../localFonts/oregano/oregano";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import clsx from "clsx";
 import Button from "../ui/button/template";
 
 const navData = [
@@ -77,17 +76,19 @@ function NavBar() {
               {navData.map(({ href, id, text }) => (
                 <li
                   key={id}
-                  className={clsx(
-                    pathname === href && "text-white border-b border-b-white"
-                  )}
+                  className={`${
+                    pathname === href
+                      ? "text-white border-b border-b-white"
+                      : ""
+                  }`}
                 >
                   <Link href={href}>{text}</Link>
                 </li>
               ))}
             </ul>
             <div className="mx-auto space-y-4 text-sm text-bold">
-            <Button variant="inverted" > Login</Button>
-            <Button variant="primary">Get Started</Button>
+              <Button variant="inverted"> Login</Button>
+              <Button variant="primary">Get Started</Button>
             </div>
           </div>
         )}
@@ -103,10 +104,11 @@ function NavBar() {
           {navData.map(({ href, id, text }) => (
             <li
               key={id}
-              className={clsx(
-                pathname === href &&
-                  "text-secondary-100 border-b border-b-white"
-              )}
+              className={`${
+                pathname === href
+                  ? "text-secondary-100 border-b border-b-white"
+                  : ""
+              }`}
             >
               <Link href={href}>{text}</Link>
             </li>
