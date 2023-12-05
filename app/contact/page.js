@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import NavBar from "../components/landingpage/NavBar";
+import Button from "../components/ui/button/template";
 
 function Page() {
   return (
@@ -33,12 +34,7 @@ function Page() {
 
             <div className="mx-auto w-1/12">
             
-            <button
-              className="p-2 lg:p-3 text-xs lg:text-base bg-black text-white font-medium border mx-auto text-center"
-              type="button"
-            >
-              Send
-            </button>
+            <Button variant="secondary">Send</Button>
             </div>
           </form>
         </div>

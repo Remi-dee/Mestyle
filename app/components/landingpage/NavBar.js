@@ -3,6 +3,7 @@ import { oregano } from "../../localFonts/oregano/oregano";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
+import Button from "../ui/button/template";
 
 const navData = [
   {
@@ -85,14 +86,8 @@ function NavBar() {
               ))}
             </ul>
             <div className="mx-auto space-y-4 text-sm text-bold">
-              <div className="px-3 py-2 border border-gray-400">
-                <button>Login</button>
-              </div>
-              <div className="p-3 bg-white text-black">
-                <button className="" type="button">
-                  Get Started
-                </button>
-              </div>
+            <Button variant="inverted" > Login</Button>
+            <Button variant="primary">Get Started</Button>
             </div>
           </div>
         )}
@@ -118,14 +113,8 @@ function NavBar() {
           ))}
         </ul>
         <div className="flex items-center justify-center space-x-6 text-sm text-bold">
-          <div className="px-3 py-2 border border-gray-400">
-            <button>Login</button>
-          </div>
-          <div className="p-3 bg-white text-black">
-            <button className="" type="button">
-              Get Started
-            </button>
-          </div>
+          <Button variant="inverted"> Login</Button>
+          <Button variant="primary">Get Started</Button>
         </div>
       </nav>
     </>

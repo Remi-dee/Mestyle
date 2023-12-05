@@ -1,5 +1,6 @@
 import Image from "next/image";
 import React from "react";
+import Button from "../ui/button/template";
 
 function About() {
   return (
@@ -15,12 +16,7 @@ function About() {
               occasion. There&apos;s no need to create an account start
               exploring right away!
             </p>
-            <button
-              className="p-2 lg:p-3 text-xs lg:text-base bg-white text-black font-medium"
-              type="button"
-            >
-              Start Exploring
-            </button>
+            <Button variant="primary">Start Exploring</Button>
           </div>
         </div>
       </section>
@@ -46,12 +42,7 @@ function About() {
               our fashion community today and embark on a journey of
               self-expression and creativity
             </p>
-            <button
-              className="p-2 lg:p-3 text-xs lg:text-base bg-black text-white font-medium border mx-auto"
-              type="button"
-            >
-              Get Started As a Creator
-            </button>
+            <Button variant="inverted"> Get Started As a Creator</Button>
           </div>
         </div>
       </section>
@@ -67,12 +58,7 @@ function About() {
               inquiries, feel free to reach out to us. We value your input and
               are committed to providing the best experience for our users.
             </p>
-            <button
-              className="p-2 lg:p-3 text-xs lg:text-base bg-white text-black font-medium"
-              type="button"
-            >
-              Email Us
-            </button>
+            <Button variant="primary"> Email Us</Button>
           </div>
         </div>
       </section>
