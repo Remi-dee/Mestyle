@@ -6,12 +6,12 @@ import {
   FORM_DESCRIPTIONS,
   FORM_INITIAL_STATE,
   FORM_TITLES,
-} from "@/app/components/form/userProfile/utils/formConstants";
+} from "@/app/components/form/userProfile/utils/FormConstants";
 
 import {
   validateBodyType,
   validateStylePreference,
-} from "@/app/components/form/userProfile/utils/validation";
+} from "@/app/components/form/userProfile/utils/Validation";
 
 const FormContext = createContext();
 

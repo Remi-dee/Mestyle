@@ -17,6 +17,7 @@ module.exports = {
       },
       fontFamily: {
         lexend: ["var(--font-lexend)"],
+        oregano: ['var(--font-oregano)']
       },
       backgroundImage: {
         "explore-bg": "url('/images/explore/explore_bg.png')",
