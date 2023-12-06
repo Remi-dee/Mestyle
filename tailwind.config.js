@@ -17,6 +17,7 @@ module.exports = {
       },
       fontFamily: {
         lexend: ["var(--font-lexend)"],
+        oregano: ['var(--font-oregano)']
       },
     },
   },
