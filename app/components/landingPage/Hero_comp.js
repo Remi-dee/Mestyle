@@ -10,13 +10,13 @@ import Button from "../ui/button/template";
 function Hero_comp() {
   return (
     <div className="text-center pb-10 bg-grayDark h-screen">
-      <div className="">
-        <span className="text-white text-2xl md:text-5xl font-normal ">Get Your</span>
-        <span className="text-white text-2xl md:text-5xl font-semibold mx-3 ">
+      <div className="py-3">
+        <span className="text-white text-3xl md:text-5xl font-normal ">Get Your</span>
+        <span className="text-white text-3xl md:text-5xl font-semibold mx-3 ">
           Confidence
         </span>
-        <span className="text-white text-2xl md:text-5xl font-normal ">Again</span>
-        <div className="text-white text-2xl font-normal leading-[30px] my-2">
+        <span className="text-white text-3xl md:text-5xl font-normal ">Again</span>
+        <div className="text-white text-[16px] md:text-2xl font-normal leading-[30px] my-2">
           Discover the latest trends and showcase your unique style
         </div>
         <Button type="button" onClick={"#"} className="mt-4 ">
@@ -25,33 +25,33 @@ function Hero_comp() {
       </div>
 
       <div className="flex justify-center ">
-        <div>
+        <div className="-ml-10 md:-ml-0">
           <Image
-            width={400}
+            width={null}
             height={500}
             src={imageLeft}
             alt=""
-            className="rounded-tl-[20px] rounded-tr-[20px]"
+            className="w-[700px] md:w-[400px] rounded-tl-[20px] rounded-tr-[20px]"
           />
         </div>
 
-        <div className="mt-7 rounded-tl-[20px] rounded-tr-[20px]">
-          <Image width={300} src={imageCenter} alt="" />
+        <div className=" mt-7 rounded-tl-[20px] rounded-tr-[20px] ">
+          <Image width={null} src={imageCenter} alt=""  className="w-[500px] md:w-[300px]"/>
         </div>
 
-        <div>
+        <div className="  -mr-10 md:-mr-0">
           <Image
-            width={400}
+            width={null}
             height={500}
             src={imageRight}
             alt=""
-            className="rounded-tl-[20px] rounded-tr-[20px]"
+            className="w-[700px] md:w-[400px] rounded-tl-[20px] rounded-tr-[20px]"
           />
         </div>
       </div>
 
-      <div className=" flex justify-center mt-[-150px] ">
-        <Image width={300} height={214} src={polygon} alt="" />
+      <div className=" flex justify-center mt-[-100px] w-[150px] md:w-[300px]  ">
+        <Image width={null} height={214} src={polygon} alt="" />
       </div>
     </div>
   );

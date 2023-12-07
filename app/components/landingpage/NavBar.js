@@ -33,7 +33,7 @@ function NavBar() {
     <>
       {/* Mobile View */}
       <nav className="block lg:hidden">
-        <div className="flex justify-between items-center py-2 px-6 bg-grayDark text-white mb-[50px]">
+        <div className="flex justify-between items-center py-4 px-6 bg-grayDark text-white mb-[50px]">
           <p style={oregano.style} className=" text-3xl bg-gradient-to-r from-transparent to-white text-transparent bg-clip-text">
             MeStyle
           </p>
