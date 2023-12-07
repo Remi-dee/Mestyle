@@ -9,33 +9,46 @@ import Button from "../ui/button/template";
 import { useEffect, useRef } from "react";
 
 function Hero_comp() {
- 
   const polygonRef = useRef();
+  let isScrolling = false;
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollY = window.scrollY;
-      const parentBottom = polygonRef.current.parentElement.getBoundingClientRect().bottom;
+      if (!isScrolling) {
+        isScrolling = true;
+        requestAnimationFrame(() => {
+          const scrollY = window.scrollY;
+          const parentBottom =
+            polygonRef.current.parentElement.getBoundingClientRect().bottom;
 
-      if (scrollY > parentBottom) {
-        polygonRef.current.classList.add("hidden");
-      } else {
-        polygonRef.current.classList.remove("hidden");
+          if (scrollY > parentBottom) {
+            polygonRef.current.classList.add("hidden");
+          } else {
+            polygonRef.current.classList.remove("hidden");
+          }
+
+          isScrolling = false;
+        });
       }
     };
 
     window.addEventListener("scroll", handleScroll);
+
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
- 
+
   return (
     <div className="text-center pb-10 bg-grayDark relative">
       <div className="py-3">
-        <span className="text-white text-3xl md:text-5xl font-normal ">Get Your</span>
+        <span className="text-white text-3xl md:text-5xl font-normal ">
+          Get Your
+        </span>
         <span className="text-white text-3xl md:text-5xl font-semibold mx-3 ">
           Confidence
         </span>
-        <span className="text-white text-3xl md:text-5xl font-normal ">Again</span>
+        <span className="text-white text-3xl md:text-5xl font-normal ">
+          Again
+        </span>
         <div className="text-white text-[16px] md:text-2xl font-normal leading-[30px] my-2">
           Discover the latest trends and showcase your unique style
         </div>
@@ -56,7 +69,12 @@ function Hero_comp() {
         </div>
 
         <div className=" mt-10 md:mt-8 rounded-tl-[20px] rounded-tr-[20px] ">
-          <Image width={null} src={imageCenter} alt=""  className="w-[500px] md:w-[300px]"/>
+          <Image
+            width={null}
+            src={imageCenter}
+            alt=""
+            className="w-[500px] md:w-[300px]"
+          />
         </div>
 
         <div className="  -mr-[180px] md:-mr-0">
@@ -71,7 +89,14 @@ function Hero_comp() {
       </div>
 
       <div className=" flex items-center justify-center  ">
-        <Image ref={polygonRef} width={null} height={214} src={polygon} alt="" className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-[260px] md:w-[300px]" />
+        <Image
+          ref={polygonRef}
+          width={null}
+          height={214}
+          src={polygon}
+          alt=""
+          className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-[260px] md:w-[300px]"
+        />
       </div>
     </div>
   );
