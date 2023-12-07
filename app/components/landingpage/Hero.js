@@ -2,8 +2,6 @@ import Image from "next/image";
 import React from "react";
 import Button from "../ui/button/template";
 
-register();
-
 function Hero() {
   return (
     <section className="w-full h-screen p-8 space-y-3 bg-black text-white text-center">
@@ -16,7 +14,6 @@ function Hero() {
         </p>
 
         <Button variant="primary">Get Started</Button>
-
       </div>
 
       <div className="flex items-center justify-center">
@@ -28,21 +25,20 @@ function Hero() {
         />
 
         <Image
-        src="/images/medium-shot-woman-with-yellow-suit-2.png"
-        alt="fashion icon"
-        width={270}
-        height={270}
-      />
+          src="/images/medium-shot-woman-with-yellow-suit-2.png"
+          alt="fashion icon"
+          width={270}
+          height={270}
+        />
 
-       
-       <div>
+        <div>
           <Image
             src="/images/attractive-afroamerican-models-posing-outdoors-5.png"
             alt="women style"
             width={300}
             height={300}
           />
-      </div>
+        </div>
       </div>
     </section>
   );
