@@ -11,11 +11,11 @@ function Hero_comp() {
   return (
     <div className="text-center pb-10 bg-grayDark h-screen">
       <div className="">
-        <span className="text-white text-5xl font-normal ">Get Your</span>
-        <span className="text-white text-5xl font-semibold mx-3 ">
+        <span className="text-white text-2xl md:text-5xl font-normal ">Get Your</span>
+        <span className="text-white text-2xl md:text-5xl font-semibold mx-3 ">
           Confidence
         </span>
-        <span className="text-white text-5xl font-normal ">Again</span>
+        <span className="text-white text-2xl md:text-5xl font-normal ">Again</span>
         <div className="text-white text-2xl font-normal leading-[30px] my-2">
           Discover the latest trends and showcase your unique style
         </div>
