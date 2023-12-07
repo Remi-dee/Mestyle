@@ -9,7 +9,7 @@ import Button from "../ui/button/template";
 
 function Hero_comp() {
   return (
-    <div className="text-center pb-10 bg-grayDark h-screen">
+    <div className="text-center pb-10 bg-grayDark ">
       <div className="py-3">
         <span className="text-white text-3xl md:text-5xl font-normal ">Get Your</span>
         <span className="text-white text-3xl md:text-5xl font-semibold mx-3 ">
@@ -25,7 +25,7 @@ function Hero_comp() {
       </div>
 
       <div className="flex justify-center ">
-        <div className="-ml-10 md:-ml-0">
+        <div className="-ml-[180px] md:-ml-0">
           <Image
             width={null}
             height={500}
@@ -35,11 +35,11 @@ function Hero_comp() {
           />
         </div>
 
-        <div className=" mt-7 rounded-tl-[20px] rounded-tr-[20px] ">
+        <div className=" mt-10 md:mt-8 rounded-tl-[20px] rounded-tr-[20px] ">
           <Image width={null} src={imageCenter} alt=""  className="w-[500px] md:w-[300px]"/>
         </div>
 
-        <div className="  -mr-10 md:-mr-0">
+        <div className="  -mr-[180px] md:-mr-0">
           <Image
             width={null}
             height={500}
@@ -50,8 +50,8 @@ function Hero_comp() {
         </div>
       </div>
 
-      <div className=" flex justify-center mt-[-100px] w-[150px] md:w-[300px]  ">
-        <Image width={null} height={214} src={polygon} alt="" />
+      <div className=" flex items-center justify-center  ">
+        <Image width={null} height={214} src={polygon} alt="" className="w-[280px] md:w-[300px] mt-[-170px]  md:-mt-[150px]" />
       </div>
     </div>
   );
