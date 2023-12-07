@@ -33,7 +33,7 @@ function NavBar() {
     <>
       {/* Mobile View */}
       <nav className="block lg:hidden">
-        <div className="flex justify-between items-center py-2 px-6 bg-grayDark text-white">
+        <div className="flex justify-between items-center py-2 px-6 bg-grayDark text-white mb-[50px]">
           <p style={oregano.style} className="logo-text text-5xl">
             MeStyle
           </p>
@@ -71,7 +71,7 @@ function NavBar() {
           </button>
         </div>
         {openHamburger && (
-          <div className="fixed top-0 left-0 z-20 h-screen w-10/12 overflow-hidden bg-black text-white lg:hidden">
+          <div className="fixed top-0 left-0 z-20 h-screen w-10/12 overflow-hidden bg-grayDark text-white lg:hidden">
             <ul className="flex flex-col items-center justify-center h-screen space-y-4 text-sm font-bold uppercase">
               {navData.map(({ href, id, text }) => (
                 <li
@@ -96,8 +96,8 @@ function NavBar() {
 
       {/* Web View */}
 
-      <nav className="hidden sticky top-0 z-[150] mx-auto px-24 py-4 lg:flex items-center justify-between bg-black ">
-        <p style={oregano.style} className="logo-text text-5xl text-white">
+      <nav className="hidden sticky top-0 z-[150] mx-auto px-24 py-6 lg:flex items-center justify-between bg-grayDark mb-[50px] ">
+        <p style={oregano.style} className="text-logoText text-5xl  ">
           MeStyle
         </p>
         <ul className="flex space-x-4 text-white">

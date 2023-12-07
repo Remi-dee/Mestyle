@@ -4,7 +4,7 @@ import HomePage from "./components/landingPage/template";
 
 export default function Home() {
   return (
-    <main>
+    <main className="bg-grayDark">
       <HomePage />
     </main>
   );

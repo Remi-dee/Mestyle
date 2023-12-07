@@ -9,7 +9,7 @@ import Button from "../ui/button/template";
 
 function Hero_comp() {
   return (
-    <div className="text-center pb-10 bg-grayDakr h-screen">
+    <div className="text-center pb-10 bg-grayDark h-screen">
       <div className="">
         <span className="text-white text-5xl font-normal ">Get Your</span>
         <span className="text-white text-5xl font-semibold mx-3 ">
