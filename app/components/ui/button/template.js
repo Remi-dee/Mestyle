@@ -6,11 +6,11 @@ function Button({
   ...props
 }) {
   const baseStyle =
-    "px-3 py-1 md:py-2 md:px-4 focus:outline-none focus:ring text-base";
+    "px-3 py-1 md:py-2 md:px-4 focus:outline-none focus:ring text-base md:font-medium";
   const variants = {
-    primary: "bg-white",
+    primary: "bg-white ",
     secondary: "bg-black text-white",
-    inverted: "border border-neutral-700",
+    inverted: "border border-neutral-700 text-white",
   };
 
   const isVariant = variants[variant] || variants.primary;

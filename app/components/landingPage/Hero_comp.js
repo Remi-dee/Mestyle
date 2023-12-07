@@ -7,9 +7,9 @@ import imageRight from "../../../public/images/hero/heroImage_right.png";
 import polygon from "../../../public/images/polygons/polygon3.png";
 import Button from "../ui/button/template";
 
-function Hero() {
+function Hero_comp() {
   return (
-    <div className="text-center pb-10 bg-grayDark h-screen">
+    <div className="text-center pb-10 bg-grayDakr h-screen">
       <div className="">
         <span className="text-white text-5xl font-normal ">Get Your</span>
         <span className="text-white text-5xl font-semibold mx-3 ">
@@ -19,7 +19,7 @@ function Hero() {
         <div className="text-white text-2xl font-normal leading-[30px] my-2">
           Discover the latest trends and showcase your unique style
         </div>
-        <Button type="button" onClick={"#"} className="mt-4 text-base font-medium ">
+        <Button type="button" onClick={"#"} className="mt-4 ">
           Get Started
         </Button>
       </div>
@@ -57,4 +57,4 @@ function Hero() {
   );
 }
 
-export default Hero;
+export default Hero_comp;

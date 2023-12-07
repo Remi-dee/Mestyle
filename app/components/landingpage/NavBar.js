@@ -33,7 +33,7 @@ function NavBar() {
     <>
       {/* Mobile View */}
       <nav className="block lg:hidden">
-        <div className="flex justify-between items-center py-2 px-6 bg-black text-white">
+        <div className="flex justify-between items-center py-2 px-6 bg-grayDark text-white">
           <p style={oregano.style} className="logo-text text-5xl">
             MeStyle
           </p>
@@ -96,8 +96,8 @@ function NavBar() {
 
       {/* Web View */}
 
-      <nav className="hidden sticky top-0 z-[150] mx-auto px-24 py-4 lg:flex items-center justify-between bg-black text-white">
-        <p style={oregano.style} className="logo-text text-5xl">
+      <nav className="hidden sticky top-0 z-[150] mx-auto px-24 py-4 lg:flex items-center justify-between bg-black ">
+        <p style={oregano.style} className="logo-text text-5xl text-white">
           MeStyle
         </p>
         <ul className="flex space-x-4 text-white">
