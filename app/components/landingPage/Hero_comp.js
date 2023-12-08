@@ -38,7 +38,7 @@ function Hero_comp() {
   }, []);
 
   return (
-    <div className="text-center pb-10 bg-grayDark relative">
+    <div className="text-center pb-[50px] bg-grayDark relative">
       <div className="py-3">
         <span className="text-white text-3xl md:text-5xl font-normal ">
           Get Your
