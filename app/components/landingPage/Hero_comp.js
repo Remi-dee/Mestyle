@@ -16,7 +16,7 @@ function Hero_comp() {
     const handleScroll = () => {
       if (!isScrolling) {
         isScrolling = true;
-        requestAnimationFrame(() => {
+        requestIdleCallback(() => {
           const scrollY = window.scrollY;
           const parentBottom =
             polygonRef.current.parentElement.getBoundingClientRect().bottom;
