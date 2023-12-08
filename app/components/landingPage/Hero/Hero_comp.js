@@ -6,11 +6,24 @@ import imageCenter from "../../../../public/images/hero/heroImage_center.png";
 import imageRight from "../../../../public/images/hero/heroImage_right.png";
 import polygon from "../../../../public/images/polygons/polygon3.png";
 import Button from "../../ui/button/template";
-import { useEffect, useRef } from "react";
+
+import { useEffect, useRef, useState } from "react";
 
 function Hero_comp() {
   const polygonRef = useRef();
   let isScrolling = false;
+  const [centerImageIndex, setCenterImageIndex] = useState(0);
+
+  const imageCenter1 = "/images/hero/heroImage_center.png";
+  const imageCenter2 = "/images/hero/heroImage_left.png";
+  const imageCenter3 = "/images/hero/heroImage_right.png";
+
+  const dynamicCenterImages = [
+    imageCenter1,
+    imageCenter2,
+    imageCenter3,
+    // Add more image paths as needed
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,10 +45,21 @@ function Hero_comp() {
       }
     };
 
+    const switchCenterImage = () => {
+      setCenterImageIndex(
+        (prevIndex) => (prevIndex + 1) % dynamicCenterImages.length
+      );
+    };
+
+    const imageSwitchTimer = setInterval(switchCenterImage, 2000);
+
     window.addEventListener("scroll", handleScroll);
 
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    return () => {
+      clearInterval(imageSwitchTimer);
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [dynamicCenterImages]);
 
   return (
     <div className="text-center pb-[50px] bg-grayDark relative font-lexend">
@@ -70,8 +94,9 @@ function Hero_comp() {
 
         <div className=" mt-10 md:mt-8 rounded-tl-[20px] rounded-tr-[20px] ">
           <Image
-            width={null}
-            src={imageCenter}
+            width={500}
+            height={500}
+            src={dynamicCenterImages[centerImageIndex]}
             alt=""
             className="w-[500px] md:w-[300px]"
           />
