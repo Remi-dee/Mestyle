@@ -1,10 +1,17 @@
 import { Oregano } from "next/font/google";
+import localFont from "next/font/local";
 
-const oregano = Oregano({
-    weight: '400',
-    style:  'italic',
-    subsets: ['latin'],
-    display: 'swap',
-  });
+const oregano = localFont({
+  src: [
+    {
+      path: "./fonts/Oregano-Regular.ttf",
+      weight: "400",
+      style: "regular",
+      subsets: ["latin"],
+      display: "swap",
+    },
+  ],
+  variable: "--font-oregano",
+});
 
 export { oregano };

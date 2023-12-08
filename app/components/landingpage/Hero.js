@@ -1,8 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import Button from "../ui/button/template";
-
-register();
+import imageLeft from "../../../public/images/hero/heroImage_left.png"
 
 function Hero() {
   return (
@@ -16,33 +15,31 @@ function Hero() {
         </p>
 
         <Button variant="primary">Get Started</Button>
-
       </div>
 
       <div className="flex items-center justify-center">
         <Image
-          src="/images/attractive-afroamerican-models-posing-outdoors-4.png"
+          src={imageLeft}
           alt="women style"
-          width={300}
-          height={300}
+          width={400}
+          height={500}
         />
 
         <Image
-        src="/images/medium-shot-woman-with-yellow-suit-2.png"
-        alt="fashion icon"
-        width={270}
-        height={270}
-      />
+          src="/images/medium-shot-woman-with-yellow-suit-2.png"
+          alt="fashion icon"
+          width={270}
+          height={270}
+        />
 
-       
-       <div>
+        <div>
           <Image
             src="/images/attractive-afroamerican-models-posing-outdoors-5.png"
             alt="women style"
             width={300}
             height={300}
           />
-      </div>
+        </div>
       </div>
     </section>
   );
