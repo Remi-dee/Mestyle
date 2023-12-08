@@ -1,11 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import imageLeft from "../../../public/images/hero/heroImage_left.png";
-import imageCenter from "../../../public/images/hero/heroImage_center.png";
-import imageRight from "../../../public/images/hero/heroImage_right.png";
-import polygon from "../../../public/images/polygons/polygon3.png";
-import Button from "../ui/button/template";
+import imageLeft from "../../../../public/images/hero/heroImage_left.png";
+import imageCenter from "../../../../public/images/hero/heroImage_center.png";
+import imageRight from "../../../../public/images/hero/heroImage_right.png";
+import polygon from "../../../../public/images/polygons/polygon3.png";
+import Button from "../../ui/button/template";
 import { useEffect, useRef } from "react";
 
 function Hero_comp() {
