@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import imageLeft from "../../../../public/images/hero/heroImage_left.png";
+import imageLeft from "../../../../public/images/hero/heroImage_.png";
 import imageCenter from "../../../../public/images/hero/heroImage_center.png";
 import imageRight from "../../../../public/images/hero/heroImage_right.png";
 import polygon from "../../../../public/images/polygons/polygon3.png";
