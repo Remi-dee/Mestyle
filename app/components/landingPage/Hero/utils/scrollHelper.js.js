@@ -1,4 +1,5 @@
-const handleScroll = (polygonRef, isScrolling) => {
+// util/scrollHelper.js
+export const handleScroll = (polygonRef) => {
   if (!isScrolling) {
     isScrolling = true;
     requestIdleCallback(() => {
@@ -17,4 +18,10 @@ const handleScroll = (polygonRef, isScrolling) => {
   }
 };
 
-export { handleScroll };
+export const switchCenterImage = (
+  centerImageIndex,
+  setCenterImageIndex,
+  dynamicCenterImages
+) => {
+  // Your image switching logic here
+};
