@@ -8,6 +8,7 @@ import polygon from "../../../../public/images/polygons/polygon3.png";
 import Button from "../../ui/button/template";
 
 import { useEffect, useRef, useState } from "react";
+import { switchCenterImage } from "./utils/imageSwitchHelper.js";
 
 function Hero_comp() {
   const polygonRef = useRef();
@@ -26,6 +27,8 @@ function Hero_comp() {
   ];
 
   useEffect(() => {
+    const handleScrollCallback = () => handleScroll(polygonRef);
+
     const handleScroll = () => {
       if (!isScrolling) {
         isScrolling = true;
@@ -45,13 +48,14 @@ function Hero_comp() {
       }
     };
 
-    const switchCenterImage = () => {
-      setCenterImageIndex(
-        (prevIndex) => (prevIndex + 1) % dynamicCenterImages.length
+    const switchCenterImageCallback = () =>
+      switchCenterImage(
+        centerImageIndex,
+        setCenterImageIndex,
+        dynamicCenterImages
       );
-    };
 
-    const imageSwitchTimer = setInterval(switchCenterImage, 2000);
+    const imageSwitchTimer = setInterval(switchCenterImageCallback, 2000);
 
     window.addEventListener("scroll", handleScroll);
 
