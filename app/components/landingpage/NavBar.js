@@ -3,6 +3,7 @@ import { oregano } from "../../localFonts/oregano/oregano";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Button from "../ui/button/template";
+import { motion } from "framer-motion";
 
 const navData = [
   {
@@ -34,7 +35,10 @@ function NavBar() {
       {/* Mobile View */}
       <nav className="block lg:hidden font-lexend">
         <div className="flex justify-between items-center py-4 px-6 bg-grayDark text-white mb-[50px]">
-          <p style={oregano.style} className=" text-3xl bg-gradient-to-r from-transparent to-white text-transparent bg-clip-text">
+          <p
+            style={oregano.style}
+            className=" text-3xl bg-gradient-to-r from-transparent to-white text-transparent bg-clip-text"
+          >
             MeStyle
           </p>
           <button onClick={openMobileNav} className="z-30">
@@ -82,7 +86,9 @@ function NavBar() {
                       : ""
                   }`}
                 >
-                  <Link href={href}>{text}</Link>
+                  <motion.div whileHover={{ scale: 1.1 }}>
+                    <Link href={href}>{text}</Link>
+                  </motion.div>
                 </li>
               ))}
             </ul>
@@ -97,7 +103,10 @@ function NavBar() {
       {/* Web View */}
 
       <nav className="hidden sticky top-0 z-[150] mx-auto px-24 py-6 lg:flex items-center justify-between bg-grayDark mb-[50px] ">
-        <p style={oregano.style} className="text-4xl bg-gradient-to-r from-transparent to-white text-transparent bg-clip-text ">
+        <p
+          style={oregano.style}
+          className="text-4xl bg-gradient-to-r from-transparent to-white text-transparent bg-clip-text "
+        >
           MeStyle
         </p>
         <ul className="flex space-x-4 text-white">
