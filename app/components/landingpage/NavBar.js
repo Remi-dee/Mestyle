@@ -119,7 +119,9 @@ function NavBar() {
                   : ""
               }`}
             >
-              <Link href={href}>{text}</Link>
+              <motion.div whileHover={{ scale: 1.1 }}>
+                <Link href={href}>{text}</Link>
+              </motion.div>
             </li>
           ))}
         </ul>
