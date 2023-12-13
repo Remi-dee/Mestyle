@@ -2,33 +2,45 @@
 
 import Image from "next/image";
 import imageLeft from "../../../../public/images/hero/heroImage_left.png";
-import imageCenter from "../../../../public/images/hero/heroImage_center.png";
+
 import imageRight from "../../../../public/images/hero/heroImage_right.png";
 import polygon from "../../../../public/images/polygons/polygon3.png";
 import Button from "../../ui/button/template";
+import { motion } from "framer-motion";
 
 import { useEffect, useRef, useState } from "react";
-import { switchCenterImage } from "./utils/imageSwitchHelper.js";
+import {
+  dynamicCenterImages,
+  switchCenterImage,
+} from "./utils/imageSwitchHelper.js";
 
 function Hero_comp() {
   const polygonRef = useRef();
   let isScrolling = false;
   const [centerImageIndex, setCenterImageIndex] = useState(0);
 
-  const imageCenter1 = "/images/hero/heroImage_center.png";
-  const imageCenter2 = "/images/hero/heroImage_left.png";
-  const imageCenter3 = "/images/hero/heroImage_right.png";
+  const variants = {
+    hidden: { opacity: 0 },
+    show: { opacity: 1, transition: { staggerChildren: 0.3 } },
+  };
 
-  const dynamicCenterImages = [
-    imageCenter1,
-    imageCenter2,
-    imageCenter3,
-    // Add more image paths as needed
-  ];
+  const images = {
+    hidden: {
+      opacity: 0,
+      x: 30,
+    },
+
+    show: {
+      opacity: 1,
+      x: 0,
+
+      transitions: {
+        duration: 1,
+      },
+    },
+  };
 
   useEffect(() => {
-    const handleScrollCallback = () => handleScroll(polygonRef);
-
     const handleScroll = () => {
       if (!isScrolling) {
         isScrolling = true;
@@ -49,11 +61,7 @@ function Hero_comp() {
     };
 
     const switchCenterImageCallback = () =>
-      switchCenterImage(
-        centerImageIndex,
-        setCenterImageIndex,
-        dynamicCenterImages
-      );
+      switchCenterImage(centerImageIndex, setCenterImageIndex);
 
     const imageSwitchTimer = setInterval(switchCenterImageCallback, 2000);
 
@@ -85,9 +93,14 @@ function Hero_comp() {
         </Button>
       </div>
 
-      <div className="flex justify-center ">
+      <motion.div
+        variants={variants}
+        initial="hidden"
+        animate="show"
+        className="flex justify-center "
+      >
         <div className="-ml-[180px] md:-ml-0">
-          <Image
+          <motion.Image
             width={null}
             height={500}
             src={imageLeft}
@@ -115,7 +128,7 @@ function Hero_comp() {
             className="w-[700px] md:w-[400px] rounded-tl-[20px] rounded-tr-[20px]"
           />
         </div>
-      </div>
+      </motion.div>
 
       <div className=" flex items-center justify-center  ">
         <Image
