@@ -21,24 +21,57 @@ function Hero_comp() {
 
   const variants = {
     hidden: { opacity: 0 },
-    show: { opacity: 1, transition: { staggerChildren: 0.3 } },
+    show: { opacity: 1, transition: { staggerChildren: 0.9 } },
   };
 
-  const images = {
-    hidden: {
-      opacity: 0,
-      x: 30,
-    },
-
-    show: {
-      opacity: 1,
-      x: 0,
-
-      transitions: {
-        duration: 1,
+  const heroImages = [
+    {
+      leftImage: {
+        hidden: {
+          opacity: 0,
+          x: 0,
+        },
+        show: {
+          opacity: 1,
+          x: 0,
+          transitions: {
+            duration: 1,
+          },
+        },
       },
     },
-  };
+    {
+      centerImage: {
+        hidden: {
+          opacity: 0,
+          y: 30,
+        },
+        show: {
+          opacity: 1,
+          y: 0,
+          transitions: {
+            duration: 2,
+          },
+        },
+      },
+    },
+
+    {
+      rightImage: {
+        hidden: {
+          opacity: 0,
+          x: 0,
+        },
+        show: {
+          opacity: 1,
+          x: 0,
+          transitions: {
+            duration: 2,
+          },
+        },
+      },
+    },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -99,18 +132,23 @@ function Hero_comp() {
         animate="show"
         className="flex justify-center "
       >
-        <div className="-ml-[180px] md:-ml-0">
-          <motion.Image
-            variants={images}
+        <motion.div
+          variants={heroImages[0].leftImage}
+          className="-ml-[180px] md:-ml-0"
+        >
+          <Image
             width={null}
             height={500}
             src={imageLeft}
             alt=""
             className="w-[700px] md:w-[400px] rounded-tl-[20px] rounded-tr-[20px]"
           />
-        </div>
+        </motion.div>
 
-        <div className=" mt-10 md:mt-8 rounded-tl-[20px] rounded-tr-[20px] ">
+        <motion.div
+          variants={heroImages[1].centerImage}
+          className=" mt-10 md:mt-8 rounded-tl-[20px] rounded-tr-[20px] "
+        >
           <Image
             width={500}
             height={500}
@@ -118,17 +156,20 @@ function Hero_comp() {
             alt=""
             className="w-[500px] md:w-[300px]"
           />
-        </div>
+        </motion.div>
 
-        <div className="  -mr-[180px] md:-mr-0">
+        <motion.div
+          variants={heroImages[2].rightImage}
+          className="  -mr-[180px] md:-mr-0"
+        >
           <Image
-            width={null}
+            width={500}
             height={500}
-            src={imageRight}
+            src={dynamicCenterImages[centerImageIndex]}
             alt=""
             className="w-[700px] md:w-[400px] rounded-tl-[20px] rounded-tr-[20px]"
           />
-        </div>
+        </motion.div>
       </motion.div>
 
       <div className=" flex items-center justify-center  ">
