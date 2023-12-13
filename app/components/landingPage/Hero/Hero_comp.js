@@ -101,6 +101,7 @@ function Hero_comp() {
       >
         <div className="-ml-[180px] md:-ml-0">
           <motion.Image
+            variants={images}
             width={null}
             height={500}
             src={imageLeft}
