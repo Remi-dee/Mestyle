@@ -67,6 +67,9 @@ function Hero_comp() {
           x: 0,
           transitions: {
             duration: 2,
+            delay: 5,
+            type: "spring",
+            stiffness: 100,
           },
         },
       },
@@ -74,35 +77,35 @@ function Hero_comp() {
   ];
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (!isScrolling) {
-        isScrolling = true;
-        requestIdleCallback(() => {
-          const scrollY = window.scrollY;
-          const parentBottom =
-            polygonRef.current.parentElement.getBoundingClientRect().bottom;
+    // const handleScroll = () => {
+    //   if (!isScrolling) {
+    //     isScrolling = true;
+    //     requestIdleCallback(() => {
+    //       const scrollY = window.scrollY;
+    //       const parentBottom =
+    //         polygonRef.current.parentElement.getBoundingClientRect().bottom;
 
-          if (scrollY > parentBottom) {
-            polygonRef.current.classList.add("hidden");
-          } else {
-            polygonRef.current.classList.remove("hidden");
-          }
+    //       if (scrollY > parentBottom) {
+    //         polygonRef.current.classList.add("hidden");
+    //       } else {
+    //         polygonRef.current.classList.remove("hidden");
+    //       }
 
-          isScrolling = false;
-        });
-      }
-    };
+    //       isScrolling = false;
+    //     });
+    //   }
+    // };
 
     const switchCenterImageCallback = () =>
       switchCenterImage(centerImageIndex, setCenterImageIndex);
 
     const imageSwitchTimer = setInterval(switchCenterImageCallback, 2000);
 
-    window.addEventListener("scroll", handleScroll);
+    // window.addEventListener("scroll", handleScroll);
 
     return () => {
       clearInterval(imageSwitchTimer);
-      window.removeEventListener("scroll", handleScroll);
+      // window.removeEventListener("scroll", handleScroll);
     };
   }, [dynamicCenterImages]);
 
@@ -141,7 +144,7 @@ function Hero_comp() {
             height={500}
             src={imageLeft}
             alt=""
-            className="w-[700px] md:w-[400px] rounded-tl-[20px] rounded-tr-[20px]"
+            className="w-[700px] md:w-[400px] rounded-tl-[20px] rounded-tr-[20px] rounded-br-[20px]"
           />
         </motion.div>
 
@@ -167,21 +170,30 @@ function Hero_comp() {
             height={500}
             src={dynamicCenterImages[centerImageIndex]}
             alt=""
-            className="w-[700px] md:w-[400px] rounded-tl-[20px] rounded-tr-[20px]"
+            className="w-[700px] md:w-[400px] rounded-tl-[20px] rounded-tr-[20px] rounded-bl-[20px]"
           />
         </motion.div>
       </motion.div>
 
-      <div className=" flex items-center justify-center  ">
+      <motion.div
+        initial={{ opacity: 0, scale: 0 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{
+          repeat: Infinity,
+          repeatDelay: 1,
+          duration: 2,
+        }}
+        className=" flex items-center justify-center  "
+      >
         <Image
-          ref={polygonRef}
+          // ref={polygonRef}
           width={null}
           height={214}
           src={polygon}
           alt=""
           className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-[260px] md:w-[300px]"
         />
-      </div>
+      </motion.div>
     </div>
   );
 }
