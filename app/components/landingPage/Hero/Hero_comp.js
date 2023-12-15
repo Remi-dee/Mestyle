@@ -136,7 +136,7 @@ function Hero_comp() {
         className="flex justify-center "
       >
         <motion.div
-          variants={heroImages[0].leftImage}
+          variants={heroImages[1].centerImage}
           className="-ml-[180px] md:-ml-0"
         >
           <Image
