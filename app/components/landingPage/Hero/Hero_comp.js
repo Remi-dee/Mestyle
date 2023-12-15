@@ -73,18 +73,6 @@ function Hero_comp() {
         },
       },
     },
-
-    {
-      polygon: {
-        initial: { opacity: 0, scale: 0 },
-        animate: { opacity: 1, scale: 1 },
-        transition: {
-          repeat: Infinity,
-          repeatDelay: 1,
-          duration: 2,
-        },
-      },
-    },
   ];
 
   useEffect(() => {
@@ -122,7 +110,14 @@ function Hero_comp() {
 
   return (
     <div className="text-center pb-[50px] bg-grayDark relative font-lexend">
-      <div className="py-3">
+      <motion.div
+        initial={{ opacity: 0, scale: 0 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{
+          duration: 2,
+        }}
+        className="py-3"
+      >
         <span className="text-white text-3xl md:text-5xl font-normal ">
           Get Your
         </span>
@@ -138,7 +133,7 @@ function Hero_comp() {
         <Button type="button" onClick={"#"} className="mt-4 ">
           Get Started
         </Button>
-      </div>
+      </motion.div>
 
       <motion.div
         variants={variants}
