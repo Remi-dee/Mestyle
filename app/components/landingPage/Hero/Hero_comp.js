@@ -116,23 +116,24 @@ function Hero_comp() {
         transition={{
           duration: 2,
         }}
-        className="py-3"
       >
-        <span className="text-white text-3xl md:text-5xl font-normal ">
-          Get Your
-        </span>
-        <span className="text-white text-3xl md:text-5xl font-semibold mx-3 ">
-          Confidence
-        </span>
-        <span className="text-white text-3xl md:text-5xl font-normal ">
-          Again
-        </span>
-        <div className="text-white text-[16px] md:text-2xl font-normal leading-[30px] my-2">
-          Discover the latest trends and showcase your unique style
+        <div className="py-3">
+          <span className="text-white text-3xl md:text-5xl font-normal ">
+            Get Your
+          </span>
+          <span className="text-white text-3xl md:text-5xl font-semibold mx-3 ">
+            Confidence
+          </span>
+          <span className="text-white text-3xl md:text-5xl font-normal ">
+            Again
+          </span>
+          <div className="text-white text-[16px] md:text-2xl font-normal leading-[30px] my-2">
+            Discover the latest trends and showcase your unique style
+          </div>
+          <Button type="button" onClick={"#"} className="mt-4 ">
+            Get Started
+          </Button>{" "}
         </div>
-        <Button type="button" onClick={"#"} className="mt-4 ">
-          Get Started
-        </Button>
       </motion.div>
 
       <motion.div
