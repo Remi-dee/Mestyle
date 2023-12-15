@@ -29,12 +29,12 @@ function Hero_comp() {
       leftImage: {
         hidden: {
           opacity: 0,
-          x: 0,
+          y: 30,
         },
         show: {
           opacity: 1,
-          x: 0,
-          transitions: {
+          y: 0,
+          transition: {
             duration: 1,
           },
         },
@@ -49,7 +49,7 @@ function Hero_comp() {
         show: {
           opacity: 1,
           y: 0,
-          transitions: {
+          transition: {
             duration: 2,
           },
         },
@@ -65,9 +65,9 @@ function Hero_comp() {
         show: {
           opacity: 1,
           x: 0,
-          transitions: {
+          transition: {
             duration: 2,
-            delay: 5,
+           
             type: "spring",
             stiffness: 100,
           },
@@ -136,7 +136,7 @@ function Hero_comp() {
         className="flex justify-center "
       >
         <motion.div
-          variants={heroImages[1].centerImage}
+          variants={heroImages[0].leftImage}
           className="-ml-[180px] md:-ml-0"
         >
           <Image
