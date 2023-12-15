@@ -8,9 +8,9 @@ export default function Home() {
     <main className="bg-grayDark font-lexend">
       <AnimatePresence>
         <motion.div
-          initial={{ opacity: 0, y: 15 }}
+          initial={{ opacity: 0, y: 0 }}
           animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 15 }}
+          exit={{ opacity: 0, y: 0 }}
           transition={{ delay: 0.25 }}
         >
           <HomePage />

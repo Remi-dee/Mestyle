@@ -19,9 +19,15 @@ function Hero_comp() {
   let isScrolling = false;
   const [centerImageIndex, setCenterImageIndex] = useState(0);
 
+  const elementAnimation = {
+    hidden: { opacity: 0, y: 30 }, // Move from bottom (adjust the y value based on your needs)
+    show: { opacity: 1, y: 0, transition: { duration: 1 } }, // Move to its original position
+  };
+
   const variants = {
     hidden: { opacity: 0 },
     show: { opacity: 1, transition: { staggerChildren: 0.9 } },
+    element: elementAnimation,
   };
 
   const heroMotion = [
@@ -111,29 +117,27 @@ function Hero_comp() {
   return (
     <div className="text-center pb-[50px] bg-grayDark relative font-lexend">
       <motion.div
-        initial={{ opacity: 0, scale: 0 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{
-          duration: 2,
-        }}
+        variants={variants.element}
+        initial={false}
+        animate="show"
+        transition={{ delay: 0.5 }} // Adjust the delay as needed
+        className="py-3"
       >
-        <div className="py-3">
-          <span className="text-white text-3xl md:text-5xl font-normal ">
-            Get Your
-          </span>
-          <span className="text-white text-3xl md:text-5xl font-semibold mx-3 ">
-            Confidence
-          </span>
-          <span className="text-white text-3xl md:text-5xl font-normal ">
-            Again
-          </span>
-          <div className="text-white text-[16px] md:text-2xl font-normal leading-[30px] my-2">
-            Discover the latest trends and showcase your unique style
-          </div>
-          <Button type="button" onClick={"#"} className="mt-4 ">
-            Get Started
-          </Button>{" "}
+        <span className="text-white text-3xl md:text-5xl font-normal ">
+          Get Your
+        </span>
+        <span className="text-white text-3xl md:text-5xl font-semibold mx-3 ">
+          Confidence
+        </span>
+        <span className="text-white text-3xl md:text-5xl font-normal ">
+          Again
+        </span>
+        <div className="text-white text-[16px] md:text-2xl font-normal leading-[30px] my-2">
+          Discover the latest trends and showcase your unique style
         </div>
+        <Button type="button" onClick={"#"} className="mt-4 ">
+          Get Started
+        </Button>{" "}
       </motion.div>
 
       <motion.div
