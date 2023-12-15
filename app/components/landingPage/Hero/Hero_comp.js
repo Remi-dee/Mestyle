@@ -24,18 +24,18 @@ function Hero_comp() {
     show: { opacity: 1, transition: { staggerChildren: 0.9 } },
   };
 
-  const heroImages = [
+  const heroMotion = [
     {
       leftImage: {
         hidden: {
           opacity: 0,
-          y: 30,
+          x: 0,
         },
         show: {
           opacity: 1,
-          y: 0,
+          x: 0,
           transition: {
-            duration: 1,
+            duration: 3,
           },
         },
       },
@@ -50,7 +50,9 @@ function Hero_comp() {
           opacity: 1,
           y: 0,
           transition: {
-            duration: 2,
+            duration: 1,
+            type: "spring",
+            bounce: 0.25,
           },
         },
       },
@@ -66,11 +68,20 @@ function Hero_comp() {
           opacity: 1,
           x: 0,
           transition: {
-            duration: 2,
-           
-            type: "spring",
-            stiffness: 100,
+            duration: 3,
           },
+        },
+      },
+    },
+
+    {
+      polygon: {
+        initial: { opacity: 0, scale: 0 },
+        animate: { opacity: 1, scale: 1 },
+        transition: {
+          repeat: Infinity,
+          repeatDelay: 1,
+          duration: 2,
         },
       },
     },
@@ -136,7 +147,7 @@ function Hero_comp() {
         className="flex justify-center "
       >
         <motion.div
-          variants={heroImages[0].leftImage}
+          variants={heroMotion[0].leftImage}
           className="-ml-[180px] md:-ml-0"
         >
           <Image
@@ -149,7 +160,7 @@ function Hero_comp() {
         </motion.div>
 
         <motion.div
-          variants={heroImages[1].centerImage}
+          variants={heroMotion[1].centerImage}
           className=" mt-10 md:mt-8 rounded-tl-[20px] rounded-tr-[20px] "
         >
           <Image
@@ -162,7 +173,7 @@ function Hero_comp() {
         </motion.div>
 
         <motion.div
-          variants={heroImages[2].rightImage}
+          variants={heroMotion[2].rightImage}
           className="  -mr-[180px] md:-mr-0"
         >
           <Image
