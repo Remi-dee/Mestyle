@@ -1,11 +1,12 @@
 "use client";
 import React from "react";
-import NavBar from "../components/landingpage/NavBar";
+
 import Button from "../components/ui/button/template";
+import NavBar from "../components/landingPage/NavBar";
 
 function Page() {
   return (
-    <div className="bg-black">
+    <div className="font-lexend">
       <NavBar />
       <section className="md:p-24 p-8">
         <div className="mb-8 w-full lg:w-4/6 mx-auto text-center text-white space-y-3">
@@ -33,8 +34,7 @@ function Page() {
             <textarea placeholder="Message" className="w-full" />
 
             <div className="mx-auto w-1/12">
-            
-            <Button variant="secondary">Send</Button>
+              <Button variant="secondary">Send</Button>
             </div>
           </form>
         </div>
