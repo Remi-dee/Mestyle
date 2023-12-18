@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 
-function pageWrapper({ children }) {
+export default function pageWrapper({ children }) {
   return (
     <>
       <AnimatePresence>
@@ -17,4 +17,4 @@ function pageWrapper({ children }) {
   );
 }
 
-export default pageWrapper;
+
