@@ -1,16 +1,20 @@
-import React from "react";
+
 import NavBar from "./NavBar";
-import Hero from "./Hero";
-import About from "./About";
+
 import Footer from "./Footer";
 import Hero_comp from "./Hero/Hero_comp";
+import Explore from "./Explore_comp2";
+import Contact from "./Contact_comp";
+import CreatorCTA from "./creatorCTA_comp";
 
 function HomePage() {
   return (
     <>
       <NavBar />
       <Hero_comp />
-      <About />
+      <Explore />
+      <CreatorCTA/>
+      <Contact/>
       <Footer />
     </>
   );
