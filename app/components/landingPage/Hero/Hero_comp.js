@@ -41,7 +41,7 @@ function Hero_comp() {
           opacity: 1,
           x: 0,
           transition: {
-            duration: 3,
+            duration: 8,
           },
         },
       },
@@ -56,7 +56,7 @@ function Hero_comp() {
           opacity: 1,
           y: 0,
           transition: {
-            duration: 1,
+            duration: 5,
             type: "spring",
             bounce: 0.25,
           },
@@ -74,7 +74,7 @@ function Hero_comp() {
           opacity: 1,
           x: 0,
           transition: {
-            duration: 3,
+            duration: 2,
           },
         },
       },
@@ -104,7 +104,7 @@ function Hero_comp() {
     const switchCenterImageCallback = () =>
       switchCenterImage(centerImageIndex, setCenterImageIndex);
 
-    const imageSwitchTimer = setInterval(switchCenterImageCallback, 2000);
+    const imageSwitchTimer = setInterval(switchCenterImageCallback, 5500);
 
     // window.addEventListener("scroll", handleScroll);
 
@@ -152,7 +152,7 @@ function Hero_comp() {
         >
           <Image
             width={null}
-            height={500}
+            height={null}
             src={imageLeft}
             alt=""
             className="w-[700px] md:w-[400px] rounded-tl-[20px] rounded-tr-[20px] rounded-br-[20px]"
@@ -160,6 +160,7 @@ function Hero_comp() {
         </motion.div>
 
         <motion.div
+          key={centerImageIndex}
           variants={heroMotion[1].centerImage}
           className=" mt-10 md:mt-8 rounded-tl-[20px] rounded-tr-[20px] "
         >
@@ -177,9 +178,9 @@ function Hero_comp() {
           className="  -mr-[180px] md:-mr-0"
         >
           <Image
-            width={500}
-            height={500}
-            src={dynamicCenterImages[centerImageIndex]}
+            width={null}
+            height={null}
+            src={imageRight}
             alt=""
             className="w-[700px] md:w-[400px] rounded-tl-[20px] rounded-tr-[20px] rounded-bl-[20px]"
           />
@@ -192,7 +193,7 @@ function Hero_comp() {
         transition={{
           repeat: Infinity,
           repeatDelay: 1,
-          duration: 2,
+          duration: 4,
         }}
         className=" flex items-center justify-center  "
       >
