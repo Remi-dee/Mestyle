@@ -104,7 +104,7 @@ function Hero_comp() {
     const switchCenterImageCallback = () =>
       switchCenterImage(centerImageIndex, setCenterImageIndex);
 
-    const imageSwitchTimer = setInterval(switchCenterImageCallback, 5500);
+    const imageSwitchTimer = setInterval(switchCenterImageCallback, 4000);
 
     // window.addEventListener("scroll", handleScroll);
 
@@ -189,13 +189,12 @@ function Hero_comp() {
 
       <motion.div
         initial={{ opacity: 0, scale: 0 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{
-          repeat: Infinity,
-          repeatDelay: 1,
-          duration: 4,
+        animate={{
+          opacity: 1,
+          scale: [0, 1],
+          transition: { repeat: Infinity, duration: 4 },
         }}
-        className=" flex items-center justify-center  "
+        className="flex items-center justify-center"
       >
         <Image
           // ref={polygonRef}
