@@ -1,5 +1,4 @@
-
-import NavBar from "./NavBar";
+import NavBar from "./NavBar/NavBar";
 
 import Footer from "./Footer";
 import Hero_comp from "./Hero/Hero_comp";
@@ -13,8 +12,8 @@ function HomePage() {
       <NavBar />
       <Hero_comp />
       <Explore />
-      <CreatorCTA/>
-      <Contact/>
+      {/* <CreatorCTA /> */}
+      <Contact />
       <Footer />
     </>
   );

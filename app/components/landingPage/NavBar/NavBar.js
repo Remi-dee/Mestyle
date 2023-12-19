@@ -1,27 +1,12 @@
 import React, { useState } from "react";
-import { oregano } from "../../localFonts/oregano/oregano";
+import { oregano } from "../../../localFonts/oregano/oregano";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import Button from "../ui/button/template";
+import Button from "../../ui/button/template";
 import { motion } from "framer-motion";
+import { navData } from "./utils/navData";
 
-const navData = [
-  {
-    id: "1",
-    text: "Home",
-    href: "/",
-  },
-  {
-    id: "2",
-    text: "About Us",
-    href: "/about-us",
-  },
-  {
-    id: "3",
-    text: "Contact Us",
-    href: "/contact",
-  },
-];
+
 
 function NavBar() {
   const [openHamburger, setOpenHamburger] = useState(false);
