@@ -4,7 +4,8 @@ import Footer from "./Footer";
 import Hero_comp from "./Hero/Hero_comp";
 import Explore from "./Explore_comp2";
 import Contact from "./Contact_comp";
-import CreatorCTA from "./creatorCTA_comp";
+import CreatorCTA from "./CreatorCTA_comp";
+
 
 function HomePage() {
   return (
@@ -12,7 +13,7 @@ function HomePage() {
       <NavBar />
       <Hero_comp />
       <Explore />
-      {/* <CreatorCTA /> */}
+       <CreatorCTA /> 
       <Contact />
       <Footer />
     </>
