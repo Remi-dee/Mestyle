@@ -13,11 +13,11 @@ function CreatorCTA() {
         <div className="  ">
           <div className=" ">
             <Image
-              width={200}
+              width={null}
               height={null}
               src={stackLeft}
               alt=""
-              className="absolute top-20 left-[130px]  h-[300px] w-[200px] rounded-tl-[20px] rounded-tr-[20px]  "
+              className="absolute w-[150px] h-[200px] md:w-[200px] top-[30px] md:top-[30px] left-[130px]  md:h-[300px]  rounded-tl-[20px] rounded-tr-[20px]  "
             />
 
             <Image
@@ -25,7 +25,7 @@ function CreatorCTA() {
               height={null}
               src={stackRight}
               alt=""
-              className="absolute top-[166px] left-[250px]  h-[300px]  rounded-tl-[20px] rounded-tr-[20px]"
+              className="absolute w-[150px] h-[200px] md:w-[200px] top-[116px] left-[230px] md:left-[270px] md:h-[300px]  rounded-tl-[20px] rounded-tr-[20px]"
             />
 
             <Image
@@ -33,20 +33,20 @@ function CreatorCTA() {
               height={null}
               src={stackCenter}
               alt=""
-              className="absolute top-[370px] left-[100px] h-[300px] rounded-tl-[20px] rounded-tr-[20px]"
+              className="absolute w-[150px] h-[200px] md:w-[200px] top-[220px] md:top-[307px] left-[100px] md:left-[90px] md:h-[300px] rounded-tl-[20px] rounded-br-[20px] rounded-tr-[20px]"
             />
           </div>
         </div>
-        <div className="absolute top-[180px]  left-[135px]">
+        <div className="absolute w-[150px] md:w-[200px] top-[127px]  z-30 md:top-[190px] md:left-[150px] left-[140px]">
           <Image
-            width={310}
+            width={null}
             height={null}
             src={waterMark}
             alt=""
             className=""
           />
         </div>
-        <div className="absolute  bottom-0 left-10 md:top-0 md:left-[45%] lg:w-6/12 w-10/12 flex justify-center items-center  mx-auto">
+        <div className="absolute  bottom-4 left-10 md:top-0 md:left-[45%] lg:w-6/12 w-10/12 flex justify-center  items-center  ">
           <div className=" space-y-8 text-white">
             <p className="text-2xl lg:text-4xl font-bold">
               Discover the Creator in You
