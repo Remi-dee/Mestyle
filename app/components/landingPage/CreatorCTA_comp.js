@@ -22,7 +22,7 @@ function CreatorCTA() {
 
             <Image
               width={200}
-              height={null}
+              height={null}l
               src={stackRight}
               alt=""
               className="absolute w-[150px] h-[200px] md:w-[200px] top-[116px] left-[230px] md:left-[270px] md:h-[300px]  rounded-tl-[20px] rounded-tr-[20px]"
