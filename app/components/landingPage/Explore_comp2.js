@@ -12,8 +12,8 @@ function Explore() {
 
   return (
     <>
-      <section className=" md:h-screen  p-20 md:p-24  bg-[url('/images/clothing-rack-with-floral-hawaiian-shirts-hangers-hat-1.png')] bg-no-repeat bg-cover">
-        <div className=" lg:p-4 -ml-8 lg:ml-2 md:max-lg:py-8  flex space-y-8 flex-col justify-center">
+      <section className="flex flex-col justify-center h-[580px] lg:h-[570px]  p-20 pl-10 md:pl-[55px] md:p-24  bg-[url('/images/clothing-rack-with-floral-hawaiian-shirts-hangers-hat-1.png')] bg-no-repeat bg-cover">
+        <div className=" md:max-lg:py-8 lg:pl-[30px] space-y-8  ">
           <div className="lg:w-[80%] w-full lg:pt-7 md:w-4/5 space-y-4 text-white">
             <p className="text-2xl md:text-4xl font-bold">
               {header.map((letter, index) => (

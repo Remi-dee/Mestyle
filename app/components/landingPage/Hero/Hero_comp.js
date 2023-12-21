@@ -19,8 +19,6 @@ function Hero_comp() {
   let isScrolling = false;
   const [centerImageIndex, setCenterImageIndex] = useState(0);
 
- 
-
   useEffect(() => {
     // const handleScroll = () => {
     //   if (!isScrolling) {
