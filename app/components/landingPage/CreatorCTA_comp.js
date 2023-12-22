@@ -26,7 +26,7 @@ function CreatorCTA() {
               l
               src={stackRight}
               alt=""
-              className="absolute  lg:w-[200px] w-[150px] h-[200px] md:h-[240px] md:w-[170px] top-[141px] left-[230px] md:left-[200px] lg:left-[270px] md:top-[166px] lg:h-[300px]  rounded-tl-[20px] rounded-tr-[20px]"
+              className="absolute  lg:w-[200px] w-[150px] h-[200px] md:h-[240px] md:w-[170px] top-[141px] left-[230px] md:left-[205px] lg:left-[270px] md:top-[170px] lg:top-[206px] lg:h-[300px]  rounded-tl-[20px] rounded-tr-[20px]"
             />
 
             <Image
@@ -47,7 +47,7 @@ function CreatorCTA() {
             className=""
           />
         </div>
-        <div className="absolute bottom-[4px] left-10 md:top-0 md:left-[240px] lg:left-[45%] lg:w-6/12 w-10/12 flex justify-center  items-center  ">
+        <div className="absolute bottom-[45px] md:bottom-[4px] left-10 md:top-0 md:left-[240px] lg:left-[45%] lg:w-6/12 w-10/12 flex justify-center  items-center  ">
           <div className=" space-y-8 text-white">
             <p className="text-2xl lg:text-4xl font-bold">
               Discover the Creator in You
