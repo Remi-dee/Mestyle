@@ -1,7 +1,37 @@
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useAnimationControls } from "framer-motion";
+import { useState } from "react";
 
-function TextSpan({children}) {
-  return <motion.span whileHover={{ scale: 1.5 }}>{children}</motion.span>;
+function TextSpan({ children }) {
+  const controls = useAnimationControls();
+  const [isPlaying, setIsplaying] = useState(false);
+  const rubberBand = () => {
+    controls.start({
+      transform: [
+        "scale3d(1,1,1)",
+        "scale3d(1.4, .55, 1)",
+        "scale3d(.75, 1.25, 1)",
+        "scale3d(1.25, .85, 1)",
+        "scale3d(.9, 1.05, 1)",
+        "scale3d(1, 1, 1)",
+      ],
+      
+    });
+
+    setIsplaying(true);
+  };
+
+  return (
+    <motion.span
+      className="inline-block  "
+      animate={controls}
+      onMouseOver={() => {
+        if (!isPlaying) rubberBand();
+      }}
+      onAnimationComplete={() => setIsplaying(false)}
+    >
+      {children}
+    </motion.span>
+  );
 }
 
 export default TextSpan;
