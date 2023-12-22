@@ -22,7 +22,7 @@ function Explore() {
               ))}
             </p>
 
-            <p className=" md:text-2xl ">
+            <p className=" md:text-2xl whitespace-">
               {paragraph.map((letter, index) => (
                 <TextSpan key={index}>
                   {letter === " " ? "\u00A0" : letter}
