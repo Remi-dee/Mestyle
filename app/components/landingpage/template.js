@@ -2,7 +2,7 @@ import NavBar from "./NavBar/NavBar";
 
 import Footer from "./Footer";
 import Hero_comp from "./Hero/Hero_comp";
-import Explore from "./Explore_comp2";
+import Explore from "./Explore_comp";
 import Contact from "./Contact_comp";
 import CreatorCTA from "./CreatorCTA_comp";
 
