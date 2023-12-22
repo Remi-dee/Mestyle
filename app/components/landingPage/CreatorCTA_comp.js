@@ -5,8 +5,12 @@ import stackLeft from "@/public/images/creator/creatorStack_left.png";
 import stackRight from "@/public/images/creator/creatorStack_right.png";
 import stackCenter from "@/public/images/creator/creatorStack_center.png";
 import waterMark from "@/public/images/creator/waterMark.png";
+import TextSpan from "@/app/composables/textSpan";
+import dataSets from "@/app/composables/textData";
 
 function CreatorCTA() {
+  const { header, paragraph } = dataSets.discovery;
+
   return (
     <>
       <section className="relative lg:flex  gap-[600px]   w-full h-[650px] md:h-[560px] lg:h-[700px] space-y-4 ">
@@ -50,14 +54,17 @@ function CreatorCTA() {
         <div className="absolute bottom-[45px] md:bottom-[4px] left-10 md:top-0 md:left-[240px] lg:left-[45%] lg:w-6/12 w-10/12 flex justify-center  items-center  ">
           <div className=" space-y-8 text-white">
             <p className="text-2xl lg:text-4xl font-bold">
-              Discover the Creator in You
+              {header}
             </p>
-            <p className="text-xs lg:text-2xl md:max-lg:w-[350px]">
-              Calling all fashion enthusiasts, trendsetters, and style mavens!
-              At Mestyle, we believe that everyone has the potential to be a
-              fashion creator and inspire others with their unique style. Join
-              our fashion community today and embark on a journey of
-              self-expression and creativity
+            <p className="md:text-2xl">
+              {paragraph.map((word, index) => (
+                <React.Fragment key={index}>
+                  {word.split(" ").map((letter, letterIndex) => (
+                    <TextSpan key={letterIndex}>{letter}</TextSpan>
+                  ))}
+                   
+                </React.Fragment>
+              ))}
             </p>
             <Button variant="inverted"> Get Started As a Creator</Button>
           </div>

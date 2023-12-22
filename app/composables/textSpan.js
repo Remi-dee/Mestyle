@@ -14,7 +14,9 @@ function TextSpan({ children }) {
         "scale3d(.9, 1.05, 1)",
         "scale3d(1, 1, 1)",
       ],
-      
+      transition: {
+        duration: 2,
+      },
     });
 
     setIsplaying(true);
@@ -22,7 +24,7 @@ function TextSpan({ children }) {
 
   return (
     <motion.span
-      className="inline-block  "
+      className="inline-block mr-1"
       animate={controls}
       onMouseOver={() => {
         if (!isPlaying) rubberBand();
