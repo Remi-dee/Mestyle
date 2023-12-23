@@ -15,10 +15,7 @@ function Explore() {
           <div className="lg:w-[70%] w-full lg:pt-7 md:w-4/5 space-y-4 text-white">
             <p className="text-2xl md:text-4xl font-bold">
               {header.map((letter, index) => (
-                <Typewriter
-                  key={index}
-                  text="G"
-                />
+                <span key={index}>{letter}</span>
               ))}
             </p>
 
