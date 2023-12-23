@@ -16,7 +16,7 @@ const dataSets = {
         ),
     },
     recommendations: {
-      header: "Get Personalized Outfit Recommendations".split(" "),
+      header: "Get Personalized Outfit Recommendations".split(""),
       paragraph:
         "Browse our curated collection of outfits and trends for every occasion. There's no need to create an account start exploring right away!".split(
           " "
