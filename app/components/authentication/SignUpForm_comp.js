@@ -4,6 +4,7 @@ import sideImage from "@/public/images/backgrounds/signupBackground.png";
 import google from "@/public/icons/Google.png";
 import arrowBack from "@/public/icons/arrowBack.png";
 import Button from "../ui/button/template";
+import waterMark from "@/public/icons/waterMark.png";
 function SignUp() {
   return (
     <form>
@@ -17,10 +18,18 @@ function SignUp() {
             alt=""
           />
         </div>
-
-        <div className="flex flex-col w-[500px]  py-[60px] h-[650px] bg-white items-center ">
+        <div className="flex flex-col w-[500px] relative py-8 h-[650px] bg-white items-center ">
           <div className=" text-center ">
             <div className="gap-[5px] ">
+              <div className=" h-12 flex items-center justify-center ">
+                <Image
+                  width={60}
+                  height={50}
+                  alt="Sign in with Google"
+                  src={waterMark}
+                  className=""
+                />
+              </div>
               <div className="text-black text-center text-[32px] font-medium leading-10">
                 Welcome to Mestyle
               </div>
@@ -30,7 +39,7 @@ function SignUp() {
             </div>
 
             <div className="space-y-[22px]">
-              <div className="flex justify-center gap-3 border border-spacing-2 mt-[22px] px-6 py-3">
+              <div className="flex justify-center z-20 bg-white gap-3 border border-spacing-2 mt-[22px] px-6 py-3">
                 <div className="">
                   <Image
                     width={25}
@@ -39,7 +48,7 @@ function SignUp() {
                     src={google}
                   />
                 </div>
-                <div className="text-black text-lg font-normal leading-snug ">
+                <div className="text-black  text-lg   font-normal leading-snug ">
                   Sign up with Google
                 </div>
               </div>
@@ -135,17 +144,16 @@ function SignUp() {
                 </Link>
               </div>
             </div>
-
-            <div className="bg-white absolute top-0 left-0 w-[40px] h-12 flex items-center justify-center ">
-              <Image
-                width={null}
-                height={null}
-                alt="Sign in with Google"
-                src={arrowBack}
-                className="w-[10px] h-[25px]"
-              />
-            </div>
           </div>
+        </div>
+        <div className="bg-white absolute top-0 left-0 w-[40px] h-12 z-20 flex items-center justify-center ">
+          <Image
+            width={null}
+            height={null}
+            alt="Sign in with Google"
+            src={arrowBack}
+            className="w-[10px] h-[25px]"
+          />
         </div>
       </div>
     </form>

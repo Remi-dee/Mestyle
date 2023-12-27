@@ -4,7 +4,7 @@ import Button from "../ui/button/template";
 import stackLeft from "@/public/images/creator/creatorStack_left.png";
 import stackRight from "@/public/images/creator/creatorStack_right.png";
 import stackCenter from "@/public/images/creator/creatorStack_center.png";
-import waterMark from "@/public/images/creator/waterMark.png";
+import waterMark from "@/public/icons/waterMark.png";
 import TextSpan from "@/app/composables/textSpan";
 import dataSets from "@/app/composables/textData";
 
@@ -53,16 +53,13 @@ function CreatorCTA() {
         </div>
         <div className="absolute bottom-[45px] md:bottom-[4px] left-10 md:top-0 md:left-[240px] lg:left-[45%] lg:w-6/12 w-10/12 flex justify-center  items-center  ">
           <div className=" space-y-8 text-white">
-            <p className="text-2xl lg:text-4xl font-bold">
-              {header}
-            </p>
+            <p className="text-2xl lg:text-4xl font-bold">{header}</p>
             <p className="md:text-2xl">
               {paragraph.map((word, index) => (
                 <React.Fragment key={index}>
                   {word.split(" ").map((letter, letterIndex) => (
                     <TextSpan key={letterIndex}>{letter}</TextSpan>
                   ))}
-                   
                 </React.Fragment>
               ))}
             </p>

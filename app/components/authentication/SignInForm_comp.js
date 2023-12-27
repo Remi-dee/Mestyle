@@ -4,12 +4,23 @@ import sideImage from "@/public/images/backgrounds/signupBackground.png";
 import google from "@/public/icons/Google.png";
 import arrowBack from "@/public/icons/arrowBack.png";
 import Button from "../ui/button/template";
+import waterMark from "@/public/icons/waterMark.png";
 function SignIn() {
   return (
     <form>
       <div className="flex pb-4 relative">
         <div className="flex flex-col w-[439px]  py-[60px] h-auto bg-white items-center ">
           <div className=" text-center ">
+            <div className=" h-12 flex items-center justify-center ">
+              <Image
+                width={60}
+                height={50}
+                alt="Sign in with Google"
+                src={waterMark}
+                className=""
+              />
+            </div>
+
             <div className="text-black text-center text-[32px] w-[317px] font-medium leading-10">
               Welcome back to Mestyle
             </div>
@@ -99,6 +110,16 @@ function SignIn() {
                 height={null}
                 alt="Sign in with Google"
                 src={arrowBack}
+                className="w-[10px] h-[25px]"
+              />
+            </div>
+
+            <div className="bg-white absolute top-0 right-0 w-[40px] h-12 flex items-center justify-center ">
+              <Image
+                width={null}
+                height={null}
+                alt="Sign in with Google"
+                src={waterMark}
                 className="w-[10px] h-[25px]"
               />
             </div>

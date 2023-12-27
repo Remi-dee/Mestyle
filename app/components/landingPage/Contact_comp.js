@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Button from "../ui/button/template";
-import waterMark from "@/public/images/creator/waterMark.png";
+
 import TextSpan from "@/app/composables/textSpan";
 import dataSets from "@/app/composables/textData";
 
@@ -19,7 +19,6 @@ function Contact() {
                   {word.split(" ").map((letter, letterIndex) => (
                     <TextSpan key={letterIndex}>{letter}</TextSpan>
                   ))}
-                
                 </React.Fragment>
               ))}
             </p>
