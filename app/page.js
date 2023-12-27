@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import HomePage from "./components/landingPage/template";
 import Authentication from "./components/authentication/SignUpForm_comp";
 import SignIn from "./components/authentication/SignInForm_comp";
+import ForgotPassword from "./components/authentication/ForgotPassword_comp";
 
 export default function Home() {
   return (
@@ -10,7 +11,7 @@ export default function Home() {
       <div className="max-w-screen-2xl">
         <AnimatePresence>
           <HomePage />
-          <SignIn/>
+          <ForgotPassword/>
         </AnimatePresence>
       </div>
     </main>

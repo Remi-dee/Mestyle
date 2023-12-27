@@ -8,15 +8,11 @@ function SignIn() {
   return (
     <form>
       <div className="flex pb-4 relative">
-        <div className="flex flex-col w-[500px]  py-[60px] h-[650px] bg-white items-center ">
+        <div className="flex flex-col w-[439px]  py-[60px] h-auto bg-white items-center ">
           <div className=" text-center ">
-            
-              <div className="text-black text-center text-[32px] font-medium leading-10">
-                Welcome back to Mestyle
-              </div>
-             
-            
-
+            <div className="text-black text-center text-[32px] w-[317px] font-medium leading-10">
+              Welcome back to Mestyle
+            </div>
             <div className="space-y-[22px]">
               <div className="flex justify-center gap-3 border border-spacing-2 mt-[22px] px-6 py-3">
                 <div className="">
@@ -28,16 +24,16 @@ function SignIn() {
                   />
                 </div>
                 <div className="text-black text-lg font-normal leading-snug ">
-                  Sign up with Google
+                  Sign in with Google
                 </div>
               </div>
 
-              <div className="w-80 h-[19px] items-center  gap-3 inline-flex">
-                <div className="w-[136px] h-[0px] rotate-180 border border-neutral-300"></div>
+              <div className="w-80 h-[19px] items-center justify-center  gap-3 inline-flex">
+                <div className="w-[130px] h-[0px] rotate-180 border border-neutral-300"></div>
                 <div className="text-black text-base font-normal  leading-tight">
                   OR
                 </div>
-                <div className="w-[136px] h-[0px]  rotate-180 border border-neutral-300"></div>
+                <div className="w-[130px] h-[0px]  rotate-180 border border-neutral-300"></div>
               </div>
 
               <div className="flex flex-col gap-3">
@@ -64,33 +60,11 @@ function SignIn() {
 
                 <div className="flex flex-col gap-1">
                   <label
-                    htmlFor="username"
-                    className="block text-sm text-start font-medium text-gray-700"
-                  >
-                    Email Adress
-                  </label>
-
-                  <div className="w-full   gap-1 inline-flex">
-                    <input
-                      name="email"
-                      required
-                      id="email"
-                      type="text"
-                      autoComplete="on"
-                      className=" text-zinc-400    text-base font-normal w-full leading-normal bg-white border border-neutral-300"
-                      placeholder="Enter your email address"
-                    />
-                  </div>
-                </div>
-
-                <div className="flex flex-col gap-1">
-                  <label
                     htmlFor="password"
                     className="block text-sm text-start font-medium text-gray-700"
                   >
                     Password
                   </label>
-
                   <div className="w-full gap-1 inline-flex">
                     <input
                       name="password"
@@ -101,6 +75,13 @@ function SignIn() {
                       className=" text-zinc-400    text-base font-normal w-full leading-normal bg-white border border-neutral-300"
                       placeholder="Create a password"
                     />
+                  </div>{" "}
+                  <div className="text-start ">
+                    <Link href="#">
+                      <span className="text-neutral-600 text-base font-normal  leading-tight">
+                        Forgot Password?
+                      </span>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -109,18 +90,6 @@ function SignIn() {
                 <Button variant="secondary" className=" w-full">
                   Continue
                 </Button>
-              </div>
-
-              <div className="text-start">
-                <span className="text-neutral-600 text-base font-normal  leading-tight">
-                  Already a member?{" "}
-                </span>
-
-                <Link href="#">
-                  <span className="text-neutral-600 text-base font-normal underline leading-tight">
-                    Login
-                  </span>
-                </Link>
               </div>
             </div>
 
