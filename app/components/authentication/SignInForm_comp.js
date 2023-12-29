@@ -8,14 +8,14 @@ import waterMark from "@/public/icons/waterMark.png";
 function SignIn() {
   return (
     <form>
-      <div className="flex pb-4 relative">
-        <div className="flex flex-col w-[439px]  py-[60px] h-auto bg-white items-center ">
+      <div className="flex pb-4 relative font-lexend">
+        <div className="flex flex-col w-[439px]  py-[60px] h-auto bg-white items-center rounded-tl-[30px]">
           <div className=" text-center ">
             <div className=" h-12 flex items-center justify-center ">
               <Image
                 width={60}
                 height={50}
-                alt="Sign in with Google"
+                alt="Mestyle Logo"
                 src={waterMark}
                 className=""
               />
@@ -104,22 +104,12 @@ function SignIn() {
               </div>
             </div>
 
-            <div className="bg-white absolute top-0 left-0 w-[40px] h-12 flex items-center justify-center ">
+            <div className="bg-white absolute top-0 left-0 w-[40px] h-12 flex items-center justify-center rounded-tl-[30px] ">
               <Image
                 width={null}
                 height={null}
-                alt="Sign in with Google"
+                alt="Close Signin"
                 src={arrowBack}
-                className="w-[10px] h-[25px]"
-              />
-            </div>
-
-            <div className="bg-white absolute top-0 right-0 w-[40px] h-12 flex items-center justify-center ">
-              <Image
-                width={null}
-                height={null}
-                alt="Sign in with Google"
-                src={waterMark}
                 className="w-[10px] h-[25px]"
               />
             </div>

@@ -3,6 +3,7 @@ function Button({
   variant = "primary",
   children,
   style = {},
+  onClick,
   ...props
 }) {
   const baseStyle =
@@ -19,6 +20,7 @@ function Button({
       {...props}
       className={`${baseStyle} ${isVariant} ${className}`}
       style={{ ...style }}
+      onClick={onClick}
     >
       {children}
     </button>

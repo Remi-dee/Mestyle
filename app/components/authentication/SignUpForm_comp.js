@@ -8,12 +8,12 @@ import waterMark from "@/public/icons/waterMark.png";
 function SignUp() {
   return (
     <form>
-      <div className="flex pb-4 relative">
+      <div className="flex pb-4 relative font-lexend ">
         <div className="">
           <Image
             width={392}
             height={736}
-            className="w-[350px] h-[650px] "
+            className="w-[350px] h-[650px] rounded-tl-[30px]"
             src={sideImage}
             alt=""
           />
@@ -146,7 +146,7 @@ function SignUp() {
             </div>
           </div>
         </div>
-        <div className="bg-white absolute top-0 left-0 w-[40px] h-12 z-20 flex items-center justify-center ">
+        <div className="bg-white absolute top-0 left-0 w-[40px] h-12 z-20 flex items-center justify-center rounded-tl-[30px] ">
           <Image
             width={null}
             height={null}

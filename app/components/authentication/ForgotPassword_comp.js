@@ -7,7 +7,7 @@ import Button from "../ui/button/template";
 function ForgotPassword() {
   return (
     <form>
-      <div className="flex pb-4 relative">
+      <div className="flex pb-4 relative font-lexend">
         <div className="flex flex-col w-[439px]  py-[60px] h-auto bg-white items-center ">
           <div className=" text-center ">
             <div className="gap-[5px] ">

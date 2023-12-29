@@ -12,7 +12,6 @@ export default function Home() {
       <div className="max-w-screen-2xl">
         <AnimatePresence>
           <HomePage />
-          <SignIn/>
         </AnimatePresence>
       </div>
     </main>

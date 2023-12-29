@@ -1,19 +1,18 @@
 import React, { useState } from "react";
 import { oregano } from "../../../localFonts/oregano/oregano";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Button from "../../ui/button/template";
 import { motion } from "framer-motion";
 import { navData } from "./utils/navData";
-
-
+import { Router } from "next/router";
 
 function NavBar() {
   const [openHamburger, setOpenHamburger] = useState(false);
   const openMobileNav = () => {
     setOpenHamburger((prevIsOpen) => !prevIsOpen);
   };
-
+  const router = useRouter();
   const pathname = usePathname();
   return (
     <>
@@ -78,7 +77,16 @@ function NavBar() {
               ))}
             </ul>
             <div className="mx-auto space-y-4 text-sm text-bold">
-              <Button variant="inverted"> Login</Button>
+              <Button
+                variant="inverted"
+                onClick={(e) => {
+                  e.preventDefault();
+                  router.push("/?view=signIn");
+                }}
+              >
+                {" "}
+                Login
+              </Button>
               <Button variant="primary">Get Started</Button>
             </div>
           </div>
@@ -111,8 +119,24 @@ function NavBar() {
           ))}
         </ul>
         <div className="flex items-center justify-center space-x-6 text-sm text-bold">
-          <Button variant="inverted"> Login</Button>
-          <Button variant="primary">Get Started</Button>
+          <Button
+            variant="inverted"
+            onClick={(e) => {
+              e.preventDefault();
+              router.push("/?view=signin");
+            }}
+          >
+            Login
+          </Button>
+          <Button
+            variant="primary"
+            onClick={(e) => {
+              e.preventDefault();
+              router.push("/?view=signup");
+            }}
+          >
+            Get Started
+          </Button>
         </div>
       </nav>
     </>
