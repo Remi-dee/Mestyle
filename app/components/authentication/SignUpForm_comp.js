@@ -5,7 +5,16 @@ import google from "@/public/icons/Google.png";
 import arrowBack from "@/public/icons/arrowBack.png";
 import Button from "../ui/button/template";
 import waterMark from "@/public/icons/waterMark.png";
+import { useState } from "react";
 function SignUp() {
+ 
+  function SignUp() {
+    const [formData, setFormData] = useState({
+      username: '',
+      email: '',
+      password: '',
+    });
+ 
   return (
     <form>
       <div className="flex pb-4 relative font-lexend ">
@@ -93,6 +102,9 @@ function SignUp() {
 
                   <div className="w-full   gap-1 inline-flex">
                     <input
+                      value={formData.email}
+                      onBlur={handleBlur}
+                      onChange={handleChange}
                       name="email"
                       required
                       id="email"
@@ -114,6 +126,9 @@ function SignUp() {
 
                   <div className="w-full gap-1 inline-flex">
                     <input
+                      value={formData.email}
+                      onBlur={handleBlur}
+                      onChange={handleChange}
                       name="password"
                       required
                       id="password"
@@ -134,7 +149,7 @@ function SignUp() {
 
               <div className="text-start">
                 <span className="text-neutral-600 text-base font-normal  leading-tight">
-                  Already a member?{" "}
+                  Already a member?
                 </span>
 
                 <Link href="#">
