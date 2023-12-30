@@ -2,7 +2,8 @@ import { Modal } from "@/app/composables/modal/modal";
 import SignIn from "./SignInForm_comp";
 import ForgotPassword from "./ForgotPassword_comp";
 import { useRouter, useSearchParams } from "next/navigation";
-import SignUp from "./SignUpForm_comp";
+import SignUp from "./signUp/SignUpForm_comp";
+
 
 function Authentication() {
   const view = useSearchParams().get("view");

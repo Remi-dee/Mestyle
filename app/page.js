@@ -1,10 +1,10 @@
 "use client";
 import { motion, AnimatePresence } from "framer-motion";
 import HomePage from "./components/landingPage/template";
-import Authentication from "./components/authentication/SignUpForm_comp";
+import Authentication from "./components/authentication/signUp/SignUpForm_comp";
 import SignIn from "./components/authentication/SignInForm_comp";
 import ForgotPassword from "./components/authentication/ForgotPassword_comp";
-import SignUp from "./components/authentication/SignUpForm_comp";
+import SignUp from "./components/authentication/signUp/SignUpForm_comp";
 
 export default function Home() {
   return (

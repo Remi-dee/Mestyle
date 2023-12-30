@@ -3,27 +3,31 @@ import Link from "next/link";
 import sideImage from "@/public/images/backgrounds/signupBackground.png";
 import google from "@/public/icons/Google.png";
 import arrowBack from "@/public/icons/arrowBack.png";
-import Button from "../ui/button/template";
+import Button from "../../ui/button/template";
 import waterMark from "@/public/icons/waterMark.png";
 import { useState } from "react";
+import { handleSignUp } from "./util/handleSignup";
 function SignUp() {
- 
-  function SignUp() {
-    const [formData, setFormData] = useState({
-      username: '',
-      email: '',
-      password: '',
-    });
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
 
-    const handleChange = (e) => {
-      setFormData((prevData) => ({
-        ...prevData,
-        [e.target.name]: e.target.value,
-      }));
-    };
- 
+  const handleChange = (e) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
   return (
-    <form>
+    <form
+      onSubmit={(e) => {
+        e.preventDefault()
+        handleSignUp(e, formData.email, formData.password);
+      }}
+    >
       <div className="flex pb-4 relative font-lexend ">
         <div className="">
           <Image
@@ -88,9 +92,8 @@ function SignUp() {
 
                   <div className="w-full   gap-1 inline-flex">
                     <input
-                       value={formData.email}
-                       onBlur={handleBlur}
-                       onChange={handleChange}
+                      value={formData.username}
+                      onChange={handleChange}
                       name="username"
                       required
                       id="fullname"
@@ -113,7 +116,6 @@ function SignUp() {
                   <div className="w-full   gap-1 inline-flex">
                     <input
                       value={formData.email}
-                      onBlur={handleBlur}
                       onChange={handleChange}
                       name="email"
                       required
@@ -136,8 +138,7 @@ function SignUp() {
 
                   <div className="w-full gap-1 inline-flex">
                     <input
-                      value={formData.email}
-                      onBlur={handleBlur}
+                      value={formData.password}
                       onChange={handleChange}
                       name="password"
                       required
@@ -152,7 +153,7 @@ function SignUp() {
               </div>
 
               <div>
-                <Button variant="secondary" className=" w-full">
+                <Button type="submit" variant="secondary" className=" w-full">
                   Continue
                 </Button>
               </div>
