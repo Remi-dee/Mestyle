@@ -14,6 +14,13 @@ function SignUp() {
       email: '',
       password: '',
     });
+
+    const handleChange = (e) => {
+      setFormData((prevData) => ({
+        ...prevData,
+        [e.target.name]: e.target.value,
+      }));
+    };
  
   return (
     <form>
@@ -81,6 +88,9 @@ function SignUp() {
 
                   <div className="w-full   gap-1 inline-flex">
                     <input
+                       value={formData.email}
+                       onBlur={handleBlur}
+                       onChange={handleChange}
                       name="username"
                       required
                       id="fullname"
