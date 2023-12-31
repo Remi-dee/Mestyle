@@ -1,5 +1,4 @@
 import React from "react";
-import Image from "next/image";
 import Button from "../ui/button/template";
 
 import TextSpan from "@/app/composables/textSpan";
