@@ -21,13 +21,18 @@ function SignUp() {
     }));
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formData.email, +"see it" + formData.password);
+    const formDataObject = {
+      email: formData.email,
+      password: formData.password,
+    };
+    handleSignUp(formData);
+  };
+
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault()
-        handleSignUp(e, formData.email, formData.password);
-      }}
-    >
+    <form onSubmit={handleSubmit}>
       <div className="flex pb-4 relative font-lexend ">
         <div className="">
           <Image

@@ -10,12 +10,13 @@ const handleSignUp = async ({ email, password }) => {
   } catch (error) {
     console.error("Error initializing Firebase:", error);
   }
+  console.log(email, "see it", password);
 
   try {
     const userCredential = await createUserWithEmailAndPassword(
       appAuth,
-      email,
-      password
+      "oluwaremidaniel36@gmail.com",
+      "tttteeee"
     );
     const user = userCredential.user;
     console.log("User signed up:", user);
