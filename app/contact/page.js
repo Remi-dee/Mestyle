@@ -2,7 +2,7 @@
 import React from "react";
 
 import Button from "../components/ui/button/template";
-import NavBar from "../components/landingPage/NavBar";
+import NavBar from "../components/landingPage/NavBar/NavBar";
 
 function Page() {
   return (
