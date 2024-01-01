@@ -7,7 +7,7 @@ import Contact from "./Contact_comp";
 import CreatorCTA from "./CreatorCTA_comp";
 import { Modal } from "@/app/composables/modal/modal";
 import SignUp from "../authentication/signUp/SignUpForm_comp";
-import SignIn from "../authentication/SignInForm_comp";
+import SignIn from "../authentication/signIn/SignInForm_comp";
 import ForgotPassword from "../authentication/ForgotPassword_comp";
 import Authentication from "../authentication/authentication";
 

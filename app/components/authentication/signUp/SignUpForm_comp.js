@@ -112,7 +112,7 @@ function SignUp() {
 
                 <div className="flex flex-col gap-1">
                   <label
-                    htmlFor="username"
+                    htmlFor="email"
                     className="block text-sm text-start font-medium text-gray-700"
                   >
                     Email Adress
