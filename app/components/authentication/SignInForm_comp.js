@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import sideImage from "@/public/images/backgrounds/signupBackground.png";
+
 import google from "@/public/icons/Google.png";
 import arrowBack from "@/public/icons/arrowBack.png";
 import Button from "../ui/button/template";
