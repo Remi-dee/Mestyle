@@ -77,7 +77,7 @@ function SignIn() {
                     htmlFor="email"
                     className="block text-sm text-start font-medium text-gray-700"
                   >
-                    Username
+                    Email
                   </label>
 
                   <div className="w-full   gap-1 inline-flex">

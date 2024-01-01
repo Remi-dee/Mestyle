@@ -4,19 +4,11 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 
 const handleSignUp = async ({ email, password }) => {
   try {
-    const app = initializeApp(firebaseConfig);
-    console.log("hehehhr");
-    // Continue with Firebase services...
-  } catch (error) {
-    console.error("Error initializing Firebase:", error);
-  }
-  console.log(email, "see it", password);
-
-  try {
+    console.log(email, "see it", password);
     const userCredential = await createUserWithEmailAndPassword(
       appAuth,
-      "oluwaremidaniel36@gmail.com",
-      "tttteeee"
+      email,
+      password
     );
     const user = userCredential.user;
     console.log("User signed up:", user);
