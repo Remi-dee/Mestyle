@@ -7,7 +7,7 @@ function Button({
   ...props
 }) {
   const baseStyle =
-    "px-3 py-1 md:py-2 md:px-4 focus:outline-none focus:ring text-base md:font-medium";
+    "px-3 py-1 md:py-2 md:px-4 focus:outline-none focus:ring text-base md:font-medium ";
   const variants = {
     primary: "bg-white ",
     secondary: "bg-black text-white",

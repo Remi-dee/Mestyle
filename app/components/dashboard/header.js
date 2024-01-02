@@ -3,14 +3,14 @@ import Button from "../ui/button/template";
 function Header() {
   return (
     <div>
-      <div className="flex justify-between text-white font-lexend">
+      <div className="flex justify-between items-center text-white font-lexend">
         <div>
           <h1 className=" text-5xl font-medium leading-tight">
             Good Afternoon User
           </h1>
         </div>
 
-        <div className="w-[332px] h-[92px] justify-between px-4 py-3 opacity-40 text-white bg-gray-200 bg-opacity-10 rounded-[20px] shadow-inner items-center gap-2.5 inline-flex">
+        <div className="w-[332px] h-[92px] justify-between px-4 py-3  text-white bg-gray-200 bg-opacity-5 rounded-[20px]  items-center gap-2.5 inline-flex">
           <div>
             <svg
               width="60"
@@ -42,6 +42,7 @@ function Header() {
               />
             </svg>
           </div>
+
           <div>
             <svg
               width="60"
@@ -136,11 +137,10 @@ function Header() {
               </defs>
             </svg>
           </div>
-          <div>
-            <Button className="w-[114px] h-[60px] text-xl text-white bg-neutral-800 rounded-[20px] shadow-inner border border-zinc-600  items-center ">
-              Create
-            </Button>
-          </div>
+
+          <Button className="w-[114px] h-[60px] text-xl text-white bg-neutral-800 rounded-[20px]  shadow-inner border border-zinc-600  items-center ">
+            Create
+          </Button>
         </div>
       </div>
     </div>
