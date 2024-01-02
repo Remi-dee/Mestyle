@@ -1,3 +1,5 @@
+import Button from "../ui/button/template";
+
 function Header() {
   return (
     <div>
@@ -8,7 +10,7 @@ function Header() {
           </h1>
         </div>
 
-        <div className="w-[332px] h-[92px] px-4 py-3 opacity-40 bg-gray-200 bg-opacity-10 rounded-[20px] shadow-inner justify-start items-center gap-2.5 inline-flex">
+        <div className="w-[332px] h-[92px] justify-between px-4 py-3 opacity-40 text-white bg-gray-200 bg-opacity-10 rounded-[20px] shadow-inner items-center gap-2.5 inline-flex">
           <div>
             <svg
               width="60"
@@ -40,7 +42,6 @@ function Header() {
               />
             </svg>
           </div>
-
           <div>
             <svg
               width="60"
@@ -134,6 +135,11 @@ function Header() {
                 </clipPath>
               </defs>
             </svg>
+          </div>
+          <div>
+            <Button className="w-[114px] h-[60px] text-xl text-white bg-neutral-800 rounded-[20px] shadow-inner border border-zinc-600  items-center ">
+              Create
+            </Button>
           </div>
         </div>
       </div>
