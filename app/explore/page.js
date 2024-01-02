@@ -1,11 +1,12 @@
 import Header from "../components/dashboard/header"
 import StyleCard from "../components/dashboard/styleCard"
+import StyleGrid from "../components/dashboard/styleGrid"
 
 function page() {
   return (
     <div>
       <Header/>
-      <StyleCard/>
+      <StyleGrid/>
     </div>
   )
 }
