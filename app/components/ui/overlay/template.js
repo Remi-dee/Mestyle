@@ -10,13 +10,13 @@ import React from "react";
 
 function Overlay({ title = "", description = "", children, className = "" }) {
   const baseStyle =
-    "relative backdrop-blur-md z-50 bg-black/25 dark:bg-white/30 " +
+    "relative backdrop-blur-md bg-black/25 dark:bg-white/30 " +
     "border border-solid border-black dark:border-white rounded-xl " +
     "shadow-lg antialiased select-none";
 
   return (
     <div className={`${baseStyle} ${className}`}>
-      <div className="flex flex-col items-center justify-center xl:px-10 xl:py-12 lg:py-10 lg:px-8 md:px-6 md:py-8 px-4 py-6 space-y-6 mx-auto font-lexend">
+      <div className="relative flex flex-col items-center justify-center xl:px-10 xl:py-12 lg:py-10 lg:px-8 md:px-6 md:py-8 px-4 py-6 space-y-6 mx-auto font-lexend">
         {title && (
           <div className="space-y-2 w-full">
             <h2 className="text-2xl text-center capitalize md:text-3xl xl:text-3xl lg:text-3xl font-medium text-black dark:text-white">
@@ -24,7 +24,7 @@ function Overlay({ title = "", description = "", children, className = "" }) {
             </h2>
             <hr
               aria-hidden="true"
-              className="border border-solid dark:border-white border-black w-full"
+              className="border border-solid dark:border-white border-black"
             />
           </div>
         )}
