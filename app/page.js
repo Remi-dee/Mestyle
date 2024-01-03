@@ -1,6 +1,6 @@
 "use client";
 import { motion, AnimatePresence } from "framer-motion";
-import HomePage from "./components/landingPage/template";
+import HomePage from "./components/landingPage/homePage";
 
 export default function Home() {
   return (
