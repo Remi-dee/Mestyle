@@ -1,12 +1,11 @@
-import React, { useState } from "react";
-import ImageProcessor from "@/lib/ImageProcessor";
+import useFormContext from "@/hooks/creatorProfile/useFormContext";
 import Image from "next/image";
+import { useState } from "react";
 
 const ImageUpload = () => {
-  const [imageSrc, setImageSrc] = useState("");
   const [isDragging, setIsDragging] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  const { formData, errors, isLoading, imageSrc, handleChange } =
+    useFormContext();
 
   const handleDragEnter = (e) => {
     e.preventDefault();
@@ -22,34 +21,19 @@ const ImageUpload = () => {
     setIsDragging(false);
   };
 
-  const handleFileInput = async (file) => {
-    setIsLoading(true);
-    const result = await ImageProcessor.processFile(file);
-
-    if (result.errorMessage) {
-      setErrorMessage(result.errorMessage);
-      setImageSrc("");
-    } else if (result.imageSrc) {
-      setImageSrc(result.imageSrc);
-      setErrorMessage("");
-    }
-
-    setIsLoading(false);
-  };
-
   const handleDrop = (e) => {
     e.preventDefault();
     setIsDragging(false);
-    const files = e.dataTransfer.files;
-    if (files && files.length > 0) {
-      handleFileInput(files[0]);
-    }
-  };
-
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
+    const file = e.dataTransfer.files[0];
     if (file) {
-      handleFileInput(file);
+      const event = {
+        target: {
+          name: "imageUpload",
+          type: "file",
+          files: [file],
+        },
+      };
+      handleChange(event);
     }
   };
 
@@ -60,7 +44,10 @@ const ImageUpload = () => {
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
-        className={`relative border px-2 lg:w-[300px] lg:h-[600px] xl:w-[300px] xl:h-[600px] md:w-[270px] md:h-[570px] w-[250px] h-[500px] grid grid-cols-1 items-center ${
+        className={`relative border px-2 lg:w-[15vw] lg:h-[40vh] 
+        xl:w-[15vw] xl:h-[40vh] 
+        md:w-[15vw] md:h-[40vh] 
+        w-full h-[65vh] grid grid-cols-1 items-center ${
           imageSrc ? "border-none p-0" : ""
         } ${
           isDragging
@@ -69,20 +56,22 @@ const ImageUpload = () => {
         } rounded-lg cursor-pointer`}
       >
         <input
+          name="imageUpload"
           id="upload"
           type="file"
           className="hidden"
           accept="image/*"
-          onChange={handleFileChange}
+          onChange={handleChange}
           aria-label="File Upload"
         />
+
         <label htmlFor="upload" className="cursor-pointer">
           {isLoading ? (
             <div className="text-center text-sm dark:text-white text-black">
               Loading...
             </div>
           ) : imageSrc ? (
-            <div className="w-full h-full">
+            <div className="lg:w-full xl:w-full md:w-full h-full w-[100vw]">
               <Image
                 src={imageSrc}
                 layout="fill"
@@ -94,7 +83,7 @@ const ImageUpload = () => {
             </div>
           ) : (
             <div className="flex flex-col items-center justify-center text-black dark:text-white">
-              <span className="gap-y-3 flex items-center flex-col pt-16 pb-32">
+              <span className="gap-y-3 flex items-center flex-col xl:pt-16 md:pt-16 lg:pt-16 pt-4">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="41"
@@ -112,7 +101,7 @@ const ImageUpload = () => {
                   Drag and drop or click to upload your images
                 </p>
               </span>
-              <span className="mt-24">
+              <span className="lg:mt-24 xl:mt-24 md:mt-24 mt-12">
                 <p className="text-center text-sm">
                   We recommend using a high-quality .jpg file less than 20MB
                 </p>
@@ -124,9 +113,9 @@ const ImageUpload = () => {
             </div>
           )}
         </label>
-        {errorMessage && (
-          <p className="text-red-500 text-sm mt-2 max-w-xs text-center">
-            {errorMessage}
+        {errors.imageUpload && (
+          <p className="text-xs text-red-500 text-center">
+            {errors.imageUpload}
           </p>
         )}
       </article>

@@ -11,6 +11,7 @@ import {
   validateFashionStyle,
   validateUploadContent,
 } from "@/app/components/form/creatorProfile/utils/Validation";
+import imageProcessor from "@/lib/ImageProcessor";
 
 const FormContext = createContext();
 
@@ -18,6 +19,8 @@ function FormProvider({ children }) {
   const [formStep, setFormStep] = useState(0);
   const [formData, setFormData] = useState(FORM_INITIAL_STATE);
   const [errors, setErrors] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
+  const [imageSrc, setImageSrc] = useState("");
 
   useEffect(() => {
     const handleBeforeUnload = (e) => {
@@ -31,17 +34,45 @@ function FormProvider({ children }) {
     return () => window.removeEventListener("beforeunload", handleBeforeUnload);
   }, [formData]);
 
-  const handleChange = (e) => {
+  const handleChange = async (e) => {
+    const { name, type } = e.target;
+
+    // Handle file input
+    if (type === "file") {
+      const file = e.target.files[0];
+      if (!file) {
+        setErrors({ [name]: "No file selected" });
+        return;
+      }
+
+      setIsLoading(true);
+      const result = await imageProcessor.processFile(file);
+
+      if (result.errorMessage) {
+        setErrors({ [name]: result.errorMessage });
+        setImageSrc("");
+      } else if (result.imageSrc) {
+        setImageSrc(result.imageSrc);
+        setErrors({});
+        setFormData((prev) => ({ ...prev, [name]: file }));
+      }
+
+      setIsLoading(false);
+    } else {
+      handleOtherInputChange(e);
+    }
+  };
+
+  const handleOtherInputChange = (e) => {
     const { name, value, checked, type } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]:
-        type === "checkbox"
-          ? checked
-            ? [...(prev[name] || []), value]
-            : prev[name].filter((v) => v !== value)
-          : value,
-    }));
+    const newValue =
+      type === "checkbox"
+        ? checked
+          ? [...(formData[name] || []), value]
+          : formData[name].filter((v) => v !== value)
+        : value;
+
+    setFormData((prev) => ({ ...prev, [name]: newValue }));
     setErrors((prev) => ({ ...prev, [name]: "" }));
   };
 
@@ -75,7 +106,31 @@ function FormProvider({ children }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("FormData:", JSON.stringify(formData));
+    const error = validateUploadContent(formData);
+
+    if (Object.keys(error).length === 0) {
+      const data = new FormData();
+      for (const key in formData) {
+        if (key !== "imageUpload") {
+          data.append(key, formData[key]);
+        }
+      }
+
+      data.append("imageUpload", formData.imageUpload);
+
+      // checking out the url of the uploaded image
+      const fileUrl = URL.createObjectURL(formData.imageUpload);
+      console.log("Image URL:", fileUrl);
+
+      // checking out FormData
+      for (let pair of data.entries()) {
+        console.log(pair[0] + ", " + pair[1]);
+      }
+
+      // Sending `data` to the server can go here
+    } else {
+      setErrors(error);
+    }
   };
 
   const contextValue = {
@@ -90,6 +145,10 @@ function FormProvider({ children }) {
     handleChange,
     handleNext,
     handleSubmit,
+    setIsLoading,
+    isLoading,
+    imageSrc,
+    setImageSrc,
   };
 
   return (

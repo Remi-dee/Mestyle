@@ -10,10 +10,10 @@ function FashionStyle() {
     "form-checkbox md:h-5 md:w-5 xl:w-5 xl:h-5 lg:h-5 lg:w-5 focus:checked:bg-black checked:bg-black focus:ring-0 lg:rounded-md xl:rounded-md md:rounded-md rounded-sm hover:checked:bg-black";
 
   return (
-    <div className="flex flex-col select-none items-center justify-center mx-auto">
-      <div className="flex flex-col lg:flex-row md:flex-row xl:flex-row space-y-2 lg:justify-between md:justify-between xl:justify-between">
+    <div className="flex flex-col items-center justify-center select-none mx-auto">
+      <div className="grid grid-cols-1 lg:grid-cols-2 md:grid-cols-2 xl:grid-cols-2 space-y-2 lg:justify-between md:justify-between xl:justify-between mx-auto">
         <div className="space-y-4">
-          <fieldset>
+          <fieldset className="mb-4">
             <legend className="text-base font-medium mb-2">Occasion</legend>
             {["Formal", "Hangout", "Party", "Work"].map((occasion) => (
               <label key={occasion} className="inline-flex items-center mr-4">
@@ -28,12 +28,12 @@ function FashionStyle() {
                 <span className="ml-1">{occasion}</span>
               </label>
             ))}
-            {"errors.occasion" && (
+            {errors.occasion && (
               <p className="text-red-500 text-sm">{errors.occasion}</p>
             )}
           </fieldset>
 
-          <div className="space-y-2">
+          <div className="mb-4">
             <label
               htmlFor="DisplayName"
               className="block text-base font-medium"
@@ -78,7 +78,7 @@ function FashionStyle() {
           </fieldset>
 
           <fieldset className="space-y-2">
-            <legend className="text-base font-medium mb-2">Age Group</legend>
+            <legend className="text-base font-medium">Age Group</legend>
             {["Under 18", "18-34", "35-54", "55-74", "75 and over"].map(
               (ageGroup) => (
                 <label key={ageGroup} className="inline-flex items-center mr-4">

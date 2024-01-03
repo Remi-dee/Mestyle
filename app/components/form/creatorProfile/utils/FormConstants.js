@@ -8,6 +8,7 @@ const FORM_INITIAL_STATE = {
   bodyShape: [],
   colorPreference: [],
   uploadTitle: "",
+  imageUpload: "",
   altText: "",
 };
 
