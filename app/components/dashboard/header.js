@@ -21,7 +21,7 @@ function Header() {
             id="search"
             type="text"
             autoComplete="on"
-            className=" px-4 py-3 text-zinc-400 bg-transparent  text-base font-normal w-full leading-normal  "
+            className=" px-4 py-3t text-zinc-400 bg-transparent  text-base font-normal w-full leading-normal  "
             placeholder="Search..."
           />
         )}
