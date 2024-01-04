@@ -1,20 +1,36 @@
+import { useState } from "react";
 import Button from "../ui/button/template";
 
 function Header() {
+  const [isSearch, setIsSearch] = useState(true);
+
   return (
     <div className=" w-[1300px] flex justify-between items-center text-white font-lexend mb-7 mt-[80px]">
       <div>
-        <h1 className=" text-4xl font-medium leading-tight">
-          Good Afternoon User
-        </h1>
+        {!isSearch && (
+          <h1 className=" text-4xl font-medium leading-tight">
+            Good Afternoon User
+          </h1>
+        )}
       </div>
 
       <div className=" justify-between px-4 py-3  text-white bg-gray-200 bg-opacity-5 rounded-[20px]  items-center  gap-2.5 inline-flex">
+        {isSearch && (
+          <input
+            name="search"
+            id="search"
+            type="text"
+            autoComplete="on"
+            className=" px-4 py-3 text-zinc-400 bg-transparent  text-base font-normal w-full leading-normal  "
+            placeholder="Search..."
+          />
+        )}
+
         <div>
           <svg
             width="50"
             height="50"
-            viewBox="0 0 70 70"
+            viewBox="0 0 60 60"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
@@ -40,7 +56,7 @@ function Header() {
           <svg
             width="50"
             height="50"
-            viewBox="0 0 70 70"
+            viewBox="0 0 60 60"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
@@ -132,7 +148,7 @@ function Header() {
         </div>
 
         <button
-          className="p-2 text-xl bg-neutral-800 rounded-[20px]  shadow-inner border border-zinc-600  items-center "
+          className="p-3 text-xl bg-neutral-800 rounded-[20px]  shadow-inner border border-zinc-600  items-center "
           variant="secondary"
           type="button"
         >
