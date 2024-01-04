@@ -94,7 +94,7 @@ function StyleGrid() {
   ];
 
   return (
-    <div className="grid grid-flow-row-dense md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-[90px] ">
+    <div className="max-w-[1245px] grid grid-flow-row-dense md:grid-cols-2 lg:grid-cols-4 gap-[80px] ">
       {items.map(({ id, description, styleImage, posterIcon, posterName }) => {
         return (
           <StyleCard
