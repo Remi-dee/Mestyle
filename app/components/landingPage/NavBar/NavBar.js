@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 import { navData } from "./utils/navData";
 import { Router } from "next/router";
 
-function NavBar({className}) {
+function NavBar({ className }) {
   const [openHamburger, setOpenHamburger] = useState(false);
   const openMobileNav = () => {
     setOpenHamburger((prevIsOpen) => !prevIsOpen);
@@ -18,7 +18,7 @@ function NavBar({className}) {
     <>
       {/* Mobile View */}
       <nav className="block lg:hidden font-lexend">
-        <div className="flex justify-between items-center py-4 px-6 bg-grayDark text-white mb-[50px]">
+        <div className="flex backdrop-blur-md  bg-opacity-50 justify-between items-center py-4 px-6 bg-grayDark text-white mb-[50px]">
           <p
             style={oregano.style}
             className=" text-3xl bg-gradient-to-r from-transparent to-white text-transparent bg-clip-text"
@@ -59,7 +59,7 @@ function NavBar({className}) {
           </button>
         </div>
         {openHamburger && (
-          <div className="fixed top-0 left-0 z-20 h-screen w-10/12 overflow-hidden bg-grayDark text-white lg:hidden">
+          <div className="fixed top-0 left-0 z-20 h-screen w-10/12 overflow-hidden backdrop-blur-md  bg-opacity-80 bg-grayDark text-white lg:hidden">
             <ul className="flex flex-col items-center justify-center h-screen space-y-4 text-sm font-bold uppercase">
               {navData.map(({ href, id, text }) => (
                 <li
@@ -95,7 +95,9 @@ function NavBar({className}) {
 
       {/* Web View */}
 
-      <nav className={`hidden sticky  bg-opacity-40 top-0 z-[150] mx-auto  py-6 lg:flex items-center justify-between bg-grayDark mb-[50px] ${className}`}>
+      <nav
+        className={`hidden sticky backdrop-blur-md  bg-opacity-50 top-0 z-[150] mx-auto  py-6 lg:flex items-center justify-between bg-grayDark mb-[50px] ${className}`}
+      >
         <p
           style={oregano.style}
           className="text-4xl bg-gradient-to-r from-transparent to-white text-transparent bg-clip-text "

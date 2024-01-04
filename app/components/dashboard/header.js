@@ -9,12 +9,12 @@ function Header() {
         </h1>
       </div>
 
-      <div className="w-[332px] h-[92px] justify-between px-4 py-3  text-white bg-gray-200 bg-opacity-5 rounded-[20px]  items-center gap-2.5 inline-flex">
+      <div className=" justify-between px-4 py-3  text-white bg-gray-200 bg-opacity-5 rounded-[20px]  items-center  gap-2.5 inline-flex">
         <div>
           <svg
-            width="60"
-            height="60"
-            viewBox="0 0 60 60"
+            width="50"
+            height="50"
+            viewBox="0 0 70 70"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
@@ -38,9 +38,9 @@ function Header() {
 
         <div>
           <svg
-            width="60"
-            height="60"
-            viewBox="0 0 60 60"
+            width="50"
+            height="50"
+            viewBox="0 0 70 70"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
@@ -131,12 +131,13 @@ function Header() {
           </svg>
         </div>
 
-        <Button
-          className="w-[114px] h-[60px] text-xl bg-neutral-800 rounded-[20px]  shadow-inner border border-zinc-600  items-center "
+        <button
+          className="p-2 text-xl bg-neutral-800 rounded-[20px]  shadow-inner border border-zinc-600  items-center "
           variant="secondary"
+          type="button"
         >
           Create
-        </Button>
+        </button>
       </div>
     </div>
   );
