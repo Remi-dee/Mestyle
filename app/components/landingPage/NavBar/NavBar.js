@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 import { navData } from "./utils/navData";
 import { Router } from "next/router";
 
-function NavBar() {
+function NavBar({className}) {
   const [openHamburger, setOpenHamburger] = useState(false);
   const openMobileNav = () => {
     setOpenHamburger((prevIsOpen) => !prevIsOpen);
@@ -95,7 +95,7 @@ function NavBar() {
 
       {/* Web View */}
 
-      <nav className="hidden sticky top-0 z-[150] mx-auto px-24 py-6 lg:flex items-center justify-between bg-grayDark mb-[50px] ">
+      <nav className={`hidden sticky  bg-opacity-40 top-0 z-[150] mx-auto  py-6 lg:flex items-center justify-between bg-grayDark mb-[50px] ${className}`}>
         <p
           style={oregano.style}
           className="text-4xl bg-gradient-to-r from-transparent to-white text-transparent bg-clip-text "

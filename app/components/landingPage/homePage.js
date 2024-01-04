@@ -14,7 +14,7 @@ import Authentication from "../authentication/authentication";
 function HomePage() {
   return (
     <>
-      <NavBar />
+      <NavBar className="px-24" />
       <Hero_comp />
       <Explore />
       <CreatorCTA />
