@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 
-import Button from "../components/ui/button/template";
+import Button from "../components/ui/button/button";
 import NavBar from "../components/landingPage/NavBar/NavBar";
 
 function Page() {

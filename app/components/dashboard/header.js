@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Button from "../ui/button/template";
+import Button from "../ui/button/button";
 
 function Header() {
   const [isSearch, setIsSearch] = useState(false);

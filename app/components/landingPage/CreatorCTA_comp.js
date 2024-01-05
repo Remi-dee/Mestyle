@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import Button from "../ui/button/template";
+import Button from "../ui/button/button";
 import stackLeft from "@/public/images/creator/creatorStack_left.png";
 import stackRight from "@/public/images/creator/creatorStack_right.png";
 import stackCenter from "@/public/images/creator/creatorStack_center.png";

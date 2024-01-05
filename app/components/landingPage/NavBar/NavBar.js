@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { oregano } from "../../../localFonts/oregano/oregano";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import Button from "../../ui/button/template";
+import Button from "../../ui/button/button";
 import { motion } from "framer-motion";
 import { navData } from "./utils/navData";
 import { Router } from "next/router";

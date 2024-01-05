@@ -3,7 +3,7 @@ import Link from "next/link";
 import sideImage from "@/public/images/backgrounds/signupBackground.png";
 import google from "@/public/icons/Google.png";
 import arrowBack from "@/public/icons/arrowBack.png";
-import Button from "../../ui/button/template";
+import Button from "../../ui/button/button";
 import waterMark from "@/public/icons/waterMark.png";
 import { useState } from "react";
 import { handleSignUp } from "./util/handleSignup";
