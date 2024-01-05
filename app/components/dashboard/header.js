@@ -14,43 +14,54 @@ function Header() {
         )}
       </div>
 
-      <div className=" justify-between px-4 py-3  text-white bg-gray-200 bg-opacity-5 rounded-[20px]  items-center  gap-2.5 inline-flex">
+      <div className=" justify-between px-4 py-3 text-white bg-gray-200 bg-opacity-5 rounded-[20px]  items-center  gap-2.5 inline-flex">
         {isSearch && (
           <input
             name="search"
             id="search"
             type="text"
             autoComplete="on"
-            className=" px-4 py-3t text-zinc-400 bg-transparent  text-base font-normal w-full leading-normal  "
+            className=" px-4 py-3  text-white  bg-gray-800 bg-opacity-5 rounded-[10px] border-none text-xl  font-normal w-[1108px] leading-normal  "
             placeholder="Search..."
           />
         )}
 
-        <div>
-          <svg
-            width="50"
-            height="50"npm run de
-            viewBox="0 0 60 60"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <circle cx="30" cy="30" r="29.5" fill="#272424" stroke="#5B5C5C" />
-            <path
-              d="M28.75 41.75C34.2728 41.75 38.75 37.2728 38.75 31.75C38.75 26.2272 34.2728 21.75 28.75 21.75C23.2272 21.75 18.75 26.2272 18.75 31.75C18.75 37.2728 23.2272 41.75 28.75 41.75Z"
-              stroke="white"
-              stroke-width="4"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-            <path
-              d="M41.25 44.25L35.8125 38.8125"
-              stroke="white"
-              stroke-width="4"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </svg>
-        </div>
+        {!isSearch && (
+          <div>
+            <svg
+              width="50"
+              height="50"
+              npm
+              run
+              de
+              viewBox="0 0 60 60"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle
+                cx="30"
+                cy="30"
+                r="29.5"
+                fill="#272424"
+                stroke="#5B5C5C"
+              />
+              <path
+                d="M28.75 41.75C34.2728 41.75 38.75 37.2728 38.75 31.75C38.75 26.2272 34.2728 21.75 28.75 21.75C23.2272 21.75 18.75 26.2272 18.75 31.75C18.75 37.2728 23.2272 41.75 28.75 41.75Z"
+                stroke="white"
+                stroke-width="4"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M41.25 44.25L35.8125 38.8125"
+                stroke="white"
+                stroke-width="4"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </div>
+        )}
 
         <div>
           <svg
