@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 import { navData } from "./utils/navData";
 import { Router } from "next/router";
 
-function NavBar({ className }) {
+function NavBar({ className, isExplore }) {
   const [openHamburger, setOpenHamburger] = useState(false);
   const openMobileNav = () => {
     setOpenHamburger((prevIsOpen) => !prevIsOpen);
@@ -104,22 +104,36 @@ function NavBar({ className }) {
         >
           MeStyle
         </p>
-        <ul className="flex space-x-4 text-white">
-          {navData.map(({ href, id, text }) => (
-            <li
-              key={id}
-              className={`${
-                pathname === href
-                  ? "text-secondary-100 border-b border-b-white"
-                  : ""
-              }`}
-            >
-              <motion.div whileHover={{ scale: 1.1 }}>
-                <Link href={href}>{text}</Link>
-              </motion.div>
-            </li>
-          ))}
-        </ul>
+
+        {isExplore && (
+          <input
+            name="search"
+            id="search"
+            type="text"
+            autoComplete="on"
+            className=" px-4 py-3  text-white  bg-gray-100 bg-opacity-5  border-none  font-normal w-[60%] leading-normal  "
+            placeholder="Search for next wedding outfit inspiration ..."
+          />
+        )}
+
+        {!isExplore && (
+          <ul className="flex space-x-4 text-white">
+            {navData.map(({ href, id, text }) => (
+              <li
+                key={id}
+                className={`${
+                  pathname === href
+                    ? "text-secondary-100 border-b border-b-white"
+                    : ""
+                }`}
+              >
+                <motion.div whileHover={{ scale: 1.1 }}>
+                  <Link href={href}>{text}</Link>
+                </motion.div>
+              </li>
+            ))}
+          </ul>
+        )}
         <div className="flex items-center justify-center space-x-6 text-sm text-bold">
           <Button
             variant="inverted"

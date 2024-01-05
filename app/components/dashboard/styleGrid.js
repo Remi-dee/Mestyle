@@ -1,4 +1,6 @@
+import Image from "next/image";
 import StyleCard from "./styleCard";
+import waterMark from "@/public/icons/waterMark.png";
 
 function StyleGrid() {
   const items = [
@@ -21,7 +23,8 @@ function StyleGrid() {
 
     {
       id: 3,
-      styleImage: "/images/conversation-nationality-work-male-business-classy.png",
+      styleImage:
+        "/images/conversation-nationality-work-male-business-classy.png",
       description:
         "Another description for the second item. Adjust as needed for your content.",
       posterIcon: "/images/medium-shot-woman-with-yellow-suit-2.png",
@@ -39,7 +42,8 @@ function StyleGrid() {
 
     {
       id: 5,
-      styleImage: "/images/conversation-nationality-work-male-business-classy.png",
+      styleImage:
+        "/images/conversation-nationality-work-male-business-classy.png",
       description:
         "Another description for the second item. Adjust as needed for your content.",
       posterIcon: "/images/medium-shot-woman-with-yellow-suit-2.png",
@@ -94,20 +98,25 @@ function StyleGrid() {
   ];
 
   return (
-    <div className="max-w-[1244px] grid grid-flow-row-dense md:grid-cols-2 lg:grid-cols-4 gap-[80px] ">
-      {items.map(({ id, description, styleImage, posterIcon, posterName }) => {
-        return (
-          <StyleCard
-            key={id}
-            id={id}
-            description={description}
-            image={styleImage}
-            posterIcon={posterIcon}
-            posterName={posterName}
-          />
-        );
-      })}
-    </div>
+    <section>
+      <div className="relative grid grid-flow-row-dense md:grid-cols-2 lg:grid-cols-4 gap-x-[30px] gap-y-[80px] ">
+        {items.map(
+          ({ id, description, styleImage, posterIcon, posterName }) => {
+            return (
+              <StyleCard
+                key={id}
+                id={id}
+                description={description}
+                image={styleImage}
+                posterIcon={posterIcon}
+                posterName={posterName}
+              />
+            );
+          }
+        )}
+      </div>
+     
+    </section>
   );
 }
 

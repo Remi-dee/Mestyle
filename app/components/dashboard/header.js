@@ -2,10 +2,10 @@ import { useState } from "react";
 import Button from "../ui/button/template";
 
 function Header() {
-  const [isSearch, setIsSearch] = useState(true);
+  const [isSearch, setIsSearch] = useState(false);
 
   return (
-    <div className=" w-[1300px] flex justify-between items-center text-white font-lexend mb-7 mt-[80px]">
+    <div className="  flex justify-between items-center text-white font-lexend mb-7 mt-[80px]">
       <div>
         {!isSearch && (
           <h1 className=" text-4xl font-medium leading-tight">
