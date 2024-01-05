@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 import { navData } from "./utils/navData";
 import { Router } from "next/router";
 
-function NavBar({ className, isExplore }) {
+function NavBar({ className, isExplore, isProfile }) {
   const [openHamburger, setOpenHamburger] = useState(false);
   const openMobileNav = () => {
     setOpenHamburger((prevIsOpen) => !prevIsOpen);
