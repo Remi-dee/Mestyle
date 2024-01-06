@@ -11,7 +11,7 @@ import React from "react";
 function Overlay({ title = "", description = "", children, className = "" }) {
   const baseStyle =
     "relative backdrop-blur-md z-50 bg-black/25 dark:bg-white/30 " +
-    "border border-solid border-black dark:border-white rounded-xl " +
+    "bg-opacity-10 dark:bg-opacity-10 rounded-xl " +
     "shadow-lg antialiased select-none";
 
   return (
@@ -24,7 +24,7 @@ function Overlay({ title = "", description = "", children, className = "" }) {
             </h2>
             <hr
               aria-hidden="true"
-              className="border border-solid dark:border-white border-black w-full"
+              className="border border-neutral-100   w-full"
             />
           </div>
         )}

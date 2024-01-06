@@ -8,7 +8,7 @@ import NavBar from "../components/landingPage/NavBar/NavBar";
 
 function template() {
   return (
-    <main className=" font-lexend  flex justify-center">
+    <main className="bg-grayLight dark:bg-grayDark font-lexend  flex justify-center">
       <div className="max-w-screen-2xl">
         
         <NavBar isProfile={true} />
