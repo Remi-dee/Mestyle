@@ -8,10 +8,10 @@ import Button from "../../ui/button/button";
 import { motion } from "framer-motion";
 import { navData } from "./utils/navData";
 import { router } from "next/navigation";
-import { useTheme } from "next-themes";
+
 
 function NavBar({ className, isExplore, isProfile }) {
-  const { theme, setTheme } = useTheme();
+  // const { theme, setTheme } = useTheme();
   const [openHamburger, setOpenHamburger] = useState(false);
   const openMobileNav = () => {
     setOpenHamburger((prevIsOpen) => !prevIsOpen);
@@ -158,6 +158,111 @@ function NavBar({ className, isExplore, isProfile }) {
             >
               Get Started
             </Button>
+          </div>
+        )}
+
+        {isProfile && (
+          <div className="flex justify-end">
+            <button
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            >
+              {theme === "dark" ? (
+                <svg
+                  width="30"
+                  height="30"
+                  viewBox="0 0 30 30"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g clip-path="url(#clip0_439_374)">
+                    <path
+                      d="M15 21.25C18.4518 21.25 21.25 18.4518 21.25 15C21.25 11.5482 18.4518 8.75 15 8.75C11.5482 8.75 8.75 11.5482 8.75 15C8.75 18.4518 11.5482 21.25 15 21.25Z"
+                      stroke="white"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M15 1.25V3.75"
+                      stroke="white"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M15 26.25V28.75"
+                      stroke="white"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M5.27499 5.27539L7.04999 7.05039"
+                      stroke="white"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M22.95 22.9492L24.725 24.7242"
+                      stroke="white"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M1.25 15H3.75"
+                      stroke="white"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M26.25 15H28.75"
+                      stroke="white"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M5.27499 24.7242L7.04999 22.9492"
+                      stroke="white"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M22.95 7.05039L24.725 5.27539"
+                      stroke="white"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_439_374">
+                      <rect width="30" height="30" fill="white" />
+                    </clipPath>
+                  </defs>
+                </svg>
+              ) : (
+                <svg
+                  width="32"
+                  height="32"
+                  viewBox="0 0 32 32"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M27.9239 25.1626C29.6703 22.9038 30.7373 20.1944 31 17.3514C28.7481 19.0159 25.9736 19.8168 23.1811 19.6086C20.3885 19.4003 17.7635 18.1967 15.7834 16.2166C13.8033 14.2365 12.5997 11.6115 12.3914 8.81894C12.1832 6.02641 12.9841 3.25189 14.6486 1C11.8056 1.26273 9.09619 2.32972 6.83743 4.07611C4.57867 5.82251 2.86399 8.17607 1.89402 10.8614C0.924058 13.5468 0.738931 16.4528 1.3603 19.2395C1.98167 22.0262 3.38384 24.5784 5.40274 26.5973C7.42164 28.6162 9.97376 30.0183 12.7605 30.6397C15.5472 31.2611 18.4532 31.0759 21.1386 30.106C23.8239 29.136 26.1775 27.4213 27.9239 25.1626Z"
+                    stroke="black"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              )}
+            </button>
           </div>
         )}
       </nav>
