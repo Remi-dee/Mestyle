@@ -8,10 +8,10 @@ import Button from "../../ui/button/button";
 import { motion } from "framer-motion";
 import { navData } from "./utils/navData";
 import { router } from "next/navigation";
-
+import { useTheme } from "next-themes";
 
 function NavBar({ className, isExplore, isProfile }) {
-  // const { theme, setTheme } = useTheme();
+  const { theme, setTheme } = useTheme();
   const [openHamburger, setOpenHamburger] = useState(false);
   const openMobileNav = () => {
     setOpenHamburger((prevIsOpen) => !prevIsOpen);
@@ -22,7 +22,7 @@ function NavBar({ className, isExplore, isProfile }) {
     <>
       {/* Mobile View */}
       <nav className="block lg:hidden font-lexend">
-        <div className="flex backdrop-blur-md  bg-opacity-50 justify-between items-center py-4 px-6 bg-grayDark text-white mb-[50px]">
+        <div className="flex backdrop-blur-md  bg-opacity-50 justify-between items-center py-4 px-6 dark:bg-grayDark text-white mb-[50px]">
           <p
             style={oregano.style}
             className=" text-3xl bg-gradient-to-r from-transparent to-white text-transparent bg-clip-text"

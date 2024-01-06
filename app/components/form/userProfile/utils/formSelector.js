@@ -1,7 +1,8 @@
 import React from 'react';
 import useFormContext from '@/hooks/userProfile/useFormContext';
-import BodyType from '../BodyType';
-import StylePreference from '../StylePreference';
+import StylePreference from '../stylePreference';
+import BodyType from '../bodyType';
+
 
 function FormSelector() {
   const { formStep } = useFormContext();
