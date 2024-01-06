@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from "react";
 import { oregano } from "../../../localFonts/oregano/oregano";
 import Link from "next/link";
@@ -5,9 +7,11 @@ import { usePathname, useRouter } from "next/navigation";
 import Button from "../../ui/button/button";
 import { motion } from "framer-motion";
 import { navData } from "./utils/navData";
-import { Router } from "next/router";
+import { router } from "next/navigation";
+import { useTheme } from "next-themes";
 
 function NavBar({ className, isExplore, isProfile }) {
+  const { theme, setTheme } = useTheme();
   const [openHamburger, setOpenHamburger] = useState(false);
   const openMobileNav = () => {
     setOpenHamburger((prevIsOpen) => !prevIsOpen);
@@ -116,7 +120,7 @@ function NavBar({ className, isExplore, isProfile }) {
           />
         )}
 
-        {!isExplore && (
+        {!isExplore && !isProfile && (
           <ul className="flex space-x-4 text-white">
             {navData.map(({ href, id, text }) => (
               <li
@@ -134,26 +138,28 @@ function NavBar({ className, isExplore, isProfile }) {
             ))}
           </ul>
         )}
-        <div className="flex items-center justify-center space-x-6 text-sm text-bold">
-          <Button
-            variant="inverted"
-            onClick={(e) => {
-              e.preventDefault();
-              router.push("/?view=signin");
-            }}
-          >
-            Login
-          </Button>
-          <Button
-            variant="primary"
-            onClick={(e) => {
-              e.preventDefault();
-              router.push("/?view=signup");
-            }}
-          >
-            Get Started
-          </Button>
-        </div>
+        {!isProfile && (
+          <div className="flex items-center justify-center space-x-6 text-sm text-bold">
+            <Button
+              variant="inverted"
+              onClick={(e) => {
+                e.preventDefault();
+                router.push("/?view=signin");
+              }}
+            >
+              Login
+            </Button>
+            <Button
+              variant="primary"
+              onClick={(e) => {
+                e.preventDefault();
+                router.push("/?view=signup");
+              }}
+            >
+              Get Started
+            </Button>
+          </div>
+        )}
       </nav>
     </>
   );
