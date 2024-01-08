@@ -1,7 +1,7 @@
 "use client";
 import { motion, AnimatePresence } from "framer-motion";
 import HomePage from "./components/landingPage/homePage";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Home() {
   const [mounted, setMounted] = useState();
