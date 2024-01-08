@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PersonaliseScreen from "../components/ui/personaliseScreen/template";
 import { FormProvider } from "@/context/form/userProfile/FormContext";
 import Form from "../components/form/userProfile/template";
@@ -10,7 +10,6 @@ function template() {
   return (
     <main className="bg-grayLight dark:bg-grayDark font-lexend  flex justify-center">
       <div className="max-w-screen-2xl">
-        
         <NavBar isProfile={true} />
         <PersonaliseScreen
           title="Get Personalized Outfit Recommendations"
