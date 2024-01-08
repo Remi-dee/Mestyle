@@ -162,7 +162,7 @@ function NavBar({ className, isExplore, isProfile }) {
         )}
 
         {isProfile && (
-          <div className="flex justify-end">
+          <div className="flex justify-end px-5">
             <button
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
             >
