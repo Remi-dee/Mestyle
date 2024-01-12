@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import Button from "../ui/button/template";
+import Button from "../ui/button/button";
 import TextSpan from "@/app/composables/textSpan";
 import dataSets from "@/app/composables/textData";
 import Typewriter from "@/app/composables/typewriter";

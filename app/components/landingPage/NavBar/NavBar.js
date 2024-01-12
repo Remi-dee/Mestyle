@@ -1,13 +1,20 @@
+"use client";
+
 import React, { useState } from "react";
 import { oregano } from "../../../localFonts/oregano/oregano";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import Button from "../../ui/button/template";
+import Button from "../../ui/button/button";
 import { motion } from "framer-motion";
 import { navData } from "./utils/navData";
-import { Router } from "next/router";
+import { router } from "next/navigation";
+import { useTheme } from "next-themes";
+import userLight from "@/public/icons/user.png";
+import userDark from "@/public/icons/userDark.png";
+import Image from "next/image";
 
-function NavBar() {
+function NavBar({ className, isExplore, isProfile }) {
+  const { theme, setTheme } = useTheme();
   const [openHamburger, setOpenHamburger] = useState(false);
   const openMobileNav = () => {
     setOpenHamburger((prevIsOpen) => !prevIsOpen);
@@ -18,7 +25,7 @@ function NavBar() {
     <>
       {/* Mobile View */}
       <nav className="block lg:hidden font-lexend">
-        <div className="flex justify-between items-center py-4 px-6 bg-grayDark text-white mb-[50px]">
+        <div className="flex backdrop-blur-md  bg-opacity-50 justify-between items-center py-4 px-6 dark:bg-grayDark text-white mb-[50px]">
           <p
             style={oregano.style}
             className=" text-3xl bg-gradient-to-r from-transparent to-white text-transparent bg-clip-text"
@@ -59,7 +66,7 @@ function NavBar() {
           </button>
         </div>
         {openHamburger && (
-          <div className="fixed top-0 left-0 z-20 h-screen w-10/12 overflow-hidden bg-grayDark text-white lg:hidden">
+          <div className="fixed top-0 left-0 z-[100%] h-screen w-10/12 overflow-hidden backdrop-blur-md  bg-opacity-80 bg-grayDark text-white lg:hidden">
             <ul className="flex flex-col items-center justify-center h-screen space-y-4 text-sm font-bold uppercase">
               {navData.map(({ href, id, text }) => (
                 <li
@@ -95,49 +102,209 @@ function NavBar() {
 
       {/* Web View */}
 
-      <nav className="hidden sticky top-0 z-[150] mx-auto px-24 py-6 lg:flex items-center justify-between bg-grayDark mb-[50px] ">
+      <nav
+        className={`hidden ${
+          theme !== "dark" ? "bg-transparent" : "" } sticky backdrop-blur-md  bg-opacity-50 top-0 z-[150] mx-auto  py-6 lg:flex items-center justify-between bg-grayDark mb-[50px] ${className}`}
+      >
         <p
           style={oregano.style}
-          className="text-4xl bg-gradient-to-r from-transparent to-white text-transparent bg-clip-text "
+          className={`text-4xl ${
+            theme !== "dark" ? "to-black" : "to-white" } bg-gradient-to-r from-transparent to-white text-transparent bg-clip-text pl-5`}
         >
           MeStyle
         </p>
-        <ul className="flex space-x-4 text-white">
-          {navData.map(({ href, id, text }) => (
-            <li
-              key={id}
-              className={`${
-                pathname === href
-                  ? "text-secondary-100 border-b border-b-white"
-                  : ""
-              }`}
+
+        {isExplore && (
+          <input
+            name="search"
+            id="search"
+            type="text"
+            autoComplete="on"
+            className=" px-4 py-3  text-white  bg-gray-100 bg-opacity-5  border-none  font-normal w-[60%] leading-normal  "
+            placeholder="Search for next wedding outfit inspiration ..."
+          />
+        )}
+
+        {!isExplore && !isProfile && (
+          <ul className="flex space-x-4 text-white">
+            {navData.map(({ href, id, text }) => (
+              <li
+                key={id}
+                className={`${
+                  pathname === href
+                    ? "text-secondary-100 border-b border-b-white"
+                    : ""
+                }`}
+              >
+                <motion.div whileHover={{ scale: 1.1 }}>
+                  <Link href={href}>{text}</Link>
+                </motion.div>
+              </li>
+            ))}
+          </ul>
+        )}
+        {!isProfile && (
+          <div className="flex items-center justify-center space-x-6 text-sm text-bold">
+            <Button
+              variant="inverted"
+              onClick={(e) => {
+                e.preventDefault();
+                router.push("/?view=signin");
+              }}
             >
-              <motion.div whileHover={{ scale: 1.1 }}>
-                <Link href={href}>{text}</Link>
-              </motion.div>
-            </li>
-          ))}
-        </ul>
-        <div className="flex items-center justify-center space-x-6 text-sm text-bold">
-          <Button
-            variant="inverted"
-            onClick={(e) => {
-              e.preventDefault();
-              router.push("/?view=signin");
-            }}
-          >
-            Login
-          </Button>
-          <Button
-            variant="primary"
-            onClick={(e) => {
-              e.preventDefault();
-              router.push("/?view=signup");
-            }}
-          >
-            Get Started
-          </Button>
-        </div>
+              Login
+            </Button>
+            <Button
+              variant="primary"
+              onClick={(e) => {
+                e.preventDefault();
+                router.push("/?view=signup");
+              }}
+            >
+              Get Started
+            </Button>
+          </div>
+        )}
+
+        {isProfile && (
+          <div className="flex justify-end px-5 gap-4">
+            <button
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            >
+              {theme === "dark" ? (
+                <div className="relative p-6 rounded-full border border-zinc-600">
+                  <svg
+                    width="30"
+                    height="30"
+                    viewBox="0 0 30 30"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="absolute bottom-1 left-[10px]"
+                  >
+                    <g clip-path="url(#clip0_439_374)">
+                      <path
+                        d="M15 21.25C18.4518 21.25 21.25 18.4518 21.25 15C21.25 11.5482 18.4518 8.75 15 8.75C11.5482 8.75 8.75 11.5482 8.75 15C8.75 18.4518 11.5482 21.25 15 21.25Z"
+                        stroke="white"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M15 1.25V3.75"
+                        stroke="white"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M15 26.25V28.75"
+                        stroke="white"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M5.27499 5.27539L7.04999 7.05039"
+                        stroke="white"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M22.95 22.9492L24.725 24.7242"
+                        stroke="white"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M1.25 15H3.75"
+                        stroke="white"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M26.25 15H28.75"
+                        stroke="white"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M5.27499 24.7242L7.04999 22.9492"
+                        stroke="white"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M22.95 7.05039L24.725 5.27539"
+                        stroke="white"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </g>
+                    <defs>
+                      <clipPath id="clip0_439_374">
+                        <rect width="30" height="30" fill="white" />
+                      </clipPath>
+                    </defs>
+                  </svg>
+                </div>
+              ) : (
+                <div className="relative p-6 rounded-full border border-zinc-600">
+                  <svg
+                    width="32"
+                    height="32"
+                    viewBox="0 0 32 32"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="absolute bottom-1 left-[10px]"
+                  >
+                    <path
+                      d="M27.9239 25.1626C29.6703 22.9038 30.7373 20.1944 31 17.3514C28.7481 19.0159 25.9736 19.8168 23.1811 19.6086C20.3885 19.4003 17.7635 18.1967 15.7834 16.2166C13.8033 14.2365 12.5997 11.6115 12.3914 8.81894C12.1832 6.02641 12.9841 3.25189 14.6486 1C11.8056 1.26273 9.09619 2.32972 6.83743 4.07611C4.57867 5.82251 2.86399 8.17607 1.89402 10.8614C0.924058 13.5468 0.738931 16.4528 1.3603 19.2395C1.98167 22.0262 3.38384 24.5784 5.40274 26.5973C7.42164 28.6162 9.97376 30.0183 12.7605 30.6397C15.5472 31.2611 18.4532 31.0759 21.1386 30.106C23.8239 29.136 26.1775 27.4213 27.9239 25.1626Z"
+                      stroke="black"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </div>
+              )}
+            </button>
+
+            {theme == "dark" ? (
+              <button>
+                {" "}
+                <div className="relative p-6 rounded-full border border-zinc-600">
+                  {" "}
+                  <Image
+                    src={userLight}
+                    alt=""
+                    width={null}
+                    height={null}
+                    className="absolute bottom-1 left-[8px]"
+                  />
+                </div>
+              </button>
+            ) : (
+              <button>
+                {" "}
+                <div className="relative p-6 rounded-full border border-zinc-600">
+                  <Image
+                    src={userDark}
+                    alt=""
+                    width={null}
+                    height={null}
+                    className="absolute bottom-1 left-[8px]"
+                  />
+                </div>
+              </button>
+            )}
+          </div>
+        )}
       </nav>
     </>
   );

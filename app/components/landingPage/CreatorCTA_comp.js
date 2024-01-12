@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import Button from "../ui/button/template";
+import Button from "../ui/button/button";
 import stackLeft from "@/public/images/creator/creatorStack_left.png";
 import stackRight from "@/public/images/creator/creatorStack_right.png";
 import stackCenter from "@/public/images/creator/creatorStack_center.png";
@@ -13,14 +13,15 @@ function CreatorCTA() {
 
   return (
     <>
-      <section className="relative lg:flex  gap-[600px]   w-full h-[650px] md:h-[560px] lg:h-[700px] space-y-4 ">
+      <section className="relative lg:flex  gap-[600px]   w-full h-[700px] md:h-[560px] lg:h-[700px] space-y-4 ">
         <div className="  ">
           <div className=" ">
             <Image
               width={null}
               height={null}
               src={stackLeft}
-              alt=""
+              alt="Left Photo"
+              placeholder="blur"
               className="absolute w-[150px] h-[200px] md:h-[240px] md:w-[170px] lg:w-[200px] top-[50px] md:top-[55px] md:max-lg:left-[88px] left-[130px]  lg:h-[300px]  rounded-tl-[20px] rounded-tr-[20px]  "
             />
 
@@ -29,7 +30,8 @@ function CreatorCTA() {
               height={null}
               l
               src={stackRight}
-              alt=""
+              alt="Right Photo"
+              placeholder="blur"
               className="absolute  lg:w-[200px] w-[150px] h-[200px] md:h-[240px] md:w-[170px] top-[141px] left-[230px] md:left-[205px] lg:left-[270px] md:top-[170px] lg:top-[206px] lg:h-[300px]  rounded-tl-[20px] rounded-tr-[20px]"
             />
 
@@ -37,7 +39,8 @@ function CreatorCTA() {
               width={200}
               height={null}
               src={stackCenter}
-              alt=""
+              alt="Center Photo"
+              placeholder="blur"
               className="absolute w-[150px] h-[200px] md:h-[240px] md:w-[170px] lg:w-[200px] top-[245px] md:top-[270px] lg:top-[347px] left-[100px]  md:left-[58px] lg:left-[93px] lg:h-[300px] rounded-tl-[20px] rounded-br-[20px] rounded-tr-[20px]"
             />
           </div>
@@ -47,11 +50,12 @@ function CreatorCTA() {
             width={null}
             height={null}
             src={waterMark}
-            alt=""
+            alt="Mestyle Watermark"
             className=""
+            placeholder="blur"
           />
         </div>
-        <div className="absolute bottom-[45px] md:bottom-[4px] left-10 md:top-0 md:left-[240px] lg:left-[45%] lg:w-6/12 w-10/12 flex justify-center  items-center  ">
+        <div className=" absolute bottom-12 md:bottom-[4px] left-10 md:top-0 md:left-[240px] lg:left-[45%] lg:w-6/12 w-10/12 flex justify-center  items-center  ">
           <div className=" space-y-8 text-white">
             <p className="text-2xl lg:text-4xl font-bold">{header}</p>
             <p className="md:text-2xl">

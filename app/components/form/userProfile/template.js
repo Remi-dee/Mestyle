@@ -1,9 +1,10 @@
 "use client";
 
 import useFormContext from "@/hooks/userProfile/useFormContext";
-import Button from "@/app/components/ui/button/template";
+import Button from "@/app/components/ui/button/button";
 import Overlay from "@/app/components/ui/overlay/template";
-import FormSelector from "./utils/FormSelector";
+import FormSelector from "./utils/formSelector";
+
 
 function Form() {
   const { formTitle, formDescription, formStep, handleSubmit, handleNext } =

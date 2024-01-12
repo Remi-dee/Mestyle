@@ -4,7 +4,7 @@ import imageLeft from "../../../../public/images/hero/heroImage_left.png";
 
 import imageRight from "../../../../public/images/hero/heroImage_right.png";
 import polygon from "../../../../public/images/polygons/polygon3.png";
-import Button from "../../ui/button/template";
+import Button from "../../ui/button/button";
 import { motion } from "framer-motion";
 
 import { useEffect, useRef, useState } from "react";

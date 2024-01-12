@@ -3,11 +3,35 @@ import Link from "next/link";
 
 import google from "@/public/icons/Google.png";
 import arrowBack from "@/public/icons/arrowBack.png";
-import Button from "../ui/button/template";
+import Button from "../../ui/button/button";
 import waterMark from "@/public/icons/waterMark.png";
+import { handleSignIn } from "./util/handleSignin";
+import { useState } from "react";
 function SignIn() {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formData.email, +"see it" + formData.password);
+    const formDataObject = {
+      email: formData.email,
+      password: formData.password,
+    };
+    handleSignIn(formData);
+  };
+
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <div className="flex pb-4 relative font-lexend">
         <div className="flex flex-col w-[439px]  py-[60px] h-auto bg-white items-center rounded-tl-[30px]">
           <div className=" text-center ">
@@ -50,21 +74,23 @@ function SignIn() {
               <div className="flex flex-col gap-3">
                 <div className="flex flex-col gap-1">
                   <label
-                    htmlFor="username"
+                    htmlFor="email"
                     className="block text-sm text-start font-medium text-gray-700"
                   >
-                    Username
+                    Email
                   </label>
 
                   <div className="w-full   gap-1 inline-flex">
                     <input
-                      name="username"
+                      value={formData.email}
+                      onChange={handleChange}
+                      name="email"
                       required
-                      id="fullname"
+                      id="email"
                       type="text"
                       autoComplete="on"
                       className=" text-zinc-400    text-base font-normal w-full leading-normal bg-white border border-neutral-300"
-                      placeholder="Enter your username"
+                      placeholder="Enter your email"
                     />
                   </div>
                 </div>
@@ -78,6 +104,8 @@ function SignIn() {
                   </label>
                   <div className="w-full gap-1 inline-flex">
                     <input
+                      value={formData.password}
+                      onChange={handleChange}
                       name="password"
                       required
                       id="password"
