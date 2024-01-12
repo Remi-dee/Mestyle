@@ -66,7 +66,7 @@ function NavBar({ className, isExplore, isProfile }) {
           </button>
         </div>
         {openHamburger && (
-          <div className="fixed top-0 left-0 z-20 h-screen w-10/12 overflow-hidden backdrop-blur-md  bg-opacity-80 bg-grayDark text-white lg:hidden">
+          <div className="fixed top-0 left-0 z-[100%] h-screen w-10/12 overflow-hidden backdrop-blur-md  bg-opacity-80 bg-grayDark text-white lg:hidden">
             <ul className="flex flex-col items-center justify-center h-screen space-y-4 text-sm font-bold uppercase">
               {navData.map(({ href, id, text }) => (
                 <li
