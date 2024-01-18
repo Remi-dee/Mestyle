@@ -13,7 +13,7 @@ function CreatorCTA() {
 
   return (
     <>
-      <section className="relative lg:flex  gap-[600px]   w-full h-[700px] md:h-[560px] lg:h-[700px] space-y-4 ">
+      <section className="relative lg:flex  gap-[600px]   w-full h-[730px] md:h-[560px] lg:h-[700px] space-y-4 ">
         <div className="  ">
           <div className=" ">
             <Image
@@ -55,7 +55,7 @@ function CreatorCTA() {
             placeholder="blur"
           />
         </div>
-        <div className=" absolute bottom-6 md:bottom-[4px] left-[45%] md:top-0 md:left-[240px] lg:left-[45%] lg:w-6/12 w-10/12 flex justify-center  items-center  ">
+        <div className=" absolute bottom-[16px] md:bottom-[4px] left-[50px] md:top-0 md:left-[240px] lg:left-[45%] lg:w-6/12 w-10/12 flex justify-center  items-center  ">
           <div className=" space-y-8 text-white">
             <p className="text-2xl lg:text-4xl font-bold">{header}</p>
             <p className="md:text-2xl">

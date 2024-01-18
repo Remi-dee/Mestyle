@@ -12,7 +12,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${lexend.variable}  `}>
+      <body className={`${lexend.variable} overflow-x-hidden `}>
         <ThemeProvider enableSystem="true" attribute="class">
           {children}
         </ThemeProvider>
