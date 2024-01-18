@@ -1,7 +1,8 @@
 import { Inter, Oregano } from "next/font/google";
 import "./globals.css";
 import { lexend } from "./localFonts/lexend/localFont";
-import { ThemeProvider } from "@/app/composables/provider"
+import { ThemeProvider } from "@/app/composables/provider";
+import Head from "next/head";
 
 export const metadata = {
   title: "MeStyle",
@@ -12,7 +13,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${lexend.variable}  `}>
-        <ThemeProvider enableSystem="true" attribute="class">{children}</ThemeProvider>
+        <ThemeProvider enableSystem="true" attribute="class">
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
