@@ -14,6 +14,7 @@ import {
 } from "./utils/imageSwitchHelper.js";
 import { heroMotion, variants } from "./utils/motion";
 import { useRouter } from "next/navigation";
+import Authentication from "../../authentication/authentication";
 
 function Hero_comp() {
   const router = useRouter();
@@ -80,7 +81,7 @@ function Hero_comp() {
           type="button"
           onClick={(e) => {
             e.preventDefault();
-            router.push("/?view=signUp");
+            router.push("/?view=signup");
           }}
           className="mt-4 "
         >
@@ -153,6 +154,7 @@ function Hero_comp() {
           className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-[260px] md:w-[300px]"
         />
       </motion.div>
+      
     </div>
   );
 }
