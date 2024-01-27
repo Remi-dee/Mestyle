@@ -13,9 +13,12 @@ import {
   switchCenterImage,
 } from "./utils/imageSwitchHelper.js";
 import { heroMotion, variants } from "./utils/motion";
+import { useRouter } from "next/navigation";
 
 function Hero_comp() {
+  const router = useRouter();
   const polygonRef = useRef();
+
   let isScrolling = false;
   const [centerImageIndex, setCenterImageIndex] = useState(0);
 
@@ -73,7 +76,14 @@ function Hero_comp() {
         <div className="text-white text-[16px] md:text-2xl font-normal leading-[30px] my-2">
           Discover the latest trends and showcase your unique style
         </div>
-        <Button type="button" onClick={"#"} className="mt-4 ">
+        <Button
+          type="button"
+          onClick={(e) => {
+            e.preventDefault();
+            router.push("/?view=signUp");
+          }}
+          className="mt-4 "
+        >
           Get Started
         </Button>{" "}
       </motion.div>

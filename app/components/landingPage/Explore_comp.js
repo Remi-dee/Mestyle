@@ -4,9 +4,15 @@ import Button from "../ui/button/button";
 import TextSpan from "@/app/composables/textSpan";
 import dataSets from "@/app/composables/textData";
 import Typewriter from "@/app/composables/typewriter";
+import { useRouter } from "next/navigation";
 
 function Explore() {
   const { header, paragraph } = dataSets.recommendations;
+  const router = useRouter();
+  const handleClick = (e) => {
+    e.preventDefault();
+    router.push("/explore");
+  };
 
   return (
     <>
@@ -30,7 +36,9 @@ function Explore() {
             </p>
           </div>
           <div>
-            <Button variant="primary">Start Exploring</Button>
+            <Button onClick={handleClick} variant="primary">
+              Start Exploring
+            </Button>
           </div>
         </div>
       </section>
