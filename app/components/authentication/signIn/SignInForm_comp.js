@@ -7,7 +7,12 @@ import Button from "../../ui/button/button";
 import waterMark from "@/public/icons/waterMark.png";
 import { handleSignIn } from "./util/handleSignin";
 import { useState } from "react";
+import { useAuthContext } from "@/app/composables/authContext";
+import { useRouter } from "next/navigation";
 function SignIn() {
+  const router = useRouter();
+
+  const { currentUser } = useAuthContext();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -20,14 +25,24 @@ function SignIn() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData.email, +"see it" + formData.password);
+
     const formDataObject = {
       email: formData.email,
       password: formData.password,
     };
-    handleSignIn(formData);
+
+    try {
+      const userCred = await handleSignIn(formDataObject);
+      console.log("here is" + userCred.success);
+      if (userCred.success && currentUser) {
+        router.push("/profile");
+      }
+    } catch (error) {
+      // Handle errors if needed
+      console.error("Error in handleSignUp:", userCred.error);
+    }
   };
 
   return (

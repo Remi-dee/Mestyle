@@ -34,9 +34,9 @@ function SignUp() {
     };
 
     try {
-      await handleSignUp(formDataObject);
-
-      if (currentUser) {
+      const userCred = await handleSignUp(formDataObject);
+      console.log("here is" + userCred.success);
+      if (userCred.success) {
         router.push("/?view=signin");
       }
     } catch (error) {
