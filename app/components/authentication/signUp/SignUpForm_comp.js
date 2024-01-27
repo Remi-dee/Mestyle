@@ -7,6 +7,9 @@ import Button from "../../ui/button/button";
 import waterMark from "@/public/icons/waterMark.png";
 import { useState } from "react";
 import { handleSignUp } from "./util/handleSignup";
+
+const user = currentUser
+
 function SignUp() {
   const [formData, setFormData] = useState({
     username: "",
