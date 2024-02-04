@@ -4,7 +4,7 @@ import Button from "../ui/button/button";
 import TextSpan from "@/app/composables/textSpan";
 import dataSets from "@/app/composables/textData";
 
-function Contact() {
+const Contact: React.FC = () => {
   const { header, paragraph } = dataSets.feedback;
   return (
     <>

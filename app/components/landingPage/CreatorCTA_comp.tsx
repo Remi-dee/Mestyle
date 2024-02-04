@@ -8,7 +8,7 @@ import waterMark from "@/public/icons/waterMark.png";
 import TextSpan from "@/app/composables/textSpan";
 import dataSets from "@/app/composables/textData";
 
-function CreatorCTA() {
+const CreatorCTA: React.FC = () => {
   const { header, paragraph } = dataSets.discovery;
 
   return (
@@ -28,7 +28,6 @@ function CreatorCTA() {
             <Image
               width={200}
               height={null}
-              l
               src={stackRight}
               alt="Right Photo"
               placeholder="blur"
@@ -68,7 +67,7 @@ function CreatorCTA() {
               ))}
             </p>
             <Button variant="inverted"> Get Started As a Creator</Button>
-          </div>
+          </div> 
         </div>
       </section>
     </>

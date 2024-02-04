@@ -6,7 +6,7 @@ import dataSets from "@/app/composables/textData";
 import Typewriter from "@/app/composables/typewriter";
 import { useRouter } from "next/navigation";
 
-function Explore() {
+const Explore: React.FC = () => {
   const { header, paragraph } = dataSets.recommendations;
   const router = useRouter();
   const handleClick = (e) => {
