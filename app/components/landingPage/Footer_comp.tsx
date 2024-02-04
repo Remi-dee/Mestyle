@@ -1,7 +1,7 @@
 import React from "react";
 import { oregano } from "../../localFonts/oregano/oregano";
 
-const Footer = () => {
+const Footer: React.FC = () => {
   return (
     <footer className="bg-[#D9D9D9] lg:px-24 py-2 px-4 w-full flex justify-between items-center">
       <p style={oregano.style} className="md:text-5xl text-2xl">Mestyle</p>

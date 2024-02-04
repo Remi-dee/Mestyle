@@ -1,6 +1,6 @@
 import NavBar from "./NavBar/NavBar";
 
-import Footer from "./Footer";
+import Footer from "./Footer_comp";
 import Hero_comp from "./Hero/Hero_comp";
 import Explore from "./Explore_comp";
 import Contact from "./Contact_comp";
@@ -11,7 +11,7 @@ import SignIn from "../authentication/signIn/SignInForm_comp";
 import ForgotPassword from "../authentication/ForgotPassword_comp";
 import Authentication from "../authentication/authentication";
 
-function HomePage() {
+const HomePage: React.FC = () => {
   return (
     <>
       <NavBar className="px-24" />
@@ -23,6 +23,6 @@ function HomePage() {
       <Authentication />
     </>
   );
-}
+};
 
 export default HomePage;

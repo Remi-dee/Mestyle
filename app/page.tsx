@@ -3,12 +3,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import HomePage from "./components/landingPage/homePage";
 import { useEffect, useState } from "react";
 
-export default function Home() {
-  const [mounted, setMounted] = useState();
+ const Home: React.FC = () => {
+  const [mounted, setMounted] = useState<boolean>();
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  useEffect(() => setMounted(true), []);
 
   if (!mounted) return null;
 
@@ -21,4 +19,7 @@ export default function Home() {
       </div>
     </main>
   );
-}
+};
+
+
+export default Home
