@@ -21,6 +21,6 @@
       }
     ]
   },
-  "include": ["next-env.d.ts", ".next/types/**/*.ts", "**/*.ts", "**/*.tsx", "app/components/authentication/signIn/SignInForm_comp.js"],
+  "include": ["next-env.d.ts", ".next/types/**/*.ts", "**/*.ts", "**/*.tsx", "app/components/authentication/signIn/SignInForm_comp.jsx"],
   "exclude": ["node_modules"]
 }
