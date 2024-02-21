@@ -10,23 +10,37 @@ import { handleSignUp } from "./util/handleSignup";
 import { useAuthContext } from "@/app/composables/authContext";
 import { useRouter } from "next/navigation";
 
+
+
+interface FormData {
+  username: string;
+  email: string;
+  password: string;
+}
+
+
+
 function SignUp() {
+ 
+ 
+ 
+ 
   const { currentUser } = useAuthContext();
   const router = useRouter();
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     username: "",
     email: "",
     password: "",
   });
 
-  const handleChange = (e) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFormData((prevData) => ({
       ...prevData,
       [e.target.name]: e.target.value,
     }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     const formDataObject = {
       email: formData.email,
