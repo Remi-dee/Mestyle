@@ -12,10 +12,10 @@ const handleSignUp = async ({ email, password }) => {
     );
     const user = userCredential.user;
     console.log("User signed up:", user);
-    // You can redirect the user or perform other actions upon successful sign-up
+    return { success: true, user };
   } catch (error) {
     console.error("Error signing up:", error.message);
-    // Handle the error, display a message, etc.
+    return { success: false, error: error.message };
   }
 };
 

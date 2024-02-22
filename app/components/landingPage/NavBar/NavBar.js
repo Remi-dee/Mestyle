@@ -7,7 +7,7 @@ import { usePathname, useRouter } from "next/navigation";
 import Button from "../../ui/button/button";
 import { motion } from "framer-motion";
 import { navData } from "./utils/navData";
-import { router } from "next/navigation";
+
 import { useTheme } from "next-themes";
 import userLight from "@/public/icons/user.png";
 import userDark from "@/public/icons/userDark.png";

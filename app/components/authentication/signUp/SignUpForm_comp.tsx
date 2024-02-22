@@ -7,8 +7,19 @@ import Button from "../../ui/button/button";
 import waterMark from "@/public/icons/waterMark.png";
 import { useState } from "react";
 import { handleSignUp } from "./util/handleSignup";
+import { useAuthContext } from "@/app/composables/authContext";
+import { useRouter } from "next/navigation";
+
+interface FormData {
+  username: string;
+  email: string;
+  password: string;
+}
+
 function SignUp() {
-  const [formData, setFormData] = useState({
+  const { currentUser } = useAuthContext();
+  const router = useRouter();
+  const [formData, setFormData] = useState<FormData>({
     username: "",
     email: "",
     password: "",
@@ -21,14 +32,23 @@ function SignUp() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData.email, +"see it" + formData.password);
     const formDataObject = {
       email: formData.email,
       password: formData.password,
     };
-    handleSignUp(formData);
+
+    try {
+      const userCred = await handleSignUp(formDataObject);
+      console.log("here is" + userCred.success);
+      if (userCred.success) {
+        router.push("/?view=signin");
+      }
+    } catch (error) {
+      // Handle errors if needed
+      console.error("Error in handleSignUp:", error);
+    }
   };
 
   return (

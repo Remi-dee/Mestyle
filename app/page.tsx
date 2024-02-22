@@ -3,8 +3,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import HomePage from "./components/landingPage/homePage";
 import { useEffect, useState } from "react";
 
-export default function Home() {
-  const [mounted, setMounted] = useState();
+export default function Home(): JSX.Element {
+  const [mounted, setMounted] = useState<boolean | undefined>();
 
   useEffect(() => {
     setMounted(true);
