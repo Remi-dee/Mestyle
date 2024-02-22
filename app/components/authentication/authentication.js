@@ -3,6 +3,7 @@ import SignIn from "./signIn/SignInForm_comp";
 import ForgotPassword from "./ForgotPassword_comp";
 import { useRouter, useSearchParams } from "next/navigation";
 import SignUp from "./signUp/SignUpForm_comp";
+import SuccessMessage from "../notifications/RegisterationMessage_comp";
 
 function Authentication() {
   const view = useSearchParams().get("view");
@@ -43,6 +44,18 @@ function Authentication() {
               }}
             >
               <ForgotPassword
+                onClose={() => {
+                  router.push("/");
+                }}
+              />
+            </Modal>
+          ) : view == "registerationsuccess" ? (
+            <Modal
+              onClose={() => {
+                router.push("/");
+              }}
+            >
+              <SuccessMessage
                 onClose={() => {
                   router.push("/");
                 }}
