@@ -3,7 +3,7 @@ import Link from "next/link";
 import google from "../../../public/icons/Google.png";
 import arrowBack from "@/public/icons/arrowBack.png";
 import Button from "../ui/button/button";
-function ForgotPassword(): JSX.Element {
+function ForgotPassword() {
   return (
     <form>
       <div className="flex pb-4 relative font-lexend">

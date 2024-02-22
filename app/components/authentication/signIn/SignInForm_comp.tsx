@@ -22,14 +22,14 @@ function SignIn(): JSX.Element {
     password: "",
   });
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e) => {
     setFormData((prevData) => ({
       ...prevData,
       [e.target.name]: e.target.value,
     }));
   };
 
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const formDataObject = {
@@ -45,7 +45,7 @@ function SignIn(): JSX.Element {
       }
     } catch (error) {
       // Handle errors if needed
-      console.error("Error in handleSignUp:", userCred.error);
+      console.error("Error in handleSignUp:", error);
     }
   };
 
