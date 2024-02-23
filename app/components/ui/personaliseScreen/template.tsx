@@ -1,4 +1,11 @@
-import React from "react";
+import React, { ReactNode } from "react";
+
+interface PersonaliseScreenProps {
+  title?: string;
+  description?: string;
+  className?: string;
+  children?: ReactNode;
+}
 
 /**
  * PersonaliseScreen Component - Displays screens for personalized recommendations with a title, description, and overlay content.
@@ -7,13 +14,12 @@ import React from "react";
  * @param {string} className - Additional custom class names for styling.
  * @param {node} children - Overlay component will be rendered as the child component.
  */
-
 function PersonaliseScreen({
   title = "",
   description = "",
   className = "",
   children,
-}) {
+}: PersonaliseScreenProps): JSX.Element {
   const baseStyle =
     "relative flex flex-col items-center justify-center lg:p-12 xl:p-12 " +
     "py-8 px-4 select-none antialiased";
