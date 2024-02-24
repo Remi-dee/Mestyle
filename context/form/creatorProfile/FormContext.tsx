@@ -6,16 +6,24 @@ import {
   FORM_TITLES,
 } from "@/app/components/form/creatorProfile/utils/FormConstants";
 
+import { FormContext } from "./FormContextType";
+
 import {
   validateBodyType,
   validateFashionStyle,
   validateUploadContent,
 } from "@/app/components/form/creatorProfile/utils/Validation";
 import imageProcessor from "@/lib/ImageProcessor";
+import {
+  storeDocumentWithImage,
+  uploadImageToStorage,
+} from "@/lib/database/databaseService";
 
-const FormContext = createContext();
+type CreatorFormProps = {
+  children: import("react").ReactNode;
+};
 
-function FormProvider({ children }) {
+const FormProvider: React.FC<CreatorFormProps> = ({ children }) => {
   const [formStep, setFormStep] = useState(0);
   const [formData, setFormData] = useState(FORM_INITIAL_STATE);
   const [errors, setErrors] = useState({});
@@ -46,6 +54,7 @@ function FormProvider({ children }) {
       }
 
       setIsLoading(true);
+
       const result = await imageProcessor.processFile(file);
 
       if (result.errorMessage) {
@@ -104,30 +113,26 @@ function FormProvider({ children }) {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const error = validateUploadContent(formData);
 
     if (Object.keys(error).length === 0) {
-      const data = new FormData();
-      for (const key in formData) {
-        if (key !== "imageUpload") {
-          data.append(key, formData[key]);
-        }
+      try {
+        // Upload image to Firestore Storage
+        const imageUrl = await uploadImageToStorage(formData.imageUpload);
+
+        // Store document in Firestore with the image URL
+        await storeDocumentWithImage(
+          formData.title,
+          formData.description,
+          imageUrl
+        );
+
+        console.log("Image and document stored successfully.");
+      } catch (error) {
+        console.error("Error storing image and document: ", error);
       }
-
-      data.append("imageUpload", formData.imageUpload);
-
-      // checking out the url of the uploaded image
-      const fileUrl = URL.createObjectURL(formData.imageUpload);
-      console.log("Image URL:", fileUrl);
-
-      // checking out FormData
-      for (let pair of data.entries()) {
-        console.log(pair[0] + ", " + pair[1]);
-      }
-
-      // Sending `data` to the server can go here
     } else {
       setErrors(error);
     }
@@ -154,6 +159,6 @@ function FormProvider({ children }) {
   return (
     <FormContext.Provider value={contextValue}>{children}</FormContext.Provider>
   );
-}
+};
 
-export { FormContext, FormProvider };
+export { FormProvider };

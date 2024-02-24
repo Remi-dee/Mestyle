@@ -1,4 +1,5 @@
-import Button from "@/app/components/ui/button/template";
+import Button from "@/app/components/ui/button/button";
+
 
 const ButtonWithArrowRight = ({ onClick, className, buttonText }) => (
   <Button

@@ -35,7 +35,7 @@ function ForgotPassword() {
                       id="email"
                       type="text"
                       autoComplete="on"
-                      className=" text-zinc-400    text-base font-normal w-full leading-normal bg-white border border-neutral-300"
+                      className=" text-zinc-400  text-base font-normal w-full leading-normal bg-white border border-neutral-300"
                       placeholder="Enter your email address"
                     />
                   </div>

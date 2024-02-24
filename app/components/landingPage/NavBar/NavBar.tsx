@@ -7,13 +7,21 @@ import { usePathname, useRouter } from "next/navigation";
 import Button from "../../ui/button/button";
 import { motion } from "framer-motion";
 import { navData } from "./utils/navData";
-
 import { useTheme } from "next-themes";
 import userLight from "@/public/icons/user.png";
 import userDark from "@/public/icons/userDark.png";
 import Image from "next/image";
 
-function NavBar({ className, isExplore, isProfile }) {
+
+
+interface NavBarProps {
+  className?: string;
+  isExplore?: boolean;
+  isProfile?: boolean;
+}
+
+
+function NavBar({ className, isExplore, isProfile }: NavBarProps): JSX.Element{
   const { theme, setTheme } = useTheme();
   const [openHamburger, setOpenHamburger] = useState(false);
   const openMobileNav = () => {
