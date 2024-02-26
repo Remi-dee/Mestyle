@@ -9,6 +9,7 @@ const FORM_INITIAL_STATE = {
   colorPreference: [],
   uploadTitle: "",
   imageUpload: null,
+  imageDescription: "",
   altText: "",
 };
 
