@@ -12,6 +12,7 @@ const errorMessages = {
   colorPreference: "Please select your color preference.",
   uploadTitle: "Please provide a title for your content.",
   imageUpload: "Please provide an image for your content.",
+  imageDescription: "Please provide a description for your content.",
   altText: "Please provide an alt text for your content.",
   isBadCharacter: "Please provide a valid character.",
 };
@@ -121,6 +122,16 @@ class ImageUploadValidator extends Validator {
   }
 }
 
+class ImageDescription extends Validator {
+  validate(data, errors) {
+    if (!data.imageDescription) {
+      errors.imageDescription = errorMessages.imageDescription;
+    } else if (!isSafeText(data.imageDescription)) {
+      errors.imageDescription = errorMessages.isBadCharacter;
+    }
+    return super.validate(data, errors);
+  }
+}
 class AltTextValidator extends Validator {
   validate(data, errors) {
     if (!data.altText) {
@@ -163,7 +174,7 @@ function validateBodyType(data) {
 }
 function validateUploadContent(data) {
   const chain = new UploadTitleValidator(
-    new AltTextValidator(new ImageUploadValidator(null))
+    new AltTextValidator(new ImageUploadValidator(new ImageDescription(null)))
   );
   const errors = {};
   chain.validate(data, errors);
