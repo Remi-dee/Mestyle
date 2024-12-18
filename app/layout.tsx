@@ -6,6 +6,8 @@ import { lexend } from "./localFonts/lexend/localFont";
 import { ThemeProvider } from "@/app/composables/provider";
 import Head from "next/head";
 import { AuthProvider } from "./composables/authContext";
+import { Provider } from "react-redux";
+import { store } from "./redux/store";
 
 type Metadata = {
   title: string;
@@ -30,11 +32,13 @@ export default function RootLayout({ children }: RootLayoutProps) {
       </Head>
 
       <body className={`${lexend.variable} overflow-x-hidden `}>
-        <AuthProvider>
-          <ThemeProvider enableSystem={true} attribute="class">
-            {children}
-          </ThemeProvider>
-        </AuthProvider>
+        <Provider store={store}>
+          <AuthProvider>
+            <ThemeProvider enableSystem={true} attribute="class">
+              {children}
+            </ThemeProvider>
+          </AuthProvider>
+        </Provider>
       </body>
     </html>
   );
