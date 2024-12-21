@@ -1,20 +1,25 @@
-import { useRegisterMutation } from "@/redux/authApi";
-import { setCredentials } from "@/redux/authSlice";
+import { useRegisterMutation } from "@/app/redux/features/auth/authApi";
+import { setCredentials } from "@/app/redux/features/auth/authSlice";
 import { useDispatch } from "react-redux";
 
 const HandleSignUp = () => {
-  const [register] = useRegisterMutation();
+  
+  const [register, { isLoading, error }] = useRegisterMutation();
   const dispatch = useDispatch();
 
-  const signUp = async ({ username, email, password }) => {
+  const signUp = async ({
+    userData,
+  }: {
+    userData: { username: string; email: string; password: string };
+  }) => {
+    const { username, email, password } = userData;
     try {
       const response = await register({ username, email, password }).unwrap();
 
-      // If registration is successful, update the Redux state
       if (response && response.accessToken) {
         dispatch(
           setCredentials({
-            user: { email }, // Use username if needed
+            user: { email },
             accessToken: response.accessToken,
           })
         );
