@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import sideImage from "@/public/images/backgrounds/signupBackground.png";
@@ -10,9 +11,10 @@ import { useRouter } from "next/navigation";
 import { useRegisterMutation } from "@/app/redux/features/auth/authApi";
 import { setCredentials } from "@/app/redux/features/auth/authSlice";
 import { useDispatch } from "react-redux";
+import InputField from "../../ui/inputField/inputField";
 
 interface FormData {
-  username: string;
+  user_name: string;
   email: string;
   password: string;
 }
@@ -22,7 +24,7 @@ function SignUp() {
   const dispatch = useDispatch();
   const [register, { isLoading }] = useRegisterMutation();
   const [formData, setFormData] = useState<FormData>({
-    username: "",
+    user_name: "",
     email: "",
     password: "",
   });
@@ -36,8 +38,8 @@ function SignUp() {
   };
 
   const validateForm = () => {
-    const { username, email, password } = formData;
-    if (!username || !email || !password) {
+    const { user_name, email, password } = formData;
+    if (!user_name || !email || !password) {
       return "All fields are required.";
     }
     if (!/^\S+@\S+\.\S+$/.test(email)) {
@@ -59,15 +61,20 @@ function SignUp() {
 
     try {
       const response = await register(formData).unwrap();
+      if (response) {
+        alert("registered successfully");
+        console.log("our response", response);
+      }
       dispatch(
         setCredentials({
           user: { email: formData.email },
-          accessToken: response.accessToken,
+          access_token: response.access_token,
         })
       );
       router.push("/?view=signin");
     } catch (err: any) {
       setError(err.data?.message || "An unexpected error occurred.");
+      console.log("our response2", err.data?.message);
     }
   };
 
@@ -122,8 +129,8 @@ function SignUp() {
               <div className="flex flex-col gap-3">
                 <InputField
                   label="Username"
-                  name="username"
-                  value={formData.username}
+                  name="user_name"
+                  value={formData.user_name}
                   onChange={handleChange}
                   placeholder="Enter your username"
                   required
@@ -135,6 +142,7 @@ function SignUp() {
                   onChange={handleChange}
                   placeholder="Enter your email address"
                   required
+                  type="email"
                 />
                 <InputField
                   label="Password"
@@ -153,7 +161,7 @@ function SignUp() {
                 <span className="text-neutral-600 text-base">
                   Already a member?{" "}
                 </span>
-                <Link href="/signin">
+                <Link href="/?view=signin">
                   <span className="text-neutral-600 text-base underline">
                     Login
                   </span>
@@ -167,42 +175,6 @@ function SignUp() {
         </div>
       </div>
     </form>
-  );
-}
-
-function InputField({
-  label,
-  name,
-  value,
-  onChange,
-  type = "text",
-  placeholder,
-  required,
-}: {
-  label: string;
-  name: string;
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  type?: string;
-  placeholder: string;
-  required?: boolean;
-}) {
-  return (
-    <div className="flex flex-col gap-1">
-      <label htmlFor={name} className="block text-sm font-medium text-gray-700">
-        {label}
-      </label>
-      <input
-        id={name}
-        name={name}
-        value={value}
-        onChange={onChange}
-        type={type}
-        required={required}
-        className="text-zinc-400 text-base font-normal w-full bg-white border border-neutral-300"
-        placeholder={placeholder}
-      />
-    </div>
   );
 }
 

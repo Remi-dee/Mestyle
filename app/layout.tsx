@@ -1,3 +1,5 @@
+"use client";
+
 import { ReactNode } from "react";
 
 import { Inter, Oregano } from "next/font/google";
@@ -18,17 +20,17 @@ type RootLayoutProps = {
   children: ReactNode;
 };
 
-export const metadata: Metadata = {
-  title: "MeStyle",
-  description: "Get your confidence again",
-};
+// export const metadata: Metadata = {
+//   title: "MeStyle",
+//   description: "Get your confidence again",
+// };
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
       <Head>
-        <title>{metadata.title}</title>
-        <meta name="description" content={metadata.description} />
+        <title>MeStyle</title>
+        <meta name="description" content="Get your confidence again" />
       </Head>
 
       <body className={`${lexend.variable} overflow-x-hidden `}>

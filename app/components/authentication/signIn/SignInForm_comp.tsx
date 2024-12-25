@@ -1,14 +1,17 @@
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-
-import google from "@/public/icons/Google.png";
-import arrowBack from "@/public/icons/arrowBack.png";
-import Button from "../../ui/button/button";
-import waterMark from "@/public/icons/waterMark.png";
-import { handleSignIn } from "./util/handleSignin";
-import { useState } from "react";
-import { useAuthContext } from "@/app/composables/authContext";
 import { useRouter } from "next/navigation";
+import googleIcon from "@/public/icons/Google.png";
+import arrowBackIcon from "@/public/icons/arrowBack.png";
+import waterMarkIcon from "@/public/icons/waterMark.png";
+import Button from "../../ui/button/button";
+// A reusable input field component
+import { handleSignIn } from "./util/handleSignIn";
+import { useAuthContext } from "@/app/composables/authContext";
+import InputField from "../../ui/inputField/inputField";
+import waterMark from "@/public/icons/waterMark.png";
+
 interface FormData {
   email: string;
   password: string;
@@ -21,146 +24,93 @@ function SignIn(): JSX.Element {
     email: "",
     password: "",
   });
+  const [error, setError] = useState<string | null>(null);
 
-  const handleChange = (e) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      [e.target.name]: e.target.value,
-    }));
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const validateForm = () => {
+    const { email, password } = formData;
+    if (!email || !password) return "Email and Password are required.";
+    if (!/^\S+@\S+\.\S+$/.test(email)) return "Invalid email format.";
+    return null;
+  };
 
-    const formDataObject = {
-      email: formData.email,
-      password: formData.password,
-    };
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const validationError = validateForm();
+    if (validationError) {
+      setError(validationError);
+      return;
+    }
 
     try {
-      const userCred = await handleSignIn(formDataObject);
-      console.log("here is" + userCred.success);
-      if (userCred.success && currentUser) {
+      const response = await handleSignIn(formData);
+      if (response.success && currentUser) {
         router.push("/profile");
       }
-    } catch (error) {
-      // Handle errors if needed
-      console.error("Error in handleSignUp:", error);
+    } catch (err) {
+      setError("Invalid credentials or server error.");
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="flex pb-4 relative font-lexend">
-        <div className="flex flex-col w-[439px]  py-[60px] h-auto bg-white items-center rounded-tl-[30px]">
-          <div className=" text-center ">
-            <div className=" h-12 flex items-center justify-center ">
-              <Image
-                width={60}
-                height={50}
-                alt="Mestyle Logo"
-                src={waterMark}
-                className=""
-              />
-            </div>
-
-            <div className="text-black text-center text-[32px] w-[317px] font-medium leading-10">
-              Welcome back to Mestyle
-            </div>
-            <div className="space-y-[22px]">
-              <div className="flex justify-center gap-3 border border-spacing-2 mt-[22px] px-6 py-3">
-                <div className="">
-                  <Image
-                    width={25}
-                    height={25}
-                    alt="Sign in with Google"
-                    src={google}
-                  />
-                </div>
-                <div className="text-black text-lg font-normal leading-snug ">
-                  Sign in with Google
-                </div>
-              </div>
-
-              <div className="w-80 h-[19px] items-center justify-center  gap-3 inline-flex">
-                <div className="w-[130px] h-[0px] rotate-180 border border-neutral-300"></div>
-                <div className="text-black text-base font-normal  leading-tight">
-                  OR
-                </div>
-                <div className="w-[130px] h-[0px]  rotate-180 border border-neutral-300"></div>
-              </div>
-
-              <div className="flex flex-col gap-3">
-                <div className="flex flex-col gap-1">
-                  <label
-                    htmlFor="email"
-                    className="block text-sm text-start font-medium text-gray-700"
-                  >
-                    Email
-                  </label>
-
-                  <div className="w-full   gap-1 inline-flex">
-                    <input
-                      value={formData.email}
-                      onChange={handleChange}
-                      name="email"
-                      required
-                      id="email"
-                      type="text"
-                      autoComplete="on"
-                      className=" text-zinc-400    text-base font-normal w-full leading-normal bg-white border border-neutral-300"
-                      placeholder="Enter your email"
-                    />
-                  </div>
-                </div>
-
-                <div className="flex flex-col gap-1">
-                  <label
-                    htmlFor="password"
-                    className="block text-sm text-start font-medium text-gray-700"
-                  >
-                    Password
-                  </label>
-                  <div className="w-full gap-1 inline-flex">
-                    <input
-                      value={formData.password}
-                      onChange={handleChange}
-                      name="password"
-                      required
-                      id="password"
-                      type="password"
-                      autoComplete="on"
-                      className=" text-zinc-400    text-base font-normal w-full leading-normal bg-white border border-neutral-300"
-                      placeholder="Create a password"
-                    />
-                  </div>{" "}
-                  <div className="text-start ">
-                    <Link href="#">
-                      <span className="text-neutral-600 text-base font-normal  leading-tight">
-                        Forgot Password?
-                      </span>
-                    </Link>
-                  </div>
-                </div>
-              </div>
-
-              <div>
-                <Button variant="secondary" className=" w-full">
-                  Continue
-                </Button>
-              </div>
-            </div>
-
-            <div className="bg-white absolute top-0 left-0 w-[40px] h-12 flex items-center justify-center rounded-tl-[30px] ">
-              <Image
-                width={null}
-                height={null}
-                alt="Close Signin"
-                src={arrowBack}
-                className="w-[10px] h-[25px]"
-              />
-            </div>
-          </div>
+    <form onSubmit={handleSubmit} className="flex flex-col items-center">
+      <div className="flex flex-col w-[439px] py-[60px] bg-white items-center rounded-tl-[30px] shadow-md">
+        <Image src={waterMarkIcon} alt="Logo" width={60} height={50} />
+        <h2 className="text-[32px] font-medium text-black leading-10">
+          Welcome back to Mestyle
+        </h2>
+        {error && <div className="text-red-500 text-sm">{error}</div>}
+        <button
+          type="button"
+          className="flex items-center gap-3 border border-gray-300 px-6 py-3 mt-4"
+        >
+          <Image src={googleIcon} alt="Google Icon" width={25} height={25} />
+          <span className="text-black text-lg">Sign in with Google</span>
+        </button>
+        <div className="flex items-center my-4 w-full">
+          <div className="flex-grow border-t border-gray-300" />
+          <span className="px-4 text-gray-600">OR</span>
+          <div className="flex-grow border-t border-gray-300" />
+        </div>
+        <InputField
+          label="Email"
+          name="email"
+          type="email"
+          value={formData.email}
+          onChange={handleChange}
+          placeholder="Enter your email"
+          required
+        />
+        <InputField
+          label="Password"
+          name="password"
+          type="password"
+          value={formData.password}
+          onChange={handleChange}
+          placeholder="Enter your password"
+          required
+        />
+        <Button type="submit" variant="secondary" className="w-full mt-4">
+          Sign In
+        </Button>
+        <Link className="text-blue-500 mt-2" href="/?view=forgotpassword">
+          Forgot Password?
+        </Link>
+        <Link className="text-gray-600 mt-4" href="/?view=signup">
+          Don’t have an account? <span className="text-blue-500">Sign up</span>
+        </Link>
+        <div className="absolute top-0 left-0 p-4">
+          <Image
+            src={arrowBackIcon}
+            alt="Back"
+            width={24}
+            height={24}
+            className="cursor-pointer"
+          />
         </div>
       </div>
     </form>
