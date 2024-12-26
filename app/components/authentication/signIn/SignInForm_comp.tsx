@@ -98,12 +98,12 @@ function SignIn(): JSX.Element {
                 </span>
               </div>
 
-              <div className="w-80 h-[19px] flex items-center gap-3">
-                <div className="w-[130px] border border-neutral-300"></div>
+              <div className="w-[350px] h-[19px] flex items-center gap-3">
+                <div className="w-[200px] border border-neutral-300"></div>
                 <span className="text-black text-base font-normal leading-tight">
                   OR
                 </span>
-                <div className="w-[130px] border border-neutral-300"></div>
+                <div className="w-[200px] border border-neutral-300"></div>
               </div>
 
               <div className="flex flex-col gap-3">
