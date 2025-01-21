@@ -12,6 +12,7 @@ import { useAuthContext } from "@/app/composables/authContext";
 import InputField from "../../ui/inputField/inputField";
 import { useLoginMutation } from "@/app/redux/features/auth/authApi";
 import { useDispatch } from "react-redux";
+import { setCredentials } from "@/app/redux/features/auth/authSlice";
 
 interface FormData {
   email: string;
@@ -57,8 +58,17 @@ function SignIn(): JSX.Element {
     setError(null); // Clear previous errors
     try {
       const response = await login(formData).unwrap();
+
       if (response) {
-        alert("login successful");
+        // Store access token
+        dispatch(
+          setCredentials({
+            access_token: response.access_token,
+            user: response.user,
+          })
+        );
+        alert("Login successful");
+        router.push("/dashboard");
       } else {
         setError("Invalid email or password. Please try again.");
       }

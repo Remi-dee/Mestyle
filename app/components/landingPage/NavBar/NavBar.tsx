@@ -11,18 +11,17 @@ import { useTheme } from "next-themes";
 import userLight from "@/public/icons/user.png";
 import userDark from "@/public/icons/userDark.png";
 import Image from "next/image";
-
-
-
+import Filter from "@/public/icons/filter.svg";
+import Search from "@/public/icons/search.svg";
 interface NavBarProps {
   className?: string;
   isExplore?: boolean;
   isProfile?: boolean;
 }
 
-
-function NavBar({ className, isExplore, isProfile }: NavBarProps): JSX.Element{
+function NavBar({ className, isExplore, isProfile }: NavBarProps): JSX.Element {
   const { theme, setTheme } = useTheme();
+  const [isSearch, setIsSearch] = useState<boolean>(false);
   const [openHamburger, setOpenHamburger] = useState(false);
   const openMobileNav = () => {
     setOpenHamburger((prevIsOpen) => !prevIsOpen);
@@ -112,12 +111,14 @@ function NavBar({ className, isExplore, isProfile }: NavBarProps): JSX.Element{
 
       <nav
         className={`hidden ${
-          theme !== "dark" ? "bg-transparent" : "" } sticky backdrop-blur-md  bg-opacity-50 top-0 z-[150] mx-auto  py-6 lg:flex items-center justify-between bg-grayDark mb-[50px] ${className}`}
+          theme !== "dark" ? "bg-transparent" : ""
+        } sticky backdrop-blur-md  bg-opacity-50 top-0 z-[150] mx-auto  py-6 lg:flex items-center justify-between bg-grayDark mb-[50px] ${className}`}
       >
         <p
           style={oregano.style}
           className={`text-4xl ${
-            theme !== "dark" ? "to-black" : "to-white" } bg-gradient-to-r from-transparent to-white text-transparent bg-clip-text pl-5`}
+            theme !== "dark" ? "to-black" : "to-white"
+          } bg-gradient-to-r from-transparent to-white text-transparent bg-clip-text pl-5`}
         >
           MeStyle
         </p>
@@ -176,7 +177,49 @@ function NavBar({ className, isExplore, isProfile }: NavBarProps): JSX.Element{
 
         {isProfile && (
           <div className="flex justify-end px-5 gap-4">
-            <button
+            <div
+              className={`${
+                isSearch && "flex-grow"
+              } justify-between px-3 py-[4px] text-white bg-gray-800 bg-opacity-5  rounded-[15px] items-center gap-2.5 inline-flex`}
+            >
+              {isSearch && (
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => setIsSearch(false)}
+                    className="px-2 py-0.5 bg-black rounded-full text-white hover:bg-gray-950"
+                    aria-label="Close search"
+                  >
+                    ✕
+                  </button>
+                  <input
+                    name="search"
+                    id="search"
+                    type="text"
+                    autoComplete="on"
+                    className="px-4 py-3 text-white bg-gray-800 bg-opacity-5 rounded-[10px] border-none  font-normal w-[1108px] leading-normal"
+                    placeholder="Search your next outfit..."
+                  />
+                </div>
+              )}
+
+              {!isSearch && (
+                <div>
+                  <button
+                    className="bg-transparent rounded-full p-4 border border-zinc-600 "
+                    onClick={() => setIsSearch(true)}
+                  >
+                    {" "}
+                    <Image
+                      src={Search}
+                      alt="Search"
+                      className="w-[13px] h-auto  "
+                    />
+                  </button>
+                </div>
+              )}
+            </div>
+
+            {/* <button
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
             >
               {theme === "dark" ? (
@@ -281,7 +324,7 @@ function NavBar({ className, isExplore, isProfile }: NavBarProps): JSX.Element{
                   </svg>
                 </div>
               )}
-            </button>
+            </button> */}
 
             {theme == "dark" ? (
               <button>

@@ -21,6 +21,6 @@
       }
     ]
   },
-  "include": ["next-env.d.ts", ".next/types/**/*.ts", "**/*.ts", "**/*.tsx", "app/components/authentication/signUp/util/handleSignup.ts"],
+  "include": ["next-env.d.ts", ".next/types/**/*.ts", "**/*.ts", "**/*.tsx", "app/components/authentication/signUp/util/handleSignup.ts", "app/components/dashboard/header.tsx"],
   "exclude": ["node_modules"]
 }

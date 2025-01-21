@@ -29,17 +29,18 @@ const uploadImageToStorage = async (file: File): Promise<string> => {
 };
 
 const storeDocumentWithImage = async (
+  displayName: string,
   title: string,
   description: string,
   imageUrl: string
 ): Promise<void> => {
   try {
-    const user = appAuth.currentUser;
-    if (user == null) {
-      throw new Error("User not found!");
-    }
+    // const user = appAuth.currentUser;
+    // if (user == null) {
+    //   throw new Error("User not found!");
+    // }
 
-    const creatorContent = doc(appFirestore, "creatorContent");
+    const creatorContent = doc(appFirestore, `styleContent/${displayName}`);
 
     const data = {
       title,
@@ -48,7 +49,7 @@ const storeDocumentWithImage = async (
       // Add other fields based on your data model
     };
     const docRef = await setDoc(creatorContent, data);
-
+    console.log("first success");
     return docRef;
   } catch (error) {
     console.error("Error storing document with image:", error);

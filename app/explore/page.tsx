@@ -2,10 +2,11 @@
 
 import Image from "next/image";
 import Header from "../components/dashboard/header";
-import StyleCard from "../components/dashboard/styleCard";
-import StyleGrid from "../components/dashboard/styleGrid";
+import StyleCard from "../components/card/styleCard";
+
 import NavBar from "../components/landingPage/NavBar/NavBar";
 import waterMark from "@/public/icons/waterMark.png";
+import StyleGrid from "../components/explore/exploreStyleGrid";
 
 function page() {
   return (

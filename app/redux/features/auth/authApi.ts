@@ -1,10 +1,22 @@
 "use client";
 
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { RootState } from "../../store";
+import { baseQueryWithReauthLogic } from "../../shared/baseQueryWithReauth";
 
 export const authApi = createApi({
   reducerPath: "authApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:4000/" }), // Update to match your backend's base URL
+  baseQuery: baseQueryWithReauthLogic,
+  // baseQuery: fetchBaseQuery({
+  //   baseUrl: "http://localhost:4000/",
+  //   prepareHeaders: (headers, { getState }) => {
+  //     const token = (getState() as RootState).auth.access_token;
+  //     if (token) {
+  //       headers.set("authorization", `Bearer ${token}`);
+  //     }
+  //     return headers;
+  //   },
+  // }), // Update to match your backend's base URL
   endpoints: (builder) => ({
     register: builder.mutation<
       { access_token: string; user: { email: string } },
@@ -17,7 +29,7 @@ export const authApi = createApi({
       }),
     }),
     login: builder.mutation<
-      { access_token: string },
+      { access_token: string; user: any },
       { email: string; password: string }
     >({
       query: (credentials) => ({

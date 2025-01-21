@@ -67,7 +67,7 @@ function SignUp() {
       }
       dispatch(
         setCredentials({
-          user: { email: formData.email },
+          // user: { email: formData.email },
           access_token: response.access_token,
         })
       );

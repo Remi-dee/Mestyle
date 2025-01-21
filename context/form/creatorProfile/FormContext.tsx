@@ -18,12 +18,15 @@ import {
   storeDocumentWithImage,
   uploadImageToStorage,
 } from "@/lib/database/databaseService";
+import { useCreateStyleMutation } from "@/app/redux/features/styleContent/styleApi";
 
 type CreatorFormProps = {
   children: import("react").ReactNode;
 };
 
 const FormProvider: React.FC<CreatorFormProps> = ({ children }) => {
+  const [createStyle, { isLoading: isCreateLoading, isSuccess, error }] =
+    useCreateStyleMutation();
   const [formStep, setFormStep] = useState(0);
   const [formData, setFormData] = useState(FORM_INITIAL_STATE);
   const [errors, setErrors] = useState({});
@@ -55,18 +58,25 @@ const FormProvider: React.FC<CreatorFormProps> = ({ children }) => {
 
       setIsLoading(true);
 
-      const result = await imageProcessor.processFile(file);
+      try {
+        const result = await imageProcessor.processFile(file);
 
-      if (result.errorMessage) {
-        setErrors({ [name]: result.errorMessage });
-        setImageSrc("");
-      } else if (result.imageSrc) {
-        setImageSrc(result.imageSrc);
-        setErrors({});
-        setFormData((prev) => ({ ...prev, [name]: file }));
+        if (result.errorMessage) {
+          setErrors({ [name]: result.errorMessage });
+          setImageSrc("");
+        } else if (result.imageSrc) {
+          setImageSrc(result.imageSrc);
+          setErrors({});
+          setFormData((prev) => ({ ...prev, [name]: file }));
+        }
+
+        setIsLoading(false);
+      } catch (err) {
+        console.error("Error processing or uploading file: ", err);
+        setErrors({ [name]: "Failed to upload image. Please try again." });
+      } finally {
+        setIsLoading(false);
       }
-
-      setIsLoading(false);
     } else {
       handleOtherInputChange(e);
     }
@@ -115,20 +125,31 @@ const FormProvider: React.FC<CreatorFormProps> = ({ children }) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
     const error = validateUploadContent(formData);
 
     if (Object.keys(error).length === 0) {
       try {
+        console.log("Image and document stored successfully.", formData);
+
         // Upload image to Firestore Storage
         const imageUrl = await uploadImageToStorage(formData.imageUpload);
-
+        console.log("image ur,", imageUrl);
         // Store document in Firestore with the image URL
+        console.log("Image and document stored successfully.2x ", formData);
         await storeDocumentWithImage(
-          formData.title,
+          formData.displayName,
+          formData.uploadTitle,
           formData.description,
           imageUrl
         );
-
+        const payload = {
+          ...formData,
+          imageUrl,
+        };
+        console.log("why not showing ", imageUrl);
+        await createStyle({ ...payload, imageUrl });
+        alert("uploaded successfully");
         console.log("Image and document stored successfully.");
       } catch (error) {
         console.error("Error storing image and document: ", error);

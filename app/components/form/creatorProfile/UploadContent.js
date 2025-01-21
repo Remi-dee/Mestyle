@@ -26,18 +26,18 @@ function UploadContent() {
         </div>
 
         <div className="">
-          <label htmlFor="imageDescription" className="sr-only" />
+          <label htmlFor="description" className="sr-only" />
           <textarea
             type="text"
-            name="imageDescription"
-            value={formData.imageDescription}
+            name="description"
+            value={formData.description}
             onChange={handleChange}
             className="appearance-none border-none w-full focus:ring-0 py-4 px-2 bg-white bg-opacity-25 placeholder:text-black/50 focus-visible:text-black leading-tight resize-none text-xs lg:text-sm md:text-sm xl:text-sm"
             placeholder={`Give us glimpse into your style universe - share a few words about this content`}
           />
 
           {errors.altText && (
-            <p className="text-red-500 text-sm">{errors.imageDescription}</p>
+            <p className="text-red-500 text-sm">{errors.description}</p>
           )}
         </div>
         <div>
