@@ -38,6 +38,13 @@ export const authApi = createApi({
         body: credentials,
         credentials: "include", // Include cookies for refresh token handling
       }),
+      transformResponse: (response: any) => {
+        // Extract only the accessToken and user data
+        return {
+          access_token: response.data.accessToken,
+          user: response.data.user,
+        };
+      },
     }),
   }),
 });

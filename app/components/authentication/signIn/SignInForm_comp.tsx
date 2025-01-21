@@ -58,12 +58,14 @@ function SignIn(): JSX.Element {
     setError(null); // Clear previous errors
     try {
       const response = await login(formData).unwrap();
-
+      console.log("the first access token", response);
       if (response) {
         // Store access token
+
+        console.log("the second access token", response.access_token);
         dispatch(
           setCredentials({
-            access_token: response.access_token,
+            access_token: response?.access_token,
             user: response.user,
           })
         );
