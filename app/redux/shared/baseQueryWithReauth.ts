@@ -5,12 +5,13 @@ interface RefreshResponse {
   access_token: string;
   user: any; // Replace `any` with your user type if available
 }
+
 export const baseQueryWithReauth = fetchBaseQuery({
   baseUrl: process.env.NEXT_PUBLIC_BASE_URL,
   credentials: "include", // Include cookies for refresh token
-  prepareHeaders: (headers, { getState }) => {
-    console.log("out token is", (getState() as RootState).auth.access_token);
-    const token = (getState() as RootState).auth.access_token;
+  prepareHeaders: (headers) => {
+    const token = localStorage.getItem("access_token");
+    console.log("out token is", token);
     if (token) {
       headers.set("authorization", `Bearer ${token}`);
     }
@@ -32,6 +33,7 @@ export const baseQueryWithReauthLogic = async (args, api, extraOptions) => {
     if (refreshResult.data) {
       const { access_token, user } = refreshResult.data as RefreshResponse;
       console.log("out token is 2", access_token);
+      localStorage.setItem("access_token", access_token);
       // Update access token in state
       api.dispatch(
         setCredentials({
@@ -44,6 +46,7 @@ export const baseQueryWithReauthLogic = async (args, api, extraOptions) => {
       result = await baseQueryWithReauth(args, api, extraOptions);
     } else {
       // Clear credentials if refresh fails
+      localStorage.removeItem("access_token");
       api.dispatch(clearCredentials());
     }
   }

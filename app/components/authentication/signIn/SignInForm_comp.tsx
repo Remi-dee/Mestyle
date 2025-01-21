@@ -63,6 +63,7 @@ function SignIn(): JSX.Element {
         // Store access token
 
         console.log("the second access token", response.access_token);
+        localStorage.setItem("access_token", response.access_token);
         dispatch(
           setCredentials({
             access_token: response?.access_token,
