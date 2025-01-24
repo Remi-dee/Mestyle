@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import google from "@/public/icons/Google.png";
@@ -31,6 +31,20 @@ function SignIn(): JSX.Element {
   const dispatch = useDispatch();
   const [login, { isLoading }] = useLoginMutation();
 
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get("token");
+
+    if (token) {
+      // Store the token
+      localStorage.setItem("access_token", token);
+      dispatch(setCredentials({ access_token: token }));
+
+      // Navigate to the dashboard
+      router.push("/dashboard");
+    }
+  }, [router, dispatch]);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -46,7 +60,9 @@ function SignIn(): JSX.Element {
     }
     return null;
   };
-
+  const handleGoogleSignIn = () => {
+    window.location.href = "http://localhost:4000/auth/google/login";
+  };
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const validationError = validateForm();
@@ -106,9 +122,12 @@ function SignIn(): JSX.Element {
                   alt="Sign in with Google"
                   src={google}
                 />
-                <span className="text-black text-lg font-normal leading-snug">
-                  Sign in with Google
-                </span>
+                <button onClick={handleGoogleSignIn}>
+                  {" "}
+                  <span className="text-black text-lg font-normal leading-snug">
+                    Sign in with Google
+                  </span>
+                </button>{" "}
               </div>
 
               <div className="w-[350px] h-[19px] flex items-center gap-3">

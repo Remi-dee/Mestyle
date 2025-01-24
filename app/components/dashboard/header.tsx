@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../ui/button/button";
 import Image from "next/image";
 import Filter from "@/public/icons/filter.svg";
@@ -10,17 +10,34 @@ function Header(): JSX.Element {
     data: signedInProfile,
     isLoading: signedInLoading,
     error: signedInError,
-  } = useGetCurrentUserQuery();
-  console.log("user profile is", signedInProfile);
+  } = useGetCurrentUserQuery({});
+
+  const [userProfile, setUserProfile] = useState(null);
+
+  useEffect(() => {
+    if (signedInProfile) {
+      setUserProfile(signedInProfile);
+    }
+  }, [signedInProfile]);
+
+  if (signedInLoading) {
+    return <h1 className="text-4xl font-medium leading-tight">Loading...</h1>;
+  }
+
+  if (signedInError) {
+    return (
+      <h1 className="text-4xl font-medium leading-tight">
+        Unable to fetch profile
+      </h1>
+    );
+  }
+  console.log("user profile is", userProfile);
   return (
     <div className="flex justify-between items-center text-white font-lexend mb-7 mt-[80px]">
       <div>
         {!isSearch && (
           <h1 className="text-4xl font-medium leading-tight">
-            Good Afternoon{" "}
-            {signedInProfile?.user.user_name
-              ? signedInProfile?.user.user_name
-              : "User"}
+            Good Afternoon {signedInProfile?.user_name || "User"}
           </h1>
         )}
       </div>

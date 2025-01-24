@@ -29,7 +29,7 @@ export const userApi = createApi({
         body: profile,
       }),
     }),
-    getCurrentUser: builder.query<{ user: any }, void>({
+    getCurrentUser: builder.query({
       query: () => "/user/profile",
     }),
     getUserById: builder.query({
