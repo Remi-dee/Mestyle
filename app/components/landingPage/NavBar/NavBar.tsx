@@ -13,6 +13,7 @@ import userDark from "@/public/icons/userDark.png";
 import Image from "next/image";
 import Filter from "@/public/icons/filter.svg";
 import Search from "@/public/icons/search.svg";
+import { useGetCurrentUserQuery } from "@/app/redux/features/user/user.api";
 interface NavBarProps {
   className?: string;
   isExplore?: boolean;
@@ -28,6 +29,12 @@ function NavBar({ className, isExplore, isProfile }: NavBarProps): JSX.Element {
   };
   const router = useRouter();
   const pathname = usePathname();
+
+  const {
+    data: signedInProfile,
+    isLoading: signedInLoading,
+    error: signedInError,
+  } = useGetCurrentUserQuery({});
   return (
     <>
       {/* Mobile View */}
@@ -205,14 +212,14 @@ function NavBar({ className, isExplore, isProfile }: NavBarProps): JSX.Element {
               {!isSearch && (
                 <div>
                   <button
-                    className="bg-transparent rounded-full p-4 border border-zinc-600 "
+                    className="bg-transparent w-[30px] rounded-full p-2 border border-zinc-600 "
                     onClick={() => setIsSearch(true)}
                   >
                     {" "}
                     <Image
                       src={Search}
                       alt="Search"
-                      className="w-[13px] h-auto  "
+                      className="w-[25px] h-auto  "
                     />
                   </button>
                 </div>
@@ -327,23 +334,38 @@ function NavBar({ className, isExplore, isProfile }: NavBarProps): JSX.Element {
             </button> */}
 
             {theme == "dark" ? (
-              <button>
-                {" "}
-                <div className="relative p-6 rounded-full border border-zinc-600">
-                  {" "}
-                  <Image
-                    src={userLight}
-                    alt=""
-                    width={null}
-                    height={null}
-                    className="absolute bottom-1 left-[8px]"
-                  />
-                </div>
-              </button>
+              <>
+                {signedInProfile ? (
+                  <button>
+                    {" "}
+                    <Image
+                      src={signedInProfile.profileImage}
+                      alt="Profile Image"
+                      width={30}
+                      height={30}
+                      className="  rounded-full border border-zinc-600"
+                    />
+                  </button>
+                ) : (
+                  <button>
+                    {" "}
+                    <div className="relative p-2 w-[40px] h-[40px] rounded-full border border-zinc-600">
+                      {" "}
+                      <Image
+                        src={userLight}
+                        alt=""
+                        width={null}
+                        height={null}
+                        className="absolute w-[25px] bottom-1 left-[6px]"
+                      />
+                    </div>
+                  </button>
+                )}
+              </>
             ) : (
               <button>
                 {" "}
-                <div className="relative p-6 rounded-full border border-zinc-600">
+                <div className="relative p-6 w-3 h-auto rounded-full border border-zinc-600">
                   <Image
                     src={userDark}
                     alt=""
