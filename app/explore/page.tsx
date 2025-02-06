@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Header from "../components/dashboard/header";
-import StyleCard from "../components/card/styleCard";
+import StyleCard from "../components/styleComp/styleCard";
 
 import NavBar from "../components/landingPage/NavBar/NavBar";
 import waterMark from "@/public/icons/waterMark.png";

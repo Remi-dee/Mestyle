@@ -1,5 +1,8 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { baseQueryWithReauthLogic } from "../../shared/baseQueryWithReauth";
+import {
+  baseQueryWithReauth,
+  baseQueryWithReauthLogic,
+} from "../../shared/baseQueryWithReauth";
 
 export const stylesApi = createApi({
   reducerPath: "stylesApi",
@@ -16,7 +19,14 @@ export const stylesApi = createApi({
         body: newStyle,
       }),
     }),
+    getStyleById: builder.query({
+      query: (id: string) => `/styles/detail/${id}`,
+    }),
   }),
 });
 
-export const { useGetRandomStylesQuery, useCreateStyleMutation } = stylesApi;
+export const {
+  useGetRandomStylesQuery,
+  useCreateStyleMutation,
+  useGetStyleByIdQuery,
+} = stylesApi;

@@ -63,7 +63,7 @@ function ProfilePage(): JSX.Element {
             className="rounded-full"
           />
           <div className="text-center">
-            <h1 className="text-2xl font-bold">{profile.user_name}</h1>
+            <h1 className="text-2xl font-bold">{profile.userName}</h1>
             <p className="text-gray-500">@{profile.email.split("@")[0]}</p>
             <p className="mt-2 text-sm">{profile.bio}</p>
           </div>

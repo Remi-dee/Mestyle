@@ -1,5 +1,5 @@
 import { useGetRandomStylesQuery } from "@/app/redux/features/styleContent/styleApi";
-import StyleCard from "../card/styleCard";
+import StyleCard from "../styleComp/styleCard";
 
 const staticItems = [
   {

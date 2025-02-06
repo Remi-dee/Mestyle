@@ -1,5 +1,5 @@
 import { useGetRandomStylesQuery } from "@/app/redux/features/styleContent/styleApi";
-import StyleCard from "../card/styleCard";
+import StyleCard from "../styleComp/styleCard";
 
 const staticItems = [
   {
@@ -26,22 +26,32 @@ function StyleGrid(): JSX.Element {
   const items = data || []; // Assuming the API response has a `styles` array
   console.log(items);
   return (
-    <section>
-      <div className="relative grid grid-flow-row-dense md:grid-cols-2 lg:grid-cols-4 gap-x-[30px] gap-y-[80px]">
-        {items.map(({ _id, description, imageUrl, posterIcon, posterName }) => (
-          <StyleCard
-            key={_id}
-            id={_id}
-            description={description}
-            image={
-              imageUrl.includes("example")
-                ? "/images/medium-shot-woman-with-yellow-suit-2.png"
-                : imageUrl
-            }
-            posterIcon={posterIcon}
-            posterName={posterName}
-          />
-        ))}
+    <section className="px-4">
+      <div className="columns-2 md:columns-3 lg:columns-4 gap-6">
+        {items.map(
+          ({
+            _id,
+            description,
+            imageUrl,
+            posterIcon,
+            posterName,
+            ownerImage,
+            ownerName,
+          }) => (
+            <StyleCard
+              key={_id}
+              id={_id}
+              description={description}
+              image={
+                imageUrl.includes("example")
+                  ? "/images/medium-shot-woman-with-yellow-suit-2.png"
+                  : imageUrl
+              }
+              ownerAvatar={ownerImage}
+              ownerName={ownerName}
+            />
+          )
+        )}
       </div>
     </section>
   );

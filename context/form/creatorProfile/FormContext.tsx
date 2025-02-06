@@ -19,6 +19,7 @@ import {
   uploadImageToStorage,
 } from "@/lib/database/databaseService";
 import { useCreateStyleMutation } from "@/app/redux/features/styleContent/styleApi";
+import { useGetCurrentUserQuery } from "@/app/redux/features/user/user.api";
 
 type CreatorFormProps = {
   children: import("react").ReactNode;
@@ -33,6 +34,12 @@ const FormProvider: React.FC<CreatorFormProps> = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [imageSrc, setImageSrc] = useState("");
 
+  const {
+    data: signedInProfile,
+    isLoading: signedInLoading,
+    error: signedInError,
+  } = useGetCurrentUserQuery({});
+  console.log("signed in is", signedInProfile);
   useEffect(() => {
     const handleBeforeUnload = (e) => {
       if (Object.keys(formData).some((key) => formData[key].length > 0)) {
@@ -40,6 +47,7 @@ const FormProvider: React.FC<CreatorFormProps> = ({ children }) => {
         e.returnValue = "";
       }
     };
+    console.log("signed in is", signedInProfile);
 
     window.addEventListener("beforeunload", handleBeforeUnload);
     return () => window.removeEventListener("beforeunload", handleBeforeUnload);
@@ -146,9 +154,12 @@ const FormProvider: React.FC<CreatorFormProps> = ({ children }) => {
         const payload = {
           ...formData,
           imageUrl,
+          ownerImage: signedInProfile?.profileImage,
+          ownerName: signedInProfile.userName,
         };
         console.log("why not showing ", imageUrl);
-        await createStyle({ ...payload, imageUrl });
+        console.log(payload);
+        await createStyle(payload);
         alert("uploaded successfully");
         console.log("Image and document stored successfully.");
       } catch (error) {
