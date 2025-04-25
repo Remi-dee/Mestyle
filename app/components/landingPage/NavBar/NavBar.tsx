@@ -14,6 +14,11 @@ import Image from "next/image";
 import Filter from "@/public/icons/filter.svg";
 import Search from "@/public/icons/search.svg";
 import { useGetCurrentUserQuery } from "@/app/redux/features/user/user.api";
+import {
+  MdOutlineKeyboardArrowDown,
+  MdOutlineKeyboardArrowUp,
+} from "react-icons/md";
+import ProfileDropdown from "./ProfileDown";
 interface NavBarProps {
   className?: string;
   isExplore?: boolean;
@@ -24,6 +29,7 @@ function NavBar({ className, isExplore, isProfile }: NavBarProps): JSX.Element {
   const { theme, setTheme } = useTheme();
   const [isSearch, setIsSearch] = useState<boolean>(false);
   const [openHamburger, setOpenHamburger] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const openMobileNav = () => {
     setOpenHamburger((prevIsOpen) => !prevIsOpen);
   };
@@ -40,12 +46,18 @@ function NavBar({ className, isExplore, isProfile }: NavBarProps): JSX.Element {
       {/* Mobile View */}
       <nav className="block lg:hidden font-lexend">
         <div className="flex backdrop-blur-md  bg-opacity-50 justify-between items-center py-4 px-6 dark:bg-grayDark text-white mb-[50px]">
-          <p
+          <button
+            aria-label="Logo"
+            title="Logo"
+            onClick={(e) => {
+              e.preventDefault();
+              router.push("/");
+            }}
             style={oregano.style}
             className=" text-3xl bg-gradient-to-r from-transparent to-white text-transparent bg-clip-text"
           >
             MeStyle
-          </p>
+          </button>
           <button onClick={openMobileNav} className="z-30">
             {openHamburger ? (
               <p className="text-xl font-bold">X</p>
@@ -335,32 +347,66 @@ function NavBar({ className, isExplore, isProfile }: NavBarProps): JSX.Element {
 
             {theme == "dark" ? (
               <>
-                {signedInProfile ? (
-                  <button>
-                    {" "}
-                    <Image
-                      src={signedInProfile.profileImage}
-                      alt="Profile Image"
-                      width={30}
-                      height={30}
-                      className="  rounded-full border border-zinc-600"
-                    />
-                  </button>
-                ) : (
-                  <button>
-                    {" "}
-                    <div className="relative p-2 w-[40px] h-[40px] rounded-full border border-zinc-600">
+                <div
+                  className="relative flex items-center cursor-pointer border-2 border-zinc-600 px-2 py-1 rounded-full hover:bg-zinc-800 transition-all "
+                  onMouseEnter={() => setDropdownOpen(true)}
+                  onMouseLeave={() => setDropdownOpen(false)}
+                >
+                  {" "}
+                  {signedInProfile?.profileImage ? (
+                    <button
+                      onClick={() => {
+                        router.push("/profile");
+                      }}
+                    >
                       {" "}
                       <Image
-                        src={userLight}
-                        alt=""
-                        width={null}
-                        height={null}
-                        className="absolute w-[25px] bottom-1 left-[6px]"
+                        src={signedInProfile.profileImage}
+                        alt="Profile Image"
+                        width={30}
+                        height={30}
+                        className="  rounded-full border border-zinc-600"
                       />
-                    </div>
-                  </button>
-                )}
+                    </button>
+                  ) : (
+                    <button>
+                      {" "}
+                      <div className="relative p-2 w-[40px] h-[40px] rounded-full border border-zinc-600">
+                        {" "}
+                        <Image
+                          src={userLight}
+                          alt=""
+                          width={null}
+                          height={null}
+                          className="absolute w-[25px] bottom-1 left-[6px]"
+                        />
+                      </div>
+                    </button>
+                  )}
+                  {dropdownOpen ? (
+                    <MdOutlineKeyboardArrowUp
+                      className="ml-2 text-gray-500"
+                      size={18}
+                    />
+                  ) : (
+                    <MdOutlineKeyboardArrowDown
+                      className="ml-2 text-gray-500"
+                      size={18}
+                    />
+                  )}
+                  {/* Dropdown Menu */}
+                  {dropdownOpen && (
+                    <ProfileDropdown
+                      username={signedInProfile.username}
+                      profileImage={signedInProfile.profileImage}
+                      email={signedInProfile.email}
+                      onLogout={() => {
+                        console.log("Logout clicked");
+                        // Handle logout logic here
+                      }}
+                    />
+                  )}
+                </div>
               </>
             ) : (
               <button>

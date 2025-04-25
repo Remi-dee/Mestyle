@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   useGetCurrentUserQuery,
   useGetUserByIdQuery,
@@ -19,15 +19,21 @@ function ProfilePage(): JSX.Element {
 
   const { data: styles, isLoading: stylesLoading } = useGetUserStylesQuery({});
   const [tab, setTab] = useState("created");
-
+  const [userProfile, setUserProfile] = useState(null);
   // Fetch the signed-in user's profile if no userId is passed and the user is authenticated
+  // const {
+  //   data: signedInProfile,
+  //   isLoading: signedInLoading,
+  //   error: signedInError,
+  // } = useGetCurrentUserQuery(undefined, {
+  //   skip: !!userId || !access_token,
+  // });
+
   const {
     data: signedInProfile,
     isLoading: signedInLoading,
     error: signedInError,
-  } = useGetCurrentUserQuery(undefined, {
-    skip: !!userId || !access_token,
-  });
+  } = useGetCurrentUserQuery({});
 
   // Fetch the external user's profile if a userId is passed
   const {
@@ -36,41 +42,75 @@ function ProfilePage(): JSX.Element {
     error: externalError,
   } = useGetUserByIdQuery(userId, { skip: !userId });
 
+  useEffect(() => {
+    if (signedInProfile) {
+      setUserProfile(signedInProfile);
+    }
+  }, [signedInProfile]);
+
+  if (signedInLoading) {
+    return <h1 className="text-4xl font-medium leading-tight">Loading...</h1>;
+  }
+
+  if (signedInError) {
+    return (
+      <h1 className="text-4xl font-medium leading-tight">
+        Unable to fetch profile
+      </h1>
+    );
+  }
+
   const profile = userId ? externalProfile : signedInProfile;
   const isLoading = signedInLoading || externalLoading;
   const error = signedInError || externalError;
   if (isLoading || stylesLoading) {
     return <p>Loading...</p>;
   }
-
-  if (!profile) {
+  console.log("our profile", userProfile);
+  if (signedInError) {
     return <p>Error: Unable to load profile data.</p>;
   }
-
   return (
-    <div className="min-h-screen bg-black font-lexend">
+    <div
+      className="min-h-screen w-full flex flex-col items-center bg-white/10
+   "
+    >
       {/* Header Section */}
-      <div className="p-6 shadow-md">
-        <div className="flex flex-col items-center space-x-4">
-          <Image
-            src={
-              profile.profileImage ||
-              "/images/medium-shot-woman-with-yellow-suit-2.png"
-            }
-            alt="Profile"
-            width={300}
-            height={100}
-            className="rounded-full"
-          />
-          <div className="text-center">
-            <h1 className="text-2xl font-bold">{profile.userName}</h1>
-            <p className="text-gray-500">@{profile.email.split("@")[0]}</p>
-            <p className="mt-2 text-sm">{profile.bio}</p>
+
+      <div className="w-full max-w-md px-4 mt-[96px]">
+        <div className="backdrop-blur-xl  border border-white/20 rounded-2xl shadow-2xl overflow-hidden">
+          <div className="relative">
+            {/* Profile Picture */}
+            <div className="flex justify-center pt-6">
+              <Image
+                src={profile?.profileImage || "/images/default-profile.png"}
+                alt="Profile"
+                width={150}
+                height={150}
+                className="w-[150px] h-[150px] rounded-full border-4 border-white/30"
+              />
+            </div>
+
+            {/* Profile Details */}
+            <div className="text-center text-white px-6 py-4">
+              <h1 className="text-2xl font-bold">{profile?.userName}</h1>
+              <p className="text-white/70 text-sm">
+                @{profile?.email.split("@")[0]}
+              </p>
+              <p className="mt-2 text-sm text-white/80">{profile?.bio}</p>
+
+              {/* Action Buttons */}
+              <div className="mt-4 flex justify-center space-x-4">
+                <button className="px-6 py-2  backdrop-blur-md text-white rounded-full border border-white/30 hover:bg-white/30 transition bg-orange-400/20 ">
+                  Follow
+                </button>
+              </div>
+
+              <p className="mt-4 text-sm text-white/60">
+                Joined: {new Date(profile?.createdAt).toLocaleDateString()}
+              </p>
+            </div>
           </div>
-          <button className="ml-auto px-4 py-2 bg-white text-black rounded-md">
-            Follow
-          </button>
-          <p>Joined: {new Date(profile.createdAt).toLocaleDateString()}</p>
         </div>
       </div>
 

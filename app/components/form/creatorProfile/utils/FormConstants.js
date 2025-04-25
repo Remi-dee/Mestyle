@@ -1,3 +1,17 @@
+const PERSONA_INITIAL_STATE = {
+  occasion: [],
+  ageGroup: [],
+  gender: [],
+  displayName: "",
+  skinTone: [],
+  heightGroup: [],
+  bodyShape: [],
+  colorPreference: [],
+
+  description: "",
+  altText: "",
+};
+
 const FORM_INITIAL_STATE = {
   occasion: [],
   ageGroup: [],
@@ -33,4 +47,9 @@ const FORM_DESCRIPTIONS = [
   "",
 ];
 
-export { FORM_INITIAL_STATE, FORM_TITLES, FORM_DESCRIPTIONS };
+export {
+  FORM_INITIAL_STATE,
+  FORM_TITLES,
+  FORM_DESCRIPTIONS,
+  PERSONA_INITIAL_STATE,
+};

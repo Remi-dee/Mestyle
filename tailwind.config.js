@@ -25,6 +25,8 @@ module.exports = {
       },
       backgroundImage: {
         "explore-bg": "url('/images/explore/explore_bg.png')",
+        "radial-gradient":
+          "radial-gradient(ellipse at center, #121212 0%, #0a0a0a 100%)",
       },
     },
   },
