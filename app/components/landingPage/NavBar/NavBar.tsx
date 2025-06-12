@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { oregano } from "../../../localFonts/oregano/oregano";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import Button from "../../ui/button/button";
+import Button from "../../ui/button/Button";
 import { motion } from "framer-motion";
 import { navData } from "./utils/navData";
 import { useTheme } from "next-themes";
@@ -111,10 +111,9 @@ function NavBar({ className, isExplore, isProfile }: NavBarProps): JSX.Element {
             </ul>
             <div className="mx-auto space-y-4 text-sm text-bold">
               <Button
-                variant="inverted"
-                onClick={(e) => {
-                  e.preventDefault();
-                  router.push("/?view=signIn");
+                variant="secondary"
+                onClick={() => {
+                  router.push("/?view=signin");
                 }}
               >
                 {" "}
@@ -174,9 +173,8 @@ function NavBar({ className, isExplore, isProfile }: NavBarProps): JSX.Element {
         {!isProfile && (
           <div className="flex items-center justify-center space-x-6 text-sm text-bold">
             <Button
-              variant="inverted"
-              onClick={(e) => {
-                e.preventDefault();
+              variant="secondary"
+              onClick={() => {
                 router.push("/?view=signin");
               }}
             >
@@ -184,8 +182,7 @@ function NavBar({ className, isExplore, isProfile }: NavBarProps): JSX.Element {
             </Button>
             <Button
               variant="primary"
-              onClick={(e) => {
-                e.preventDefault();
+              onClick={() => {
                 router.push("/?view=signup");
               }}
             >
@@ -376,8 +373,8 @@ function NavBar({ className, isExplore, isProfile }: NavBarProps): JSX.Element {
                         <Image
                           src={userLight}
                           alt=""
-                          width={null}
-                          height={null}
+                          width={0}
+                          height={0}
                           className="absolute w-[25px] bottom-1 left-[6px]"
                         />
                       </div>
@@ -415,8 +412,8 @@ function NavBar({ className, isExplore, isProfile }: NavBarProps): JSX.Element {
                   <Image
                     src={userDark}
                     alt=""
-                    width={null}
-                    height={null}
+                    width={0}
+                    height={0}
                     className="absolute bottom-1 left-[8px]"
                   />
                 </div>

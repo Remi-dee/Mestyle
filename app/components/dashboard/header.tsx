@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Button from "../ui/button/button";
+
 import Image from "next/image";
 import Filter from "@/public/icons/filter.svg";
 import Search from "@/public/icons/search.svg";
@@ -85,6 +85,7 @@ function Header(): JSX.Element {
           <button
             className="bg-black rounded-[20px] p-4 border border-zinc-600"
             onClick={() => setIsStylePersonaOpen(true)} // ✅ Open Modal
+            aria-label="Open style persona filter"
           >
             <Image src={Filter} alt="Filter" className="w-[17px] h-auto" />
           </button>

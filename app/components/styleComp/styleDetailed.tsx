@@ -90,6 +90,7 @@ const StyleDetailCard: React.FC<StyleDetailCardProps> = ({
       <button
         onClick={handleBack}
         className="bg-[#D9D9D9] absolute top-0 left-0 w-[40px] h-12 z-20 flex items-center justify-center rounded-tl-lg"
+        aria-label="Go back"
       >
         <Image width={10} height={25} alt="Back" src={arrowBack} />
       </button>

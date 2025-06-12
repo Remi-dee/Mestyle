@@ -6,7 +6,7 @@ import {
   updateFormData,
 } from "@/app/redux/features/persona/personaSlice";
 import React from "react";
-
+import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
 
 const DisplayNameInput = () => {
@@ -14,27 +14,50 @@ const DisplayNameInput = () => {
   const { formData, errors } = useSelector(selectPersona);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(updateFormData({ displayName: e.target.value }));
+    dispatch(updateFormData({ personaName: e.target.value }));
     console.log(formData);
   };
 
   return (
-    <div className="bg-white/10 backdrop-blur-md border border-white/20 p-4 rounded-2xl space-y-2">
-      <label htmlFor="displayName" className="text-white text-lg font-semibold">
+    <motion.div
+      className="p-4 rounded-2xl space-y-2 border
+               dark:bg-white/10 dark:backdrop-blur-md 
+               bg-white dark:border-white/20 border-gray-200"
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3 }}
+      whileHover={{ scale: 1.01 }}
+    >
+      <label
+        htmlFor="personaName"
+        className="text-lg font-semibold dark:text-white text-gray-800"
+      >
         Display Name / Nickname
       </label>
-      <input
-        id="displayName"
-        name="displayName"
-        value={formData.displayName}
+      <motion.input
+        id="personaName"
+        name="personaName"
+        value={formData.personaName}
         onChange={handleChange}
         placeholder='"e.g., FashionIcon123"'
-        className="w-full max-w-md p-2 bg-white/20 text-white placeholder-white/50 rounded-md border-none focus:outline-none focus:ring-2 focus:ring-purple-500"
+        className="w-full max-w-md p-2 rounded-md border-none focus:outline-none focus:ring-2
+               dark:bg-white/20 bg-gray-100 
+               dark:text-white text-gray-800 
+               dark:placeholder-white/50 placeholder-gray-500 
+               focus:ring-burgundy-500"
+        whileFocus={{ scale: 1.01 }}
       />
-      {errors.displayName && (
-        <p className="text-red-400 text-sm">{errors.displayName}</p>
+      {errors.personaName && (
+        <motion.p
+          className="text-red-500 dark:text-red-400 text-sm"
+          initial={{ opacity: 0, x: -5 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.2 }}
+        >
+          {errors.personaName}
+        </motion.p>
       )}
-    </div>
+    </motion.div>
   );
 };
 

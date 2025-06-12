@@ -6,6 +6,7 @@ import {
   updateFormData,
 } from "@/app/redux/features/persona/personaSlice";
 import React from "react";
+import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
 
 const options = ["Formal", "Hangout", "Party", "Work"];
@@ -25,31 +26,51 @@ const OccasionSelection = () => {
   };
 
   return (
-    <fieldset className="bg-white/10 backdrop-blur-md border border-white/20 p-4 rounded-2xl space-y-3">
-      <legend className="text-lg font-semibold text-white">
+    <motion.fieldset
+      className="p-4 rounded-2xl space-y-3 border
+               dark:bg-white/10 dark:backdrop-blur-md 
+               bg-white dark:border-white/20 border-gray-200"
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3 }}
+      whileHover={{ scale: 1.01 }}
+    >
+      <legend className="text-lg font-semibold dark:text-white text-gray-800">
         What occasions do you typically dress for?
       </legend>
       <div className="flex flex-wrap gap-4">
-        {options.map((occasion) => (
-          <label
+        {options.map((occasion, index) => (
+          <motion.label
             key={occasion}
-            className="inline-flex items-center gap-2 text-white"
+            className="inline-flex items-center gap-2 dark:text-white text-gray-800"
+            initial={{ opacity: 0, x: -5 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: index * 0.05 }}
+            whileHover={{ scale: 1.05 }}
           >
             <input
               type="checkbox"
               value={occasion}
               checked={formData.occasion.includes(occasion)}
               onChange={handleChange}
-              className="form-checkbox h-5 w-5 accent-black"
+              className="form-checkbox h-5 w-5 text-burgundy-600 focus:ring-burgundy-500"
+              aria-label={occasion}
             />
             {occasion}
-          </label>
+          </motion.label>
         ))}
       </div>
       {errors.occasion && (
-        <p className="text-red-400 text-sm">{errors.occasion}</p>
+        <motion.p
+          className="text-red-500 dark:text-red-400 text-sm"
+          initial={{ opacity: 0, x: -5 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.2 }}
+        >
+          {errors.occasion}
+        </motion.p>
       )}
-    </fieldset>
+    </motion.fieldset>
   );
 };
 

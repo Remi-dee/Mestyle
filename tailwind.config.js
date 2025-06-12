@@ -18,6 +18,19 @@ module.exports = {
         blackAlpha10: "rgba(18, 18, 18, 0.1)", // for the gradient dark background color
         logoText:
           "linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1))",
+        burgundy: {
+          50: "#fdf2f5",
+          100: "#fbe6eb",
+          200: "#f5ccda",
+          300: "#eba3b9",
+          400: "#dd7493",
+          500: "#c94a71",
+          600: "#a82f52",
+          700: "#8d2543",
+          800: "#6d1a36",
+          900: "#5f1730",
+          950: "#350a18",
+        },
       },
       fontFamily: {
         lexend: ["var(--font-lexend)"],

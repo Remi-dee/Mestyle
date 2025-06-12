@@ -6,7 +6,7 @@
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
-    "strict": false,
+    "strict": true,
     "noEmit": true,
     "incremental": true,
     "esModuleInterop": true,
@@ -21,6 +21,13 @@
       }
     ]
   },
-  "include": ["next-env.d.ts", ".next/types/**/*.ts", "**/*.ts", "**/*.tsx", "app/components/authentication/signUp/util/handleSignup.ts", "app/components/dashboard/header.tsx"],
+  "include": [
+    "next-env.d.ts",
+    ".next/types/**/*.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "app/components/authentication/signUp/util/handleSignup.ts",
+    "app/components/dashboard/header.tsx"
+  ],
   "exclude": ["node_modules"]
 }

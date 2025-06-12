@@ -3,6 +3,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { authApi } from "./features/auth/authApi";
 import authReducer from "./features/auth/authSlice";
 import personaReducer from "./features/persona/personaSlice";
+import styleContentReducer from "./features/styleContent/styleContentSlice";
 import { stylesApi } from "./features/styleContent/styleApi";
 import { userApi } from "./features/user/user.api";
 import { personaApi } from "./features/persona/personaApi";
@@ -16,6 +17,7 @@ export const store = configureStore({
     [personaApi.reducerPath]: personaApi.reducer,
     persona: personaReducer,
     auth: authReducer,
+    styleContent: styleContentReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(

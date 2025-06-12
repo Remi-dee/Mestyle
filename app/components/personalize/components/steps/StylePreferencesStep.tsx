@@ -6,6 +6,13 @@ import {
 } from "@/app/redux/features/persona/personaSlice";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { motion } from "framer-motion";
+import {
+  containerVariants,
+  itemVariants,
+} from "../../../../composables/motion/motionConfigs";
+import ColorSelector from "../selectors/ColorSelector";
+import OccasionSelector from "../selectors/OccasionSelector";
 
 // Define color options with visual information
 const colorOptions = [
@@ -54,112 +61,41 @@ const StylePreferencesStep = () => {
   };
 
   return (
-    <div className="min-h-[60vh] px-4 py-6 bg-white/10 backdrop-blur-md rounded-lg shadow-lg text-white space-y-6">
-      <div className="space-y-2">
+    <motion.div
+      className="min-h-[60vh] px-4 py-6 rounded-lg shadow-lg space-y-6
+                 dark:bg-white/10 dark:backdrop-blur-md dark:text-white
+                 bg-gray-50 text-gray-800"
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+    >
+      <motion.div className="space-y-2" variants={itemVariants}>
         <h2 className="text-2xl font-semibold">Your Style Preferences</h2>
-        <p className="text-sm text-white/70">
+        <p className="text-sm dark:text-white/70 text-gray-600">
           Tell us what occasions you dress for and colors you love to wear.
         </p>
-      </div>
+      </motion.div>
 
       {/* Occasions Section */}
-      <fieldset className="bg-white/10 backdrop-blur-md border border-white/20 p-4 rounded-2xl space-y-3">
-        <legend className="text-lg font-semibold text-white">
-          What occasions do you typically dress for?
-        </legend>
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-          {occasionOptions.map(({ name, icon, description }) => (
-            <label
-              key={name}
-              className={`flex flex-col items-center justify-center p-3 rounded-lg border-2 transition-all cursor-pointer ${
-                formData.occasion?.includes(name)
-                  ? "bg-purple-600/20 border-purple-500"
-                  : "bg-white/5 border-white/10 hover:bg-white/10"
-              }`}
-            >
-              <input
-                type="checkbox"
-                value={name}
-                checked={formData.occasion?.includes(name) || false}
-                onChange={() => handleCheckboxChange("occasion", name)}
-                className="sr-only"
-              />
-              <span className="text-2xl mb-1">{icon}</span>
-              <span className="font-medium">{name}</span>
-              <span className="text-xs text-center text-white/70">
-                {description}
-              </span>
-            </label>
-          ))}
-        </div>
-        {errors.occasion && (
-          <p className="text-red-400 text-sm">{errors.occasion}</p>
-        )}
-      </fieldset>
+      <motion.div variants={itemVariants}>
+        <OccasionSelector
+          options={occasionOptions}
+          selectedOccasions={(formData.occasion as string[]) || []}
+          onChange={(value) => handleCheckboxChange("occasion", value)}
+          error={errors.occasion}
+        />
+      </motion.div>
 
       {/* Color Preferences Section */}
-      <fieldset className="bg-white/10 backdrop-blur-md border border-white/20 p-4 rounded-2xl space-y-4">
-        <legend className="text-lg font-semibold text-white">
-          What colors do you prefer to wear?
-        </legend>
-
-        {Object.entries(colorGroups).map(([groupName, colors]) => (
-          <div key={groupName} className="space-y-2">
-            <h3 className="text-md font-medium text-white/80">
-              {groupName} Colors
-            </h3>
-            <div className="flex flex-wrap gap-3">
-              {colors.map(({ name, hex }) => (
-                <label
-                  key={name}
-                  className={`inline-flex flex-col items-center cursor-pointer`}
-                >
-                  <div className="relative">
-                    <div
-                      style={{ backgroundColor: hex }}
-                      className={`w-10 h-10 rounded-full border transition-all ${
-                        formData.colorPreference?.includes(name)
-                          ? "ring-2 ring-purple-500 ring-offset-2 ring-offset-black/50"
-                          : "opacity-70 hover:opacity-100 border-gray-600"
-                      }`}
-                    ></div>
-                    <input
-                      type="checkbox"
-                      value={name}
-                      checked={
-                        formData.colorPreference?.includes(name) || false
-                      }
-                      onChange={() =>
-                        handleCheckboxChange("colorPreference", name)
-                      }
-                      className="sr-only"
-                    />
-                    {formData.colorPreference?.includes(name) && (
-                      <svg
-                        className="absolute -top-1 -right-1 text-purple-500 bg-black rounded-full w-5 h-5"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    )}
-                  </div>
-                  <span className="mt-1 text-xs">{name}</span>
-                </label>
-              ))}
-            </div>
-          </div>
-        ))}
-
-        {errors.colorPreference && (
-          <p className="text-red-400 text-sm mt-1">{errors.colorPreference}</p>
-        )}
-      </fieldset>
-    </div>
+      <motion.div variants={itemVariants}>
+        <ColorSelector
+          colorGroups={colorGroups}
+          selectedColors={(formData.colorPreference as string[]) || []}
+          onChange={(value) => handleCheckboxChange("colorPreference", value)}
+          error={errors.colorPreference}
+        />
+      </motion.div>
+    </motion.div>
   );
 };
 

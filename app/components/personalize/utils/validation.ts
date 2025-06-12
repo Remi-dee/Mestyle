@@ -1,4 +1,4 @@
-import { PERSONA_INITIAL_STATE } from "@/app/components/personalize/components/utils/FormConstants";
+import { PERSONA_INITIAL_STATE } from "@/app/components/personalize/utils/FormConstants";
 
 type CreatorFormData = typeof PERSONA_INITIAL_STATE;
 
@@ -11,7 +11,7 @@ const errorMessages = {
   occasion: "Please select at least one occasion.",
   ageGroup: "Please select an age group.",
   gender: "Please select a gender option.",
-  displayName: "Please provide a display name.",
+  personaName: "Please provide a name for this persona.",
   skinTone: "Please select a skin tone option.",
   heightGroup: "Please select a height group.",
   bodyShape: "Please select a body shape.",
@@ -73,13 +73,13 @@ class GenderValidator extends Validator {
   }
 }
 
-class DisplayNameValidator extends Validator {
+class PersonaNameValidator extends Validator {
   validate(data: CreatorFormData, errors: ValidationErrors) {
-    console.log("Validating displayName:", data.displayName);
-    if (!data.displayName) {
-      errors.displayName = errorMessages.displayName;
-    } else if (!isSafeText(data.displayName)) {
-      errors.displayName = errorMessages.isBadCharacter;
+    console.log("Validating personaName:", data.personaName);
+    if (!data.personaName) {
+      errors.personaName = errorMessages.personaName;
+    } else if (!isSafeText(data.personaName)) {
+      errors.personaName = errorMessages.isBadCharacter;
     }
     return super.validate(data, errors);
   }
@@ -87,7 +87,7 @@ class DisplayNameValidator extends Validator {
 
 class SkinToneValidator extends Validator {
   validate(data: CreatorFormData, errors: ValidationErrors) {
-    if (!isNonEmptyArray(data.skinTone)) {
+    if (!data.skinTone) {
       errors.skinTone = errorMessages.skinTone;
     }
     return super.validate(data, errors);
@@ -121,47 +121,47 @@ class ColorPreferenceValidator extends Validator {
   }
 }
 
-class UploadTitleValidator extends Validator {
-  validate(data: CreatorFormData, errors: ValidationErrors) {
-    if (!data.uploadTitle) {
-      errors.uploadTitle = errorMessages.uploadTitle;
-    } else if (!isSafeText(data.uploadTitle)) {
-      errors.uploadTitle = errorMessages.isBadCharacter;
-    }
-    return super.validate(data, errors);
-  }
-}
+// class UploadTitleValidator extends Validator {
+//   validate(data: CreatorFormData, errors: ValidationErrors) {
+//     if (!data.uploadTitle) {
+//       errors.uploadTitle = errorMessages.uploadTitle;
+//     } else if (!isSafeText(data.uploadTitle)) {
+//       errors.uploadTitle = errorMessages.isBadCharacter;
+//     }
+//     return super.validate(data, errors);
+//   }
+// }
 
-class ImageUploadValidator extends Validator {
-  validate(data: CreatorFormData, errors: ValidationErrors) {
-    if (!data.imageUpload) {
-      errors.imageUpload = errorMessages.imageUpload;
-    }
-    return super.validate(data, errors);
-  }
-}
+// class ImageUploadValidator extends Validator {
+//   validate(data: CreatorFormData, errors: ValidationErrors) {
+//     if (!data.imageUpload) {
+//       errors.imageUpload = errorMessages.imageUpload;
+//     }
+//     return super.validate(data, errors);
+//   }
+// }
 
-class DescriptionValidator extends Validator {
-  validate(data: CreatorFormData, errors: ValidationErrors) {
-    if (!data.description) {
-      errors.description = errorMessages.description;
-    } else if (!isSafeText(data.description)) {
-      errors.description = errorMessages.isBadCharacter;
-    }
-    return super.validate(data, errors);
-  }
-}
+// class DescriptionValidator extends Validator {
+//   validate(data: CreatorFormData, errors: ValidationErrors) {
+//     if (!data.description) {
+//       errors.description = errorMessages.description;
+//     } else if (!isSafeText(data.description)) {
+//       errors.description = errorMessages.isBadCharacter;
+//     }
+//     return super.validate(data, errors);
+//   }
+// }
 
-class AltTextValidator extends Validator {
-  validate(data: CreatorFormData, errors: ValidationErrors) {
-    if (!data.altText) {
-      errors.altText = errorMessages.altText;
-    } else if (!isSafeText(data.altText)) {
-      errors.altText = errorMessages.isBadCharacter;
-    }
-    return super.validate(data, errors);
-  }
-}
+// class AltTextValidator extends Validator {
+//   validate(data: CreatorFormData, errors: ValidationErrors) {
+//     if (!data.altText) {
+//       errors.altText = errorMessages.altText;
+//     } else if (!isSafeText(data.altText)) {
+//       errors.altText = errorMessages.isBadCharacter;
+//     }
+//     return super.validate(data, errors);
+//   }
+// }
 
 function removeEmptyErrors(errors: ValidationErrors) {
   for (const key in errors) {
@@ -169,12 +169,10 @@ function removeEmptyErrors(errors: ValidationErrors) {
   }
 }
 
-// Step 1: Basic Info (Display Name, Gender, Age Group)
+// Step 1: Basic Info (Persona Name, Gender, Age Group)
 export function validateBasicInfo(data: CreatorFormData): ValidationErrors {
   console.log("Running basic info validation with data:", JSON.stringify(data));
-  const chain = new DisplayNameValidator(
-    new GenderValidator(new AgeGroupValidator(null))
-  );
+  const chain = new PersonaNameValidator(new AgeGroupValidator(null));
 
   const errors: ValidationErrors = {};
   chain.validate(data, errors);

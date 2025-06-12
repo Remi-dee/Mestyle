@@ -5,24 +5,74 @@ import {
   goToStep,
   nextStep,
   selectPersona,
+  resetForm,
 } from "@/app/redux/features/persona/personaSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import {
+  useCreatePersonaMutation,
+  useUpdatePersonaMutation,
+} from "@/app/redux/features/persona/personaApi";
+import { useRouter } from "next/navigation";
+import FormError from "../../ui/form/FormError";
+import Button from "../../ui/button/Button";
+
+
 
 type Props = {
   steps: Array<{ label: string; component: React.ReactNode; validate: string }>;
+  isEditMode?: boolean;
+  personaId?: string;
 };
 
-export default function StepNavigation({ steps }: Props) {
+export default function StepNavigation({
+  steps,
+  isEditMode = false,
+  personaId,
+}: Props) {
   const dispatch = useDispatch();
-  const { formStep, errors } = useSelector(selectPersona);
+  const router = useRouter();
+  const { formStep, errors, formData } = useSelector(selectPersona);
   const [hasErrors, setHasErrors] = useState(false);
+
+  // Mutations
+  const [
+    createPersona,
+    { isLoading: isCreating, isSuccess: createSuccess, error: createError },
+  ] = useCreatePersonaMutation();
+
+  const [
+    updatePersona,
+    { isLoading: isUpdating, isSuccess: updateSuccess, error: updateError },
+  ] = useUpdatePersonaMutation();
+
+  // Combined loading and success states
+  const isLoading = isCreating || isUpdating;
+  const isSuccess = createSuccess || updateSuccess;
+  const error = createError || updateError;
 
   // Check if there are any validation errors
   useEffect(() => {
     setHasErrors(Object.keys(errors).length > 0);
   }, [errors]);
+
+  // Redirect to dashboard when persona is successfully created/updated
+  useEffect(() => {
+    if (isSuccess) {
+      // Reset the form state after successful submission
+      dispatch(resetForm());
+
+      // Show appropriate success message
+      if (isEditMode) {
+        alert("Persona updated successfully!");
+      } else {
+        alert("Persona created successfully!");
+      }
+
+      // Navigate back to dashboard
+      router.push("/dashboard");
+    }
+  }, [isSuccess, router, dispatch, isEditMode]);
 
   const isLastStep = formStep === steps.length - 1;
   const isFirstStep = formStep === 0;
@@ -40,87 +90,60 @@ export default function StepNavigation({ steps }: Props) {
     dispatch(goToStep(formStep - 1));
   };
 
-  const handleSubmit = () => {
-    // Replace with actual submission logic later
-    console.log("Submitting form...");
-    alert("Form submitted successfully!");
-  };
-
-  const buttonVariants = {
-    hover: { scale: 1.05, transition: { duration: 0.15 } },
-    tap: { scale: 0.95, transition: { duration: 0.08 } },
-    disabled: { scale: 1, opacity: 0.6 },
+  const handleSubmit = async () => {
+    try {
+      if (isEditMode && personaId) {
+        // Update existing persona
+        await updatePersona({
+          id: personaId,
+          personaData: formData,
+        }).unwrap();
+      } else {
+        // Create new persona
+        await createPersona(formData).unwrap();
+      }
+      // Success is handled in the useEffect
+    } catch (err) {
+      console.error(
+        `Error ${isEditMode ? "updating" : "creating"} persona:`,
+        err
+      );
+      alert(
+        `Error ${
+          isEditMode ? "updating" : "creating"
+        } persona. Please try again.`
+      );
+    }
   };
 
   return (
     <div className="mt-6 space-y-4">
-      {/* Error summary - show if there are validation errors */}
-      <AnimatePresence>
-        {hasErrors && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.2 }}
-            className="p-3 bg-red-500/20 border border-red-500 rounded-md"
-          >
-            <h3 className="text-red-400 font-medium mb-1">
-              Please fix the following errors:
-            </h3>
-            <ul className="list-disc pl-5">
-              {Object.entries(errors).map(([field, message]) => (
-                <motion.li
-                  key={field}
-                  initial={{ opacity: 0, x: -5 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.15, delay: 0.05 }}
-                  className="text-red-400 text-sm"
-                >
-                  {message}
-                </motion.li>
-              ))}
-            </ul>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Error summary */}
+      <FormError errors={errors} visible={hasErrors} />
 
       {/* Navigation buttons */}
       <div className="flex justify-between">
-        <motion.button
-          disabled={isFirstStep}
+        <Button
+          variant="secondary"
           onClick={handlePrev}
-          variants={buttonVariants}
-          whileHover={isFirstStep ? "disabled" : "hover"}
-          whileTap={isFirstStep ? "disabled" : "tap"}
-          className={`px-4 py-2 rounded-md ${
-            isFirstStep
-              ? "bg-gray-600/40 text-gray-400 cursor-not-allowed"
-              : "bg-white/10 border border-white/20 text-white hover:bg-white/20"
-          }`}
+          disabled={isFirstStep || isLoading}
         >
           Back
-        </motion.button>
+        </Button>
 
         {isLastStep ? (
-          <motion.button
+          <Button
+            variant="success"
             onClick={handleSubmit}
-            variants={buttonVariants}
-            whileHover="hover"
-            whileTap="tap"
-            className="px-4 py-2 rounded-md bg-green-500 text-white"
+            disabled={isLoading}
+            isLoading={isLoading}
           >
-            Submit
-          </motion.button>
+            {isEditMode ? "Update Persona" : "Create Persona"}
+          </Button>
         ) : (
-          <motion.button
-            onClick={handleNext}
-            variants={buttonVariants}
-            whileHover="hover"
-            whileTap="tap"
-            className="px-4 py-2 rounded-md bg-purple-600 text-white"
-          >
+          <Button variant="primary" onClick={handleNext} disabled={isLoading}>
             Next
-          </motion.button>
+          </Button>
         )}
       </div>
     </div>

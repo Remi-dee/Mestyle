@@ -5,9 +5,8 @@ import {
   validateBasicInfo,
   validateStylePreferences,
   validateBodyProfile,
-} from "@/app/components/personalize/components/utils/validation";
-import { PERSONA_INITIAL_STATE } from "@/app/components/personalize/components/utils/FormConstants";
-
+} from "@/app/components/personalize/utils/validation";
+import { PERSONA_INITIAL_STATE } from "@/app/components/personalize/utils/FormConstants";
 
 export type PersonaDataType = typeof PERSONA_INITIAL_STATE;
 
@@ -49,6 +48,13 @@ const personaSlice = createSlice({
       for (const key in action.payload) {
         delete state.errors[key as keyof PersonaDataType];
       }
+    },
+
+    setFormData: (state, action: PayloadAction<Partial<PersonaDataType>>) => {
+      state.formData = {
+        ...state.formData,
+        ...action.payload,
+      };
     },
 
     setErrors: (
@@ -107,6 +113,7 @@ const personaSlice = createSlice({
 export const {
   updateField,
   updateFormData,
+  setFormData,
   setErrors,
   nextStep,
   resetForm,

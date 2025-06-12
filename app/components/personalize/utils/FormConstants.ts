@@ -1,6 +1,6 @@
 export const PERSONA_INITIAL_STATE = {
   // Basic Info - Step 1
-  displayName: "",
+  personaName: "",
   gender: "",
   ageGroup: "",
 
@@ -10,16 +10,15 @@ export const PERSONA_INITIAL_STATE = {
 
   // Body Profile - Step 3
   bodyShape: "",
-  skinTone: [] as string[],
+  skinTone: "",
   heightGroup: "",
 
   // Legacy fields (kept for backward compatibility)
-  uploadTitle: "",
-  description: "",
-  altText: "",
-  imageUpload: "",
+  //   uploadTitle: "",
+  //   description: "",
+  //   altText: "",
+  //   imageUpload: "",
 };
-
 
 // const PERSONA_INITIAL_STATE = {
 //   occasion: [],

@@ -4,6 +4,21 @@ import {
   baseQueryWithReauthLogic,
 } from "../../shared/baseQueryWithReauth";
 
+interface Style {
+  title: string;
+  description: string;
+  altText: string;
+  occasions: string[];
+  season: string;
+  categories: string[];
+  tags: string[];
+  priceRange: string;
+  imageUrl: string;
+  additionalImages: string[];
+  createdAt: string;
+  persona: string;
+}
+
 export const stylesApi = createApi({
   reducerPath: "stylesApi",
   baseQuery: baseQueryWithReauthLogic,
@@ -12,11 +27,17 @@ export const stylesApi = createApi({
     getRandomStyles: builder.query({
       query: () => "/styles/random",
     }),
-    createStyle: builder.mutation({
-      query: (newStyle) => ({
+    createStyle: builder.mutation<Style, FormData>({
+      query: (formData) => ({
         url: "/styles/create",
         method: "POST",
-        body: newStyle,
+        body: formData,
+        formData: true,
+        // Don't set Content-Type header, let the browser set it with the boundary
+        headers: {
+          // Remove Content-Type to let the browser set it with boundary
+          "Content-Type": undefined,
+        },
       }),
     }),
     getStyleById: builder.query({
