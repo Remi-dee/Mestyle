@@ -14,7 +14,7 @@ import { useDispatch } from "react-redux";
 import InputField from "../../ui/inputField/inputField";
 
 interface FormData {
-  userName: string;
+  username: string;
   email: string;
   password: string;
 }
@@ -24,7 +24,7 @@ function SignUp() {
   const dispatch = useDispatch();
   const [register, { isLoading }] = useRegisterMutation();
   const [formData, setFormData] = useState<FormData>({
-    userName: "",
+    username: "",
     email: "",
     password: "",
   });
@@ -38,8 +38,8 @@ function SignUp() {
   };
 
   const validateForm = () => {
-    const { userName, email, password } = formData;
-    if (!userName || !email || !password) {
+    const { username, email, password } = formData;
+    if (!username || !email || !password) {
       return "All fields are required.";
     }
     if (!/^\S+@\S+\.\S+$/.test(email)) {
@@ -129,8 +129,8 @@ function SignUp() {
               <div className="flex flex-col gap-3">
                 <InputField
                   label="Username"
-                  name="userName"
-                  value={formData.userName}
+                  name="username"
+                  value={formData.username}
                   onChange={handleChange}
                   placeholder="Enter your username"
                   required

@@ -93,7 +93,7 @@ function ProfilePage(): JSX.Element {
 
             {/* Profile Details */}
             <div className="text-center text-white px-6 py-4">
-              <h1 className="text-2xl font-bold">{profile?.userName}</h1>
+              <h1 className="text-2xl font-bold">{profile?.username}</h1>
               <p className="text-white/70 text-sm">
                 @{profile?.email.split("@")[0]}
               </p>

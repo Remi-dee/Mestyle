@@ -18,11 +18,10 @@ const CreatorPage = () => {
             and add details to inspire others.
           </p>
         </div>
-
         <CreateStyleForm />
-      </div>
-    </main>
-  );
-};
+        </div>
+      </main>
+    );
+  };
 
 export default CreatorPage;

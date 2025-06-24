@@ -1,6 +1,23 @@
 import { useGetRandomStylesQuery } from "@/app/redux/features/styleContent/styleApi";
 import StyleCard from "../styleComp/styleCard";
 
+interface Owner {
+  avatar: string;
+  name: string;
+  username: string;
+  profileImage: string;
+}
+
+interface StyleItem {
+  _id: string;
+  description: string;
+  imageUrl: string;
+  posterIcon: string;
+  posterName: string;
+  coverImage: string;
+  owner: Owner;
+}
+
 const staticItems = [
   {
     id: 1,
@@ -17,42 +34,72 @@ function StyleGrid(): JSX.Element {
   const { data, error, isLoading } = useGetRandomStylesQuery({});
 
   if (isLoading) {
-    return <div>Loading styles...</div>;
+    return (
+      <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 sm:gap-4 lg:gap-6">
+        {[...Array(8)].map((_, index) => (
+          <div key={index} className="animate-pulse">
+            <div className="aspect-[3/4] bg-black/20 rounded-[12px] sm:rounded-[16px] mb-2 sm:mb-3"></div>
+            <div className="h-3 bg-black/20 rounded w-3/4 mb-2"></div>
+            <div className="flex items-center space-x-2">
+              <div className="w-6 h-6 bg-black/20 rounded-full"></div>
+              <div className="h-2 bg-black/20 rounded w-1/4"></div>
+            </div>
+          </div>
+        ))}
+      </div>
+    );
   }
 
   if (error) {
-    return <div>Error fetching styles: {error.toString()}</div>;
-  }
-  const items = data || []; // Assuming the API response has a `styles` array
-  console.log(items);
-  return (
-    <section className="px-4">
-      <div className="columns-2 md:columns-3 lg:columns-4 gap-6">
-        {items.map(
-          ({
-            _id,
-            description,
-            imageUrl,
-            posterIcon,
-            posterName,
-            ownerImage,
-            ownerName,
-          }) => (
-            <StyleCard
-              key={_id}
-              id={_id}
-              description={description}
-              image={
-                imageUrl.includes("example")
-                  ? "/images/medium-shot-woman-with-yellow-suit-2.png"
-                  : imageUrl
-              }
-              ownerAvatar={ownerImage}
-              ownerName={ownerName}
-            />
-          )
-        )}
+    return (
+      <div className="text-center py-8 sm:py-12">
+        <p className="text-white/60 text-sm sm:text-base">
+          Unable to load styles. Please try again later.
+        </p>
       </div>
+    );
+  }
+
+  const items = (data || []) as StyleItem[];
+
+  return (
+    <section className="px-2 sm:px-4">
+      <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 sm:gap-4 lg:gap-6 auto-rows-max">
+        {items.map(({ _id, description, coverImage, owner }) => (
+          <StyleCard
+            key={_id}
+            id={_id}
+            description={description}
+            image={
+              coverImage?.includes("example")
+                ? "/images/medium-shot-woman-with-yellow-suit-2.png"
+                : coverImage
+            }
+            ownerAvatar={owner?.profileImage}
+            ownerName={owner?.username}
+          />
+        ))}
+      </div>
+
+      {/* Empty State */}
+      {items.length === 0 && (
+        <div className="text-center py-8 sm:py-12">
+          <div className="max-w-md mx-auto px-4">
+            <h3 className="text-lg sm:text-xl font-medium text-white mb-2">
+              No styles found
+            </h3>
+            <p className="text-white/60 text-sm sm:text-base mb-6">
+              Be the first to create and share your style inspiration!
+            </p>
+            <button
+              onClick={() => (window.location.href = "/creator")}
+              className="px-4 sm:px-6 py-2 sm:py-3 bg-burgundy-600 text-white rounded-[20px] hover:bg-burgundy-700 transition-colors text-sm sm:text-base"
+            >
+              Create Your First Style
+            </button>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

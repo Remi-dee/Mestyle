@@ -1,17 +1,16 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { oregano } from "../../../localFonts/oregano/oregano";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import Button from "../../ui/button/Button";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { navData } from "./utils/navData";
 import { useTheme } from "next-themes";
 import userLight from "@/public/icons/user.png";
 import userDark from "@/public/icons/userDark.png";
 import Image from "next/image";
-import Filter from "@/public/icons/filter.svg";
 import Search from "@/public/icons/search.svg";
 import { useGetCurrentUserQuery } from "@/app/redux/features/user/user.api";
 import {
@@ -19,127 +18,323 @@ import {
   MdOutlineKeyboardArrowUp,
 } from "react-icons/md";
 import ProfileDropdown from "./ProfileDown";
+
 interface NavBarProps {
   className?: string;
   isExplore?: boolean;
   isProfile?: boolean;
 }
 
+interface MobileNavProps {
+  openHamburger: boolean;
+  setOpenHamburger: (value: boolean) => void;
+  pathname: string;
+  router: ReturnType<typeof useRouter>;
+}
+
+interface SearchBarProps {
+  isSearch: boolean;
+  setIsSearch: (value: boolean) => void;
+}
+
+interface ProfileSectionProps {
+  signedInProfile: {
+    username: string;
+    profileImage: string;
+    email: string;
+  } | null;
+  dropdownOpen: boolean;
+  setDropdownOpen: (value: boolean) => void;
+  router: ReturnType<typeof useRouter>;
+}
+
+// Mobile Navigation Component
+const MobileNav: React.FC<MobileNavProps> = ({
+  openHamburger,
+  setOpenHamburger,
+  pathname,
+  router,
+}) => {
+  return (
+    <nav className="block lg:hidden font-lexend">
+      <div className="flex backdrop-blur-md bg-opacity-50 justify-between items-center py-4  dark:bg-grayDark text-white mb-[50px] sticky top-0 z-[200]">
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          aria-label="Logo"
+          title="Logo"
+          onClick={(e) => {
+            e.preventDefault();
+            router.push("/");
+          }}
+          style={oregano.style}
+          className="text-3xl bg-gradient-to-r from-transparent to-white text-transparent bg-clip-text"
+        >
+          MeStyle
+        </motion.button>
+        <motion.button
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          onClick={() => setOpenHamburger(!openHamburger)}
+          className="z-[250] p-2 rounded-full hover:bg-white/10 transition-colors"
+          aria-label={openHamburger ? "Close menu" : "Open menu"}
+        >
+          {openHamburger ? (
+            <p className="text-xl font-bold">X</p>
+          ) : (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="29"
+              height="23"
+              viewBox="0 0 29 23"
+              fill="none"
+              aria-hidden="true"
+              className="transition-transform duration-300"
+            >
+              <path
+                d="M1 1.12891H28"
+                stroke="white"
+                strokeWidth="2"
+                strokeLinecap="round"
+              />
+              <path
+                d="M1 11.5H28"
+                stroke="white"
+                strokeWidth="2"
+                strokeLinecap="round"
+              />
+              <path
+                d="M1 21.873H28"
+                stroke="white"
+                strokeWidth="2"
+                strokeLinecap="round"
+              />
+            </svg>
+          )}
+        </motion.button>
+      </div>
+      <AnimatePresence>
+        {openHamburger && (
+          <motion.div
+            initial={{ x: "-100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "-100%" }}
+            transition={{ type: "spring", damping: 20 }}
+            className="fixed top-0 left-0 z-[300] h-screen w-10/12 overflow-hidden backdrop-blur-md bg-opacity-80 bg-grayDark text-white lg:hidden"
+          >
+            <div className="relative h-full">
+              <ul className="flex flex-col items-center justify-center h-screen space-y-6 text-sm font-bold uppercase">
+                {navData.map(({ href, id, text }) => (
+                  <motion.li
+                    key={id}
+                    whileHover={{ scale: 1.1 }}
+                    className={`${
+                      pathname === href
+                        ? "text-white border-b border-b-white"
+                        : ""
+                    }`}
+                  >
+                    <Link href={href}>{text}</Link>
+                  </motion.li>
+                ))}
+              </ul>
+              <div className="absolute bottom-8 left-0 right-0 mx-auto space-y-4 text-sm text-bold px-4">
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Button
+                    variant="secondary"
+                    onClick={() => router.push("/?view=signin")}
+                    className="w-full"
+                  >
+                    Login
+                  </Button>
+                </motion.div>
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Button variant="primary" className="w-full">
+                    Get Started
+                  </Button>
+                </motion.div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </nav>
+  );
+};
+
+// Search Component
+const SearchBar: React.FC<SearchBarProps> = ({ isSearch, setIsSearch }) => {
+  return (
+    <div
+      className={`${
+        isSearch && "flex-grow"
+      } justify-between px-3 py-[4px] text-white bg-gray-800 bg-opacity-5 rounded-[15px] items-center gap-2.5 inline-flex`}
+    >
+      {isSearch ? (
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => setIsSearch(false)}
+            className="px-2 py-0.5 bg-black rounded-full text-white hover:bg-gray-950"
+            aria-label="Close search"
+          >
+            ✕
+          </button>
+          <input
+            name="search"
+            id="search"
+            type="text"
+            autoComplete="on"
+            className="px-4 py-3 text-white bg-gray-800 bg-opacity-5 rounded-[10px] border-none font-normal w-[1108px] leading-normal"
+            placeholder="Search your next outfit..."
+          />
+        </div>
+      ) : (
+        <button
+          className="bg-transparent w-[30px] rounded-full p-2 border border-zinc-600"
+          onClick={() => setIsSearch(true)}
+          aria-label="Open search"
+        >
+          <Image src={Search} alt="Search" className="w-[25px] h-auto" />
+        </button>
+      )}
+    </div>
+  );
+};
+
+// Profile Component
+const ProfileSection: React.FC<ProfileSectionProps> = ({
+  signedInProfile,
+  dropdownOpen,
+  setDropdownOpen,
+  router,
+}) => {
+  return (
+    <div
+      className="relative flex items-center cursor-pointer border-2 border-zinc-600 px-2 py-1 rounded-full hover:bg-zinc-800 transition-all duration-300"
+      onMouseEnter={() => setDropdownOpen(true)}
+      onMouseLeave={() => setDropdownOpen(false)}
+    >
+      {signedInProfile?.profileImage ? (
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={() => router.push("/profile")}
+          aria-label="Go to profile"
+          className="overflow-hidden rounded-full"
+        >
+          <Image
+            src={signedInProfile.profileImage}
+            alt="Profile Image"
+            width={30}
+            height={30}
+            className="rounded-full border border-zinc-600 transition-transform duration-300 hover:scale-110"
+          />
+        </motion.button>
+      ) : (
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          aria-label="Default profile"
+          className="overflow-hidden rounded-full"
+        >
+          <div className="relative p-2 w-[40px] h-[40px] rounded-full border border-zinc-600 bg-zinc-800/50">
+            <Image
+              src={userLight}
+              alt="Default profile icon"
+              width={0}
+              height={0}
+              className="absolute w-[25px] bottom-1 left-[6px] transition-transform duration-300 hover:scale-110"
+            />
+          </div>
+        </motion.button>
+      )}
+      <motion.div
+        animate={{ rotate: dropdownOpen ? 180 : 0 }}
+        transition={{ duration: 0.3 }}
+      >
+        {dropdownOpen ? (
+          <MdOutlineKeyboardArrowUp
+            className="ml-2 text-gray-500"
+            size={18}
+            aria-hidden="true"
+          />
+        ) : (
+          <MdOutlineKeyboardArrowDown
+            className="ml-2 text-gray-500"
+            size={18}
+            aria-hidden="true"
+          />
+        )}
+      </motion.div>
+      <AnimatePresence>
+        {dropdownOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 10 }}
+            transition={{ duration: 0.2 }}
+          >
+            <ProfileDropdown
+              username={signedInProfile?.username || ""}
+              profileImage={signedInProfile?.profileImage || ""}
+              email={signedInProfile?.email || ""}
+              onLogout={() => {
+                console.log("Logout clicked");
+                // Handle logout logic here
+              }}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+};
+
 function NavBar({ className, isExplore, isProfile }: NavBarProps): JSX.Element {
-  const { theme, setTheme } = useTheme();
+  const { theme } = useTheme();
   const [isSearch, setIsSearch] = useState<boolean>(false);
   const [openHamburger, setOpenHamburger] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const openMobileNav = () => {
-    setOpenHamburger((prevIsOpen) => !prevIsOpen);
-  };
   const router = useRouter();
   const pathname = usePathname();
 
-  const {
-    data: signedInProfile,
-    isLoading: signedInLoading,
-    error: signedInError,
-  } = useGetCurrentUserQuery({});
+  const { data: signedInProfile } = useGetCurrentUserQuery({});
+
+  // Close mobile menu when route changes
+  useEffect(() => {
+    setOpenHamburger(false);
+  }, [pathname]);
+
   return (
     <>
-      {/* Mobile View */}
-      <nav className="block lg:hidden font-lexend">
-        <div className="flex backdrop-blur-md  bg-opacity-50 justify-between items-center py-4 px-6 dark:bg-grayDark text-white mb-[50px]">
-          <button
-            aria-label="Logo"
-            title="Logo"
-            onClick={(e) => {
-              e.preventDefault();
-              router.push("/");
-            }}
-            style={oregano.style}
-            className=" text-3xl bg-gradient-to-r from-transparent to-white text-transparent bg-clip-text"
-          >
-            MeStyle
-          </button>
-          <button onClick={openMobileNav} className="z-30">
-            {openHamburger ? (
-              <p className="text-xl font-bold">X</p>
-            ) : (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="29"
-                height="23"
-                viewBox="0 0 29 23"
-                fill="none"
-              >
-                <path
-                  d="M1 1.12891H28"
-                  stroke="white"
-                  stroke-width="2"
-                  strokeLinecap="round"
-                />
-                <path
-                  d="M1 11.5H28"
-                  stroke="white"
-                  stroke-width="2"
-                  strokeLinecap="round"
-                />
-                <path
-                  d="M1 21.873H28"
-                  stroke="white"
-                  stroke-width="2"
-                  strokeLinecap="round"
-                />
-              </svg>
-            )}
-          </button>
-        </div>
-        {openHamburger && (
-          <div className="fixed top-0 left-0 z-[100%] h-screen w-10/12 overflow-hidden backdrop-blur-md  bg-opacity-80 bg-grayDark text-white lg:hidden">
-            <ul className="flex flex-col items-center justify-center h-screen space-y-4 text-sm font-bold uppercase">
-              {navData.map(({ href, id, text }) => (
-                <li
-                  key={id}
-                  className={`${
-                    pathname === href
-                      ? "text-white border-b border-b-white"
-                      : ""
-                  }`}
-                >
-                  <motion.div whileHover={{ scale: 1.1 }}>
-                    <Link href={href}>{text}</Link>
-                  </motion.div>
-                </li>
-              ))}
-            </ul>
-            <div className="mx-auto space-y-4 text-sm text-bold">
-              <Button
-                variant="secondary"
-                onClick={() => {
-                  router.push("/?view=signin");
-                }}
-              >
-                {" "}
-                Login
-              </Button>
-              <Button variant="primary">Get Started</Button>
-            </div>
-          </div>
-        )}
-      </nav>
-
-      {/* Web View */}
+      <MobileNav
+        openHamburger={openHamburger}
+        setOpenHamburger={setOpenHamburger}
+        pathname={pathname}
+        router={router}
+      />
 
       <nav
         className={`hidden ${
           theme !== "dark" ? "bg-transparent" : ""
-        } sticky backdrop-blur-md  bg-opacity-50 top-0 z-[150] mx-auto  py-6 lg:flex items-center justify-between bg-grayDark mb-[50px] ${className}`}
+        } sticky backdrop-blur-md bg-opacity-50 top-0 z-[150] mx-auto py-6 lg:flex items-center justify-between bg-grayDark mb-[50px] ${className}`}
       >
-        <p
+        <motion.p
+          whileHover={{ scale: 1.05 }}
           style={oregano.style}
           className={`text-4xl ${
             theme !== "dark" ? "to-black" : "to-white"
-          } bg-gradient-to-r from-transparent to-white text-transparent bg-clip-text pl-5`}
+          } bg-gradient-to-r from-transparent to-white text-transparent bg-clip-text pl-5 cursor-pointer`}
+          onClick={() => router.push("/")}
         >
           MeStyle
-        </p>
+        </motion.p>
 
         {isExplore && (
           <input
@@ -147,277 +342,76 @@ function NavBar({ className, isExplore, isProfile }: NavBarProps): JSX.Element {
             id="search"
             type="text"
             autoComplete="on"
-            className=" px-4 py-3  text-white  bg-gray-100 bg-opacity-5  border-none  font-normal w-[60%] leading-normal  "
+            className="px-4 py-3 text-white bg-gray-100 bg-opacity-5 border-none font-normal w-[60%] leading-normal"
             placeholder="Search for next wedding outfit inspiration ..."
           />
         )}
 
         {!isExplore && !isProfile && (
-          <ul className="flex space-x-4 text-white">
+          <ul className="flex space-x-8 text-white">
             {navData.map(({ href, id, text }) => (
-              <li
+              <motion.li
                 key={id}
-                className={`${
+                whileHover={{ scale: 1.1 }}
+                className={`relative ${
                   pathname === href
-                    ? "text-secondary-100 border-b border-b-white"
-                    : ""
+                    ? "text-secondary-100 after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-white after:transform after:scale-x-100 after:transition-transform after:duration-300"
+                    : "after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-white after:transform after:scale-x-0 after:transition-transform after:duration-300 hover:after:scale-x-100"
                 }`}
               >
-                <motion.div whileHover={{ scale: 1.1 }}>
-                  <Link href={href}>{text}</Link>
-                </motion.div>
-              </li>
+                <Link href={href}>{text}</Link>
+              </motion.li>
             ))}
           </ul>
         )}
+
         {!isProfile && (
           <div className="flex items-center justify-center space-x-6 text-sm text-bold">
-            <Button
-              variant="secondary"
-              onClick={() => {
-                router.push("/?view=signin");
-              }}
-            >
-              Login
-            </Button>
-            <Button
-              variant="primary"
-              onClick={() => {
-                router.push("/?view=signup");
-              }}
-            >
-              Get Started
-            </Button>
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Button
+                variant="secondary"
+                onClick={() => router.push("/?view=signin")}
+              >
+                Login
+              </Button>
+            </motion.div>
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Button
+                variant="primary"
+                onClick={() => router.push("/?view=signup")}
+              >
+                Get Started
+              </Button>
+            </motion.div>
           </div>
         )}
 
         {isProfile && (
           <div className="flex justify-end px-5 gap-4">
-            <div
-              className={`${
-                isSearch && "flex-grow"
-              } justify-between px-3 py-[4px] text-white bg-gray-800 bg-opacity-5  rounded-[15px] items-center gap-2.5 inline-flex`}
-            >
-              {isSearch && (
-                <div className="flex items-center gap-2">
-                  <button
-                    onClick={() => setIsSearch(false)}
-                    className="px-2 py-0.5 bg-black rounded-full text-white hover:bg-gray-950"
-                    aria-label="Close search"
-                  >
-                    ✕
-                  </button>
-                  <input
-                    name="search"
-                    id="search"
-                    type="text"
-                    autoComplete="on"
-                    className="px-4 py-3 text-white bg-gray-800 bg-opacity-5 rounded-[10px] border-none  font-normal w-[1108px] leading-normal"
-                    placeholder="Search your next outfit..."
-                  />
-                </div>
-              )}
-
-              {!isSearch && (
-                <div>
-                  <button
-                    className="bg-transparent w-[30px] rounded-full p-2 border border-zinc-600 "
-                    onClick={() => setIsSearch(true)}
-                  >
-                    {" "}
-                    <Image
-                      src={Search}
-                      alt="Search"
-                      className="w-[25px] h-auto  "
-                    />
-                  </button>
-                </div>
-              )}
-            </div>
-
-            {/* <button
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            >
-              {theme === "dark" ? (
-                <div className="relative p-6 rounded-full border border-zinc-600">
-                  <svg
-                    width="30"
-                    height="30"
-                    viewBox="0 0 30 30"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="absolute bottom-1 left-[10px]"
-                  >
-                    <g clip-path="url(#clip0_439_374)">
-                      <path
-                        d="M15 21.25C18.4518 21.25 21.25 18.4518 21.25 15C21.25 11.5482 18.4518 8.75 15 8.75C11.5482 8.75 8.75 11.5482 8.75 15C8.75 18.4518 11.5482 21.25 15 21.25Z"
-                        stroke="white"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                      <path
-                        d="M15 1.25V3.75"
-                        stroke="white"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                      <path
-                        d="M15 26.25V28.75"
-                        stroke="white"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                      <path
-                        d="M5.27499 5.27539L7.04999 7.05039"
-                        stroke="white"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                      <path
-                        d="M22.95 22.9492L24.725 24.7242"
-                        stroke="white"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                      <path
-                        d="M1.25 15H3.75"
-                        stroke="white"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                      <path
-                        d="M26.25 15H28.75"
-                        stroke="white"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                      <path
-                        d="M5.27499 24.7242L7.04999 22.9492"
-                        stroke="white"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                      <path
-                        d="M22.95 7.05039L24.725 5.27539"
-                        stroke="white"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                    </g>
-                    <defs>
-                      <clipPath id="clip0_439_374">
-                        <rect width="30" height="30" fill="white" />
-                      </clipPath>
-                    </defs>
-                  </svg>
-                </div>
-              ) : (
-                <div className="relative p-6 rounded-full border border-zinc-600">
-                  <svg
-                    width="32"
-                    height="32"
-                    viewBox="0 0 32 32"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="absolute bottom-1 left-[10px]"
-                  >
-                    <path
-                      d="M27.9239 25.1626C29.6703 22.9038 30.7373 20.1944 31 17.3514C28.7481 19.0159 25.9736 19.8168 23.1811 19.6086C20.3885 19.4003 17.7635 18.1967 15.7834 16.2166C13.8033 14.2365 12.5997 11.6115 12.3914 8.81894C12.1832 6.02641 12.9841 3.25189 14.6486 1C11.8056 1.26273 9.09619 2.32972 6.83743 4.07611C4.57867 5.82251 2.86399 8.17607 1.89402 10.8614C0.924058 13.5468 0.738931 16.4528 1.3603 19.2395C1.98167 22.0262 3.38384 24.5784 5.40274 26.5973C7.42164 28.6162 9.97376 30.0183 12.7605 30.6397C15.5472 31.2611 18.4532 31.0759 21.1386 30.106C23.8239 29.136 26.1775 27.4213 27.9239 25.1626Z"
-                      stroke="black"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                </div>
-              )}
-            </button> */}
-
-            {theme == "dark" ? (
-              <>
-                <div
-                  className="relative flex items-center cursor-pointer border-2 border-zinc-600 px-2 py-1 rounded-full hover:bg-zinc-800 transition-all "
-                  onMouseEnter={() => setDropdownOpen(true)}
-                  onMouseLeave={() => setDropdownOpen(false)}
-                >
-                  {" "}
-                  {signedInProfile?.profileImage ? (
-                    <button
-                      onClick={() => {
-                        router.push("/profile");
-                      }}
-                    >
-                      {" "}
-                      <Image
-                        src={signedInProfile.profileImage}
-                        alt="Profile Image"
-                        width={30}
-                        height={30}
-                        className="  rounded-full border border-zinc-600"
-                      />
-                    </button>
-                  ) : (
-                    <button>
-                      {" "}
-                      <div className="relative p-2 w-[40px] h-[40px] rounded-full border border-zinc-600">
-                        {" "}
-                        <Image
-                          src={userLight}
-                          alt=""
-                          width={0}
-                          height={0}
-                          className="absolute w-[25px] bottom-1 left-[6px]"
-                        />
-                      </div>
-                    </button>
-                  )}
-                  {dropdownOpen ? (
-                    <MdOutlineKeyboardArrowUp
-                      className="ml-2 text-gray-500"
-                      size={18}
-                    />
-                  ) : (
-                    <MdOutlineKeyboardArrowDown
-                      className="ml-2 text-gray-500"
-                      size={18}
-                    />
-                  )}
-                  {/* Dropdown Menu */}
-                  {dropdownOpen && (
-                    <ProfileDropdown
-                      username={signedInProfile.username}
-                      profileImage={signedInProfile.profileImage}
-                      email={signedInProfile.email}
-                      onLogout={() => {
-                        console.log("Logout clicked");
-                        // Handle logout logic here
-                      }}
-                    />
-                  )}
-                </div>
-              </>
+            <SearchBar isSearch={isSearch} setIsSearch={setIsSearch} />
+            {theme === "dark" ? (
+              <ProfileSection
+                signedInProfile={signedInProfile}
+                dropdownOpen={dropdownOpen}
+                setDropdownOpen={setDropdownOpen}
+                router={router}
+              />
             ) : (
-              <button>
-                {" "}
-                <div className="relative p-6 w-3 h-auto rounded-full border border-zinc-600">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                aria-label="Default profile"
+              >
+                <div className="relative p-6 w-3 h-auto rounded-full border border-zinc-600 hover:bg-zinc-800/50 transition-colors">
                   <Image
                     src={userDark}
-                    alt=""
+                    alt="Default profile icon"
                     width={0}
                     height={0}
                     className="absolute bottom-1 left-[8px]"
                   />
                 </div>
-              </button>
+              </motion.button>
             )}
           </div>
         )}
