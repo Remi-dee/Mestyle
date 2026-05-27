@@ -1,8 +1,41 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
 
-First, run the development server:
+# Mestyle
+## Description
+Mestyle is a fashion tech app that aims to revolutionize the way individuals approach fashion and style. By offering personalized outfit recommendations, diverse and relatable fashion content, and inclusivity for all users, Mestyle stands out as a unique and user-centric platform.
+
+This document is to help developers understand the platform and the development requirements of the project.
+The document will be updated from time to time to meet project expectations and standards.
+
+# DEVELOPMENT
+During the development of the project, branches will be created for specific features/components/function development.
+PR will be created against this issue and will be merged to the `development` branch of the repository.
+
+To find new issues please visit [Projects](https://github.com/Remi-dee/Mestyle/projects?query=is%3Aopen) or visit the [Issue](https://github.com/Remi-dee/Mestyle/issues)  tab.
+A developer can request for clarification of an issue before going on so to ensure full compliance with development expectations and requirements.
+
+### FOLDERS AND NAMING STYLE
+
+The folder structure is as follows
+
+- public
+- public/assets : `For images used in the project`
+- app `For route pages`
+- app/components `for app components`
+- composables `for app functions`
+
+Folder naming would be responsibility of the collaborators.
+
+### FUNCTIONS AND EXPORT STYLE
+
+The naming convention for components files would be
+`[name]_comp.js` eg. addButton_comp.js, highlightTree_comp.js
+
+We'll be using the single file export system for our components and page exports,
+
+We'll also be using regular javascript function to define component
+
+### RUNNING SERVER
 
 ```bash
 npm run dev
@@ -10,27 +43,11 @@ npm run dev
 yarn dev
 # or
 pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### PR GUIDELINES
+A PR should request a reviewer once ready for review
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.

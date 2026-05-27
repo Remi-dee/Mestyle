@@ -1,0 +1,9 @@
+/* Add this to your CSS */
+.scrollbar-hidden::-webkit-scrollbar {
+  width: 0; /* Remove scrollbar width */
+  background-color: transparent; /* Optional: Set a background color if you want */
+}
+
+.scrollbar-hidden {
+  scrollbar-width: none; /* Firefox */
+}

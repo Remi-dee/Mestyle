@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="400" height="600" viewBox="0 0 400 600" xmlns="http://www.w3.org/2000/svg">
+  <!-- This is a sample silhouette template that can be modified for each body shape -->
+  <!-- For production, these should be refined by a designer and exported as PNG files -->
+  
+  <!-- Sample silhouette - modify path for each body type -->
+  <path 
+    d="M200,60 
+       C240,60 260,90 260,120 
+       C260,150 250,160 245,180 
+       C240,200 235,210 235,240 
+       C235,270 245,310 235,350 
+       C225,390 210,410 200,450 
+       C190,410 175,390 165,350 
+       C155,310 165,270 165,240 
+       C165,210 160,200 155,180 
+       C150,160 140,150 140,120 
+       C140,90 160,60 200,60 Z"
+    fill="#4A3933" 
+    stroke="#4A3933" 
+    stroke-width="2"/>
+    
+  <!-- Head shape -->
+  <circle cx="200" cy="40" r="30" fill="#4A3933"/>
+</svg> 
