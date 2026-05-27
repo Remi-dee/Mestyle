@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import google from "../../../public/icons/Google.png";
 import arrowBack from "@/public/icons/arrowBack.png";
-import Button from "../ui/button/button";
+import Button from "../ui/button/Button";
 function SuccessMessage() {
   return (
     <div className="flex pb-4 relative font-lexend text-center">

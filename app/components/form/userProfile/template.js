@@ -1,7 +1,7 @@
 "use client";
 
 import useFormContext from "@/hooks/userProfile/useFormContext";
-import Button from "@/app/components/ui/button/button";
+import Button from "@/app/components/ui/button/Button";
 import Overlay from "@/app/components/ui/overlay/template";
 import FormSelector from "./utils/formSelector";
 
