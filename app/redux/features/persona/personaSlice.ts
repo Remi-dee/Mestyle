@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction, Draft } from "@reduxjs/toolkit";
 
 import { RootState } from "../../store";
 import {
@@ -27,7 +27,7 @@ const personaSlice = createSlice({
   initialState,
   reducers: {
     updateField: <K extends keyof PersonaDataType>(
-      state,
+      state: Draft<personaState>,
       action: PayloadAction<{ name: K; value: PersonaDataType[K] }>
     ) => {
       const { name, value } = action.payload;

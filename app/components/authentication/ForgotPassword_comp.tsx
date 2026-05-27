@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import google from "../../../public/icons/Google.png";
 import arrowBack from "@/public/icons/arrowBack.png";
-import Button from "../ui/button/button";
+import Button from "../ui/button/Button";
 function ForgotPassword() {
   return (
     <form>
@@ -72,8 +72,8 @@ function ForgotPassword() {
 
             <div className="bg-white absolute top-0 left-0 w-[40px] h-12 flex items-center justify-center ">
               <Image
-                width={null}
-                height={null}
+                width={10}
+                height={25}
                 alt="Sign in with Google"
                 src={arrowBack}
                 className="w-[10px] h-[25px]"

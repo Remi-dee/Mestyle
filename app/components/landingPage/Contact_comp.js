@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "../ui/button/button";
+import Button from "../ui/button/Button";
 
 import TextSpan from "@/app/composables/textSpan";
 import dataSets from "@/app/composables/textData";
