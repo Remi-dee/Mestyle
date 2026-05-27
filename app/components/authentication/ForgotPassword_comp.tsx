@@ -72,8 +72,8 @@ function ForgotPassword() {
 
             <div className="bg-white absolute top-0 left-0 w-[40px] h-12 flex items-center justify-center ">
               <Image
-                width={null}
-                height={null}
+                width={10}
+                height={25}
                 alt="Sign in with Google"
                 src={arrowBack}
                 className="w-[10px] h-[25px]"

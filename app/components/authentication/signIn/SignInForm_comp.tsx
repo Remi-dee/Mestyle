@@ -8,7 +8,6 @@ import arrowBack from "@/public/icons/arrowBack.png";
 import waterMark from "@/public/icons/waterMark.png";
 import Button from "../../ui/button/Button";
 import { handleSignIn } from "./util/handleSignin";
-import { useAuthContext } from "@/app/composables/authContext";
 import InputField from "../../ui/inputField/inputField";
 import { useLoginMutation } from "@/app/redux/features/auth/authApi";
 import { useDispatch } from "react-redux";

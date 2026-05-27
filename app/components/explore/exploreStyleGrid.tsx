@@ -23,12 +23,12 @@ function StyleGrid(): JSX.Element {
   if (error) {
     return <div>Error fetching styles: {error.toString()}</div>;
   }
-  const items = data || []; // Assuming the API response has a `styles` array
+  const items: { _id: string; description: string; imageUrl: string; ownerAvatar: string; ownerName: string }[] = data || [];
   console.log(items);
   return (
     <section>
       <div className="relative grid grid-flow-row-dense md:grid-cols-2 lg:grid-cols-4 gap-x-[30px] gap-y-[80px]">
-        {items.map(({ _id, description, imageUrl, posterIcon, posterName }) => (
+        {items.map(({ _id, description, imageUrl, ownerAvatar, ownerName }) => (
           <StyleCard
             key={_id}
             id={_id}
@@ -38,8 +38,8 @@ function StyleGrid(): JSX.Element {
                 ? "/images/medium-shot-woman-with-yellow-suit-2.png"
                 : imageUrl
             }
-            posterIcon={posterIcon}
-            posterName={posterName}
+            ownerAvatar={ownerAvatar}
+            ownerName={ownerName}
           />
         ))}
       </div>

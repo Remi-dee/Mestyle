@@ -7,7 +7,7 @@ export const teamApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.NEXT_PUBLIC_BASE_URL, // your base URL
     prepareHeaders: (headers, { getState }) => {
-      const token = (getState() as RootState).auth.accessToken;
+      const token = (getState() as RootState).auth.access_token;
       if (token) {
         headers.set("Authorization", `Bearer ${token}`);
       }

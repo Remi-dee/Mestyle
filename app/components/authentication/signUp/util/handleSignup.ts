@@ -16,21 +16,21 @@ const HandleSignUp = () => {
     try {
       const response = await register({ username, email, password }).unwrap();
 
-      if (response && response.accessToken) {
+      if (response && response.access_token) {
         dispatch(
           setCredentials({
             user: { email },
-            accessToken: response.accessToken,
+            accessToken: response.access_token,
           })
         );
         console.log("User registered and state updated:", response);
         return { success: true };
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error during registration:", error);
       return {
         success: false,
-        error: error.data?.message || "Registration failed",
+        error: error?.data?.message || "Registration failed",
       };
     }
   };

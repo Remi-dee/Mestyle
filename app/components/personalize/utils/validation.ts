@@ -172,7 +172,7 @@ function removeEmptyErrors(errors: ValidationErrors) {
 // Step 1: Basic Info (Persona Name, Gender, Age Group)
 export function validateBasicInfo(data: CreatorFormData): ValidationErrors {
   console.log("Running basic info validation with data:", JSON.stringify(data));
-  const chain = new PersonaNameValidator(new AgeGroupValidator(null));
+  const chain = new PersonaNameValidator(new AgeGroupValidator(undefined));
 
   const errors: ValidationErrors = {};
   chain.validate(data, errors);
@@ -186,7 +186,7 @@ export function validateStylePreferences(
   data: CreatorFormData
 ): ValidationErrors {
   console.log("Running style preferences validation");
-  const chain = new OccasionValidator(new ColorPreferenceValidator(null));
+  const chain = new OccasionValidator(new ColorPreferenceValidator(undefined));
   const errors: ValidationErrors = {};
   chain.validate(data, errors);
   removeEmptyErrors(errors);
@@ -197,7 +197,7 @@ export function validateStylePreferences(
 export function validateBodyProfile(data: CreatorFormData): ValidationErrors {
   console.log("Running body profile validation");
   const chain = new BodyShapeValidator(
-    new SkinToneValidator(new HeightGroupValidator(null))
+    new SkinToneValidator(new HeightGroupValidator(undefined))
   );
   const errors: ValidationErrors = {};
   chain.validate(data, errors);
