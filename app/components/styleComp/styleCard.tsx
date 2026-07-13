@@ -12,6 +12,8 @@ interface StyleCardProps {
 
   ownerAvatar: string;
   ownerName: string;
+  matchScore?: number | null;
+  matchReasons?: string[];
 }
 const StyleCard: React.FC<StyleCardProps> = ({
   id,
@@ -19,6 +21,8 @@ const StyleCard: React.FC<StyleCardProps> = ({
   image,
   ownerAvatar,
   ownerName: ownerUsername,
+  matchScore,
+  matchReasons = [],
 }) => {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -40,6 +44,28 @@ const StyleCard: React.FC<StyleCardProps> = ({
               isHovered ? "scale-105" : "scale-100"
             }`}
           />
+
+          {/* Match badge — the "why this matches you" differentiator */}
+          {typeof matchScore === "number" && (
+            <div className="absolute left-1.5 top-1.5 sm:left-2 sm:top-2 z-10 flex items-center gap-1 rounded-full bg-grayDark/80 backdrop-blur-sm border border-white/15 px-2 py-1">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+              <span className="text-burgundy-300 text-[10px] sm:text-xs font-bold">
+                {matchScore}%
+              </span>
+              <span className="text-white/70 text-[9px] sm:text-[10px] font-medium">
+                match
+              </span>
+            </div>
+          )}
+
+          {/* Top match reason chip */}
+          {matchReasons[0] && (
+            <div className="absolute right-1.5 top-1.5 sm:right-2 sm:top-2 z-10 max-w-[70%]">
+              <span className="block truncate rounded-md bg-burgundy-600/85 backdrop-blur-sm px-2 py-1 text-[9px] sm:text-[10px] font-semibold text-white">
+                {matchReasons[0]}
+              </span>
+            </div>
+          )}
 
           {/* Gradient Overlay */}
           <div

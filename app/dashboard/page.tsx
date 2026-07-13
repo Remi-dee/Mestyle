@@ -1,6 +1,6 @@
 "use client";
 
-import { useGetRandomStylesQuery } from "@/app/redux/features/styleContent/styleApi";
+import { useGetFeedQuery } from "@/app/redux/features/styleContent/styleApi";
 import Image from "next/image";
 import React, { useEffect } from "react";
 
@@ -15,7 +15,7 @@ import {
   isFetchBaseQueryError,
 } from "../composables/dashboard/errorHandler";
 const DashboardPage = () => {
-  const { data, error, isLoading, isError } = useGetRandomStylesQuery({});
+  const { data, error, isLoading, isError } = useGetFeedQuery({});
   const router = useRouter();
 
   // Redirect to sign-in if there's an authentication error

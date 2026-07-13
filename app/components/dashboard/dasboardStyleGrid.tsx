@@ -1,4 +1,4 @@
-import { useGetRandomStylesQuery } from "@/app/redux/features/styleContent/styleApi";
+import { useGetFeedQuery } from "@/app/redux/features/styleContent/styleApi";
 import StyleCard from "../styleComp/styleCard";
 
 interface Owner {
@@ -16,22 +16,18 @@ interface StyleItem {
   posterName: string;
   coverImage: string;
   owner: Owner;
+  matchScore: number | null;
+  matchReasons: string[];
 }
 
-const staticItems = [
-  {
-    id: 1,
-    styleImage: "/images/medium-shot-woman-with-yellow-suit-2.png",
-    description:
-      "Man on brown hat with oversized jacket street style, Man on brown hat with oversized jacket street style",
-    posterIcon: "/images/medium-shot-woman-with-yellow-suit-2.png",
-    posterName: "FashionMaker1",
-  },
-  // Additional items here
-];
+interface FeedResponse {
+  personalized: boolean;
+  persona: { id: string; name: string } | null;
+  items: StyleItem[];
+}
 
 function StyleGrid(): JSX.Element {
-  const { data, error, isLoading } = useGetRandomStylesQuery({});
+  const { data, error, isLoading } = useGetFeedQuery({});
 
   if (isLoading) {
     return (
@@ -60,25 +56,45 @@ function StyleGrid(): JSX.Element {
     );
   }
 
-  const items = (data || []) as StyleItem[];
+  const feed = (data || {}) as Partial<FeedResponse>;
+  const items = feed.items ?? [];
 
   return (
     <section className="px-2 sm:px-4">
+      {/* Active-persona pill — "who we're styling for" */}
+      {feed.personalized && feed.persona && (
+        <div className="mb-4 sm:mb-6 flex items-center gap-2">
+          <span className="inline-flex items-center gap-2 rounded-full bg-black/30 border border-white/15 px-3 py-1.5">
+            <span className="w-5 h-5 rounded-full bg-gradient-to-br from-burgundy-400 to-burgundy-800" />
+            <span className="text-white/70 text-xs sm:text-sm">
+              Styling for:{" "}
+              <span className="text-white font-semibold">
+                {feed.persona.name}
+              </span>
+            </span>
+          </span>
+        </div>
+      )}
+
       <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 sm:gap-4 lg:gap-6 auto-rows-max">
-        {items.map(({ _id, description, coverImage, owner }) => (
-          <StyleCard
-            key={_id}
-            id={_id}
-            description={description}
-            image={
-              coverImage?.includes("example")
-                ? "/images/medium-shot-woman-with-yellow-suit-2.png"
-                : coverImage
-            }
-            ownerAvatar={owner?.profileImage}
-            ownerName={owner?.username}
-          />
-        ))}
+        {items.map(
+          ({ _id, description, coverImage, owner, matchScore, matchReasons }) => (
+            <StyleCard
+              key={_id}
+              id={_id}
+              description={description}
+              image={
+                coverImage?.includes("example")
+                  ? "/images/medium-shot-woman-with-yellow-suit-2.png"
+                  : coverImage
+              }
+              ownerAvatar={owner?.profileImage}
+              ownerName={owner?.username}
+              matchScore={matchScore}
+              matchReasons={matchReasons}
+            />
+          ),
+        )}
       </div>
 
       {/* Empty State */}
