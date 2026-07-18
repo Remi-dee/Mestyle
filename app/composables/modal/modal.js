@@ -9,16 +9,14 @@ export function Modal({ onClose = () => {}, children }) {
       open={true}
       onClose={onClose}
       initialFocus={overlayRef}
-      className="fixed inset-0 z-[200] flex items-center justify-center"
+      className="fixed inset-0 z-[200] flex items-center justify-center p-4"
     >
       <Dialog.Overlay
         ref={overlayRef}
-        className="fixed inset-0 bg-gray-800/60"
+        className="fixed inset-0 bg-black/70 backdrop-blur-sm"
       />
-      <div className="relative flex items-center justify-center w-1/2">
-        <div className="max-h-screen overflow-y-auto scrollbar-hidden">
-          {children}
-        </div>
+      <div className="relative w-full max-w-md max-h-[90vh] overflow-y-auto scrollbar-hidden">
+        {children}
       </div>
     </Dialog>
   );
