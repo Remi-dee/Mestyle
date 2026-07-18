@@ -125,18 +125,25 @@ const LandingHero: React.FC = () => {
             Fits hourglass
           </motion.span>
 
-          {/* Scroll cue = middle stroke of the M + "keep scrolling" */}
-          <motion.a
+          {/* Scroll cue = middle stroke of the M + "keep scrolling".
+              Centering lives on the static <a> (Tailwind -translate-x-1/2); the
+              bob animates translateY on the inner span so it can't clobber the
+              horizontal centering transform. */}
+          <a
             href="#every-body"
             aria-label="Scroll to see more"
-            animate={{ y: [0, 7, 0] }}
-            transition={{ repeat: Infinity, duration: 1.9, ease: "easeInOut" }}
-            className="absolute bottom-[2%] left-1/2 z-[4] grid h-10 w-10 -translate-x-1/2 place-items-center rounded-full border border-white/15 bg-grayDark/70 text-burgundy-400 shadow-[0_10px_26px_-8px_rgba(201,74,113,0.75)] backdrop-blur-sm"
+            className="absolute bottom-[6%] left-1/2 z-[4] -translate-x-1/2"
           >
-            <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M6 9l6 6 6-6" />
-            </svg>
-          </motion.a>
+            <motion.span
+              animate={{ y: [0, 7, 0] }}
+              transition={{ repeat: Infinity, duration: 1.9, ease: "easeInOut" }}
+              className="grid h-10 w-10 place-items-center rounded-full border border-white/15 bg-grayDark/70 text-burgundy-400 shadow-[0_10px_26px_-8px_rgba(201,74,113,0.75)] backdrop-blur-sm"
+            >
+              <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M6 9l6 6 6-6" />
+              </svg>
+            </motion.span>
+          </a>
         </div>
       </div>
     </section>
