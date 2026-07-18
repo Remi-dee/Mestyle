@@ -91,7 +91,7 @@ const LandingHero: React.FC = () => {
             initial="hidden"
             animate="show"
             variants={fadeUp}
-            className="relative z-[1] mt-[7%] aspect-[116/190] flex-1 overflow-hidden rounded-2xl shadow-[0_24px_50px_-20px_rgba(0,0,0,0.7)] ring-1 ring-white/5"
+            className="relative z-[1] mt-[3%] aspect-[116/190] flex-1 overflow-hidden rounded-2xl shadow-[0_24px_50px_-20px_rgba(0,0,0,0.7)] ring-1 ring-white/5"
           >
             <Image src={heroCenter} alt="Creator look — city couple" fill className="object-cover object-top" sizes="(max-width:640px) 30vw, 150px" />
           </motion.div>
