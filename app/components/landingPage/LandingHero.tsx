@@ -72,8 +72,8 @@ const LandingHero: React.FC = () => {
           </p>
         </motion.div>
 
-        {/* M-collage */}
-        <div className="relative flex items-start justify-center gap-3">
+        {/* M-collage — fluid widths (aspect-ratio + flex) so it never overflows */}
+        <div className="relative mx-auto flex w-full max-w-[420px] items-start justify-center gap-2 sm:gap-3">
           <div className="pointer-events-none absolute inset-[-14%_-6%] z-0 bg-[radial-gradient(circle_at_50%_42%,rgba(201,74,113,0.26),transparent_62%)] blur-[8px]" />
 
           <motion.div
@@ -81,9 +81,9 @@ const LandingHero: React.FC = () => {
             initial="hidden"
             animate="show"
             variants={fadeUp}
-            className="relative z-[1] h-[248px] w-[120px] overflow-hidden rounded-2xl shadow-[0_24px_50px_-20px_rgba(0,0,0,0.7)] ring-1 ring-white/5 sm:h-[300px] sm:w-[150px] lg:h-[336px] lg:w-[164px]"
+            className="relative z-[1] aspect-[120/248] flex-1 overflow-hidden rounded-2xl shadow-[0_24px_50px_-20px_rgba(0,0,0,0.7)] ring-1 ring-white/5"
           >
-            <Image src={heroLeft} alt="Creator look — street style" fill className="object-cover object-top" sizes="164px" />
+            <Image src={heroLeft} alt="Creator look — street style" fill className="object-cover object-top" sizes="(max-width:640px) 30vw, 160px" />
           </motion.div>
 
           <motion.div
@@ -91,9 +91,9 @@ const LandingHero: React.FC = () => {
             initial="hidden"
             animate="show"
             variants={fadeUp}
-            className="relative z-[1] mt-[26px] h-[180px] w-[116px] overflow-hidden rounded-2xl shadow-[0_24px_50px_-20px_rgba(0,0,0,0.7)] ring-1 ring-white/5 sm:mt-[30px] sm:h-[210px] sm:w-[140px] lg:mt-[34px] lg:h-[224px] lg:w-[156px]"
+            className="relative z-[1] mt-[7%] aspect-[116/190] flex-1 overflow-hidden rounded-2xl shadow-[0_24px_50px_-20px_rgba(0,0,0,0.7)] ring-1 ring-white/5"
           >
-            <Image src={heroCenter} alt="Creator look — city couple" fill className="object-cover object-top" sizes="156px" />
+            <Image src={heroCenter} alt="Creator look — city couple" fill className="object-cover object-top" sizes="(max-width:640px) 30vw, 150px" />
           </motion.div>
 
           <motion.div
@@ -101,9 +101,9 @@ const LandingHero: React.FC = () => {
             initial="hidden"
             animate="show"
             variants={fadeUp}
-            className="relative z-[1] h-[248px] w-[120px] overflow-hidden rounded-2xl shadow-[0_24px_50px_-20px_rgba(0,0,0,0.7)] ring-1 ring-white/5 sm:h-[300px] sm:w-[150px] lg:h-[336px] lg:w-[164px]"
+            className="relative z-[1] aspect-[120/248] flex-1 overflow-hidden rounded-2xl shadow-[0_24px_50px_-20px_rgba(0,0,0,0.7)] ring-1 ring-white/5"
           >
-            <Image src={heroRight} alt="Creator look — bold & bright" fill className="object-cover object-top" sizes="164px" />
+            <Image src={heroRight} alt="Creator look — bold & bright" fill className="object-cover object-top" sizes="(max-width:640px) 30vw, 160px" />
           </motion.div>
 
           {/* Floating match chips */}
@@ -111,7 +111,7 @@ const LandingHero: React.FC = () => {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.5 }}
-            className="absolute left-[-6px] top-[38%] z-[3] inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-grayDark/80 px-2.5 py-1.5 text-xs font-bold text-white backdrop-blur-sm"
+            className="absolute left-0 top-[38%] z-[3] inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-grayDark/80 px-2 py-1 text-[11px] font-bold text-white backdrop-blur-sm sm:px-2.5 sm:py-1.5 sm:text-xs"
           >
             <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
             <span className="text-burgundy-300">94%</span> your vibe
@@ -120,7 +120,7 @@ const LandingHero: React.FC = () => {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.62 }}
-            className="absolute right-[-10px] top-[22%] z-[3] rounded-full border border-white/15 bg-grayDark/80 px-2.5 py-1.5 text-xs font-bold text-white backdrop-blur-sm"
+            className="absolute right-0 top-[22%] z-[3] rounded-full border border-white/15 bg-grayDark/80 px-2 py-1 text-[11px] font-bold text-white backdrop-blur-sm sm:px-2.5 sm:py-1.5 sm:text-xs"
           >
             Fits hourglass
           </motion.span>
