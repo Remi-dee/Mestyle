@@ -1,45 +1,73 @@
 import { useGetRandomStylesQuery } from "@/app/redux/features/styleContent/styleApi";
 import StyleCard from "../styleComp/styleCard";
 
-const staticItems = [
-  {
-    id: 1,
-    styleImage: "/images/medium-shot-woman-with-yellow-suit-2.png",
-    description:
-      "Man on brown hat with oversized jacket street style, Man on brown hat with oversized jacket street style",
-    posterIcon: "/images/medium-shot-woman-with-yellow-suit-2.png",
-    posterName: "FashionMaker1",
-  },
-  // Additional items here
-];
+interface Owner {
+  username: string;
+  profileImage: string;
+}
+
+interface StyleItem {
+  _id: string;
+  title?: string;
+  description: string;
+  coverImage: string;
+  owner: Owner;
+}
 
 function StyleGrid(): JSX.Element {
   const { data, error, isLoading } = useGetRandomStylesQuery({});
 
   if (isLoading) {
-    return <div>Loading styles...</div>;
+    return (
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+        {[...Array(8)].map((_, index) => (
+          <div key={index} className="animate-pulse">
+            <div className="aspect-[3/4] bg-black/20 rounded-[12px] sm:rounded-[16px] mb-2 sm:mb-3" />
+            <div className="h-3 bg-black/20 rounded w-3/4 mb-2" />
+            <div className="h-2 bg-black/20 rounded w-1/4" />
+          </div>
+        ))}
+      </div>
+    );
   }
 
   if (error) {
-    return <div>Error fetching styles: {error.toString()}</div>;
+    return (
+      <div className="text-center py-12">
+        <p className="text-white/60 text-sm sm:text-base">
+          Unable to load styles. Please try again later.
+        </p>
+      </div>
+    );
   }
-  const items: { _id: string; description: string; imageUrl: string; ownerAvatar: string; ownerName: string }[] = data || [];
-  console.log(items);
+
+  const items = (data || []) as StyleItem[];
+
+  if (items.length === 0) {
+    return (
+      <div className="text-center py-12">
+        <p className="text-white/60 text-sm sm:text-base">
+          No styles to explore yet — check back soon.
+        </p>
+      </div>
+    );
+  }
+
   return (
-    <section>
-      <div className="relative grid grid-flow-row-dense md:grid-cols-2 lg:grid-cols-4 gap-x-[30px] gap-y-[80px]">
-        {items.map(({ _id, description, imageUrl, ownerAvatar, ownerName }) => (
+    <section className="px-4 sm:px-6">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 auto-rows-max">
+        {items.map(({ _id, title, description, coverImage, owner }) => (
           <StyleCard
             key={_id}
             id={_id}
-            description={description}
+            description={title || description}
             image={
-              imageUrl.includes("example")
+              !coverImage || coverImage.includes("example")
                 ? "/images/medium-shot-woman-with-yellow-suit-2.png"
-                : imageUrl
+                : coverImage
             }
-            ownerAvatar={ownerAvatar}
-            ownerName={ownerName}
+            ownerAvatar={owner?.profileImage}
+            ownerName={owner?.username}
           />
         ))}
       </div>
