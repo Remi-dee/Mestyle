@@ -336,16 +336,8 @@ function NavBar({ className, isExplore, isProfile }: NavBarProps): JSX.Element {
           MeStyle
         </motion.p>
 
-        {isExplore && (
-          <input
-            name="search"
-            id="search"
-            type="text"
-            autoComplete="on"
-            className="px-4 py-3 text-white bg-gray-100 bg-opacity-5 border-none font-normal w-[60%] leading-normal"
-            placeholder="Search for next wedding outfit inspiration ..."
-          />
-        )}
+        {/* Search lives in the page body (dashboard/explore own a functional
+            StyleSearch), so the nav no longer renders its own search field. */}
 
         {!isExplore && !isProfile && (
           <ul className="flex space-x-8 text-white">
@@ -388,7 +380,6 @@ function NavBar({ className, isExplore, isProfile }: NavBarProps): JSX.Element {
 
         {isProfile && (
           <div className="flex justify-end px-5 gap-4">
-            <SearchBar isSearch={isSearch} setIsSearch={setIsSearch} />
             {theme === "dark" ? (
               <ProfileSection
                 signedInProfile={signedInProfile}

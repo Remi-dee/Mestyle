@@ -1,5 +1,6 @@
 import { useGetFeedQuery } from "@/app/redux/features/styleContent/styleApi";
 import StyleCard from "../styleComp/styleCard";
+import { matchesStyleQuery } from "../search/StyleSearch";
 
 interface Owner {
   avatar: string;
@@ -29,28 +30,6 @@ interface FeedResponse {
   personalized: boolean;
   persona: { id: string; name: string } | null;
   items: StyleItem[];
-}
-
-/** True if the look matches a free-text query across its searchable fields. */
-function matchesQuery(item: StyleItem, q: string): boolean {
-  if (!q) return true;
-  const haystack = [
-    item.title,
-    item.description,
-    item.owner?.username,
-    ...(item.occasions || []),
-    ...(item.categories || []),
-    ...(item.tags || []),
-    ...(item.colors || []),
-  ]
-    .filter(Boolean)
-    .join(" ")
-    .toLowerCase();
-  return q
-    .toLowerCase()
-    .split(/\s+/)
-    .filter(Boolean)
-    .every((term) => haystack.includes(term));
 }
 
 function StyleGrid({ query = "" }: { query?: string }): JSX.Element {
@@ -86,7 +65,7 @@ function StyleGrid({ query = "" }: { query?: string }): JSX.Element {
   const feed = (data || {}) as Partial<FeedResponse>;
   const allItems = feed.items ?? [];
   const q = query.trim();
-  const items = q ? allItems.filter((it) => matchesQuery(it, q)) : allItems;
+  const items = q ? allItems.filter((it) => matchesStyleQuery(it, q)) : allItems;
 
   return (
     <section className="px-2 sm:px-4">
