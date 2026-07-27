@@ -52,6 +52,9 @@ export const stylesApi = createApi({
     getStyleById: builder.query({
       query: (id: string) => `/styles/detail/${id}`,
     }),
+    getMyStyles: builder.query({
+      query: () => "/styles/mine",
+    }),
   }),
 });
 
@@ -60,4 +63,5 @@ export const {
   useGetFeedQuery,
   useCreateStyleMutation,
   useGetStyleByIdQuery,
+  useGetMyStylesQuery,
 } = stylesApi;
