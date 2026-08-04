@@ -41,6 +41,31 @@ const StyleTagsStep: React.FC = () => {
 
   const priceRanges = ["Budget", "Mid-range", "High-end", "Luxury"];
 
+  // Body-pillar matching options — kept aligned with the persona builder.
+  const colorOptions = [
+    "Burgundy",
+    "Black",
+    "White",
+    "Emerald",
+    "Gold",
+    "Blue",
+    "Red",
+    "Neutral",
+    "Pastel",
+    "Earth tones",
+  ];
+
+  const bodyShapeOptions = [
+    "Hourglass",
+    "Rectangle",
+    "Triangle",
+    "Inverted triangle",
+    "Oval",
+    "Trapezoid",
+  ];
+
+  const skinToneOptions = ["Deep", "Dark", "Medium", "Tan", "Light", "Fair"];
+
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, checked } = e.target;
     dispatch(updateCheckboxField({ field: name, value, checked }));
@@ -183,6 +208,65 @@ const StyleTagsStep: React.FC = () => {
             </p>
           )}
         </div>
+
+        {/* Match tags — power the persona feed (vibe: colours; body: shape & tone) */}
+        {(
+          [
+            {
+              label: "Colours in this look",
+              hint: "Used to match people who love these colours.",
+              field: "colors",
+              options: colorOptions,
+            },
+            {
+              label: "Body shapes this flatters",
+              hint: "Helps us show it to the right body shapes.",
+              field: "flatteringBodyShapes",
+              options: bodyShapeOptions,
+            },
+            {
+              label: "Skin tones this complements",
+              hint: "Helps us match the right complexions.",
+              field: "suitableSkinTones",
+              options: skinToneOptions,
+            },
+          ] as const
+        ).map(({ label, hint, field, options }) => (
+          <div key={field}>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              {label}
+            </label>
+            <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">
+              {hint}
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {options.map((option) => {
+                const selected =
+                  (formData[field] as string[])?.includes(option) || false;
+                return (
+                  <label
+                    key={option}
+                    className={`cursor-pointer select-none rounded-full border px-3 py-1.5 text-sm transition-all ${
+                      selected
+                        ? "bg-burgundy-50 dark:bg-burgundy-900/30 border-burgundy-200 dark:border-burgundy-700 text-burgundy-700 dark:text-burgundy-200"
+                        : "bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600/50"
+                    }`}
+                  >
+                    <input
+                      type="checkbox"
+                      name={field}
+                      value={option}
+                      checked={selected}
+                      onChange={handleCheckboxChange}
+                      className="sr-only"
+                    />
+                    {option}
+                  </label>
+                );
+              })}
+            </div>
+          </div>
+        ))}
 
         {/* Price Range */}
         <div>

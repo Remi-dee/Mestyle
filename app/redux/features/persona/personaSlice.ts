@@ -73,28 +73,14 @@ const personaSlice = createSlice({
       ];
 
       const validator = validations[state.formStep];
+      if (!validator) return;
 
-      if (!validator) {
-        console.log("No validator found for step", state.formStep);
-        return;
-      }
-
-      // Run validation and check if there are errors
       const errors = validator(state.formData);
-
-      console.log("Step:", state.formStep);
-      console.log("Form data:", JSON.stringify(state.formData));
-      console.log("Errors:", JSON.stringify(errors));
-
       if (Object.keys(errors).length === 0) {
-        // No errors, proceed to next step
         state.formStep += 1;
         state.errors = {};
-        console.log("Moving to step:", state.formStep);
       } else {
-        // Errors found, update state with error messages
         state.errors = errors;
-        console.log("Validation failed, staying on step:", state.formStep);
       }
     },
 

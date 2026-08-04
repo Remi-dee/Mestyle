@@ -7,9 +7,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 
 interface Owner {
-  name: string;
-  username: string;
-  profileImage: string;
+  name?: string;
+  username?: string;
+  profileImage?: string;
 }
 
 interface StyleDetailCardProps {
@@ -18,18 +18,15 @@ interface StyleDetailCardProps {
   additionalImages: string[];
   description: string;
   owner: Owner;
-  followersCount: number;
-  uploadTitle: string;
+  title?: string;
 }
 
 const StyleDetailCard: React.FC<StyleDetailCardProps> = ({
-  id,
   coverImage,
   additionalImages,
   description,
   owner,
-  uploadTitle,
-  followersCount,
+  title,
 }) => {
   const router = useRouter();
   const [isSaved, setIsSaved] = useState(false);
@@ -55,7 +52,7 @@ const StyleDetailCard: React.FC<StyleDetailCardProps> = ({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 20 }}
-      className="relative flex flex-col lg:flex-row max-w-7xl mx-auto min-h-screen bg-gray-50 dark:bg-gray-900 shadow-xl rounded-lg overflow-hidden font-lexend"
+      className="relative flex flex-col lg:flex-row max-w-7xl mx-auto min-h-screen bg-grayDark shadow-xl rounded-lg overflow-hidden font-lexend"
     >
       {/* Left Section - Image Gallery */}
       <div className="w-full lg:w-1/2 flex flex-col">
@@ -73,7 +70,7 @@ const StyleDetailCard: React.FC<StyleDetailCardProps> = ({
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             onClick={handleBack}
-            className="absolute top-4 left-4 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm w-10 h-10 z-20 flex items-center justify-center rounded-full shadow-lg hover:bg-white dark:hover:bg-gray-800 transition-colors"
+            className="absolute top-4 left-4 bg-black/40 backdrop-blur-sm w-10 h-10 z-20 flex items-center justify-center rounded-full shadow-lg hover:bg-black/60 transition-colors"
             aria-label="Go back"
           >
             <Image width={10} height={25} alt="Back" src={arrowBack} />
@@ -82,7 +79,7 @@ const StyleDetailCard: React.FC<StyleDetailCardProps> = ({
 
         {/* Additional Images Gallery */}
         {additionalImages && additionalImages.length > 0 && (
-          <div className="w-full p-4 bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+          <div className="w-full p-4 bg-grayDark border-t border-white/10">
             <div className="flex space-x-4 overflow-x-auto pb-4 scrollbar-hide">
               <motion.div
                 whileHover={{ scale: 1.05 }}
@@ -133,15 +130,15 @@ const StyleDetailCard: React.FC<StyleDetailCardProps> = ({
       </div>
 
       {/* Right Section - Details */}
-      <div className="w-full lg:w-1/2 p-4 sm:p-6 lg:p-8 flex flex-col justify-between bg-white dark:bg-gray-800">
+      <div className="w-full lg:w-1/2 p-4 sm:p-6 lg:p-8 flex flex-col justify-between bg-grayDark">
         <div className="space-y-4 sm:space-y-6">
           <div className="flex justify-between items-center">
             <motion.h2
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white"
+              className="text-xl sm:text-2xl font-bold text-white"
             >
-              {uploadTitle}
+              {title || "Untitled look"}
             </motion.h2>
             <motion.button
               whileHover={{ scale: 1.05 }}
@@ -150,7 +147,7 @@ const StyleDetailCard: React.FC<StyleDetailCardProps> = ({
               className={`relative px-4 sm:px-6 py-2 rounded-full text-sm font-medium transition-colors ${
                 isSaved
                   ? "bg-burgundy-600 text-white"
-                  : "bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-600"
+                  : "bg-white/10 text-white hover:bg-white/20"
               }`}
             >
               {isSaved ? "Saved" : "Save"}
@@ -161,7 +158,7 @@ const StyleDetailCard: React.FC<StyleDetailCardProps> = ({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
-            className="text-sm sm:text-base text-gray-600 dark:text-gray-300 leading-relaxed"
+            className="text-sm sm:text-base text-white/70 leading-relaxed"
           >
             {description}
           </motion.p>
@@ -171,23 +168,29 @@ const StyleDetailCard: React.FC<StyleDetailCardProps> = ({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="flex items-center p-3 sm:p-4 bg-gray-50 dark:bg-gray-700/50 rounded-xl"
+            className="flex items-center p-3 sm:p-4 bg-white/[0.04] border border-white/10 rounded-xl"
           >
-            <div className="relative w-10 h-10 sm:w-12 sm:h-12">
-              <Image
-                src={owner.profileImage}
-                alt={owner.name}
-                layout="fill"
-                className="rounded-full object-cover"
-              />
+            <div className="relative w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0">
+              {owner?.profileImage ? (
+                <Image
+                  src={owner.profileImage}
+                  alt={owner.username || "Creator"}
+                  layout="fill"
+                  className="rounded-full object-cover"
+                />
+              ) : (
+                <div className="w-full h-full rounded-full bg-gradient-to-br from-burgundy-400 to-burgundy-800" />
+              )}
             </div>
-            <div className="ml-3 sm:ml-4 flex-grow">
-              <p className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white">
-                {owner.name}
+            <div className="ml-3 sm:ml-4 flex-grow min-w-0">
+              <p className="truncate text-base sm:text-lg font-semibold text-white">
+                {owner?.name || owner?.username || "Creator"}
               </p>
-              <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">
-                {followersCount?.toLocaleString()} followers
-              </p>
+              {owner?.username && (
+                <p className="truncate text-xs sm:text-sm text-white/50">
+                  @{owner.username}
+                </p>
+              )}
             </div>
             <motion.button
               whileHover={{ scale: 1.05 }}
@@ -195,7 +198,7 @@ const StyleDetailCard: React.FC<StyleDetailCardProps> = ({
               onClick={() => setIsFollowing(!isFollowing)}
               className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition-colors ${
                 isFollowing
-                  ? "bg-gray-200 dark:bg-gray-600 text-gray-900 dark:text-white"
+                  ? "bg-white/10 text-white hover:bg-white/20"
                   : "bg-burgundy-600 text-white hover:bg-burgundy-700"
               }`}
             >
@@ -209,7 +212,7 @@ const StyleDetailCard: React.FC<StyleDetailCardProps> = ({
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="flex items-center justify-between mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-gray-200 dark:border-gray-700"
+          className="flex items-center justify-between mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-white/10"
         >
           <div className="flex items-center space-x-3 sm:space-x-4">
             <motion.button
@@ -219,7 +222,7 @@ const StyleDetailCard: React.FC<StyleDetailCardProps> = ({
               className={`p-1.5 sm:p-2 rounded-full transition-colors ${
                 isLiked
                   ? "bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400"
-                  : "bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-600"
+                  : "bg-white/10 text-white/70 hover:bg-white/20"
               }`}
               aria-label={isLiked ? "Unlike" : "Like"}
             >
@@ -231,7 +234,7 @@ const StyleDetailCard: React.FC<StyleDetailCardProps> = ({
                 className="w-5 h-5 sm:w-6 sm:h-6"
               />
             </motion.button>
-            <span className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">
+            <span className="text-xs sm:text-sm text-white/50">
               {isLiked ? "Liked" : "Like"}
             </span>
           </div>
@@ -281,7 +284,7 @@ const StyleDetailCard: React.FC<StyleDetailCardProps> = ({
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 onClick={() => setSelectedImage(null)}
-                className="absolute top-4 right-4 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center rounded-full shadow-lg hover:bg-white dark:hover:bg-gray-800 transition-colors"
+                className="absolute top-4 right-4 bg-black/40 backdrop-blur-sm w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center rounded-full shadow-lg hover:bg-black/60 transition-colors"
                 aria-label="Close full screen view"
               >
                 <span className="text-xl sm:text-2xl">×</span>

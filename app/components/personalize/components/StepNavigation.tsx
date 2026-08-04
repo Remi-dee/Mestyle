@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import {
   useCreatePersonaMutation,
   useUpdatePersonaMutation,
+  useActivatePersonaMutation,
 } from "@/app/redux/features/persona/personaApi";
 import { useRouter } from "next/navigation";
 import FormError from "../../ui/form/FormError";
@@ -36,53 +37,25 @@ export default function StepNavigation({
   const [hasErrors, setHasErrors] = useState(false);
 
   // Mutations
-  const [
-    createPersona,
-    { isLoading: isCreating, isSuccess: createSuccess, error: createError },
-  ] = useCreatePersonaMutation();
+  const [createPersona, { isLoading: isCreating }] = useCreatePersonaMutation();
 
-  const [
-    updatePersona,
-    { isLoading: isUpdating, isSuccess: updateSuccess, error: updateError },
-  ] = useUpdatePersonaMutation();
+  const [updatePersona, { isLoading: isUpdating }] = useUpdatePersonaMutation();
+  const [activatePersona] = useActivatePersonaMutation();
 
-  // Combined loading and success states
+  const [submitError, setSubmitError] = useState<string | null>(null);
+
+  // Combined loading state
   const isLoading = isCreating || isUpdating;
-  const isSuccess = createSuccess || updateSuccess;
-  const error = createError || updateError;
 
   // Check if there are any validation errors
   useEffect(() => {
     setHasErrors(Object.keys(errors).length > 0);
   }, [errors]);
 
-  // Redirect to dashboard when persona is successfully created/updated
-  useEffect(() => {
-    if (isSuccess) {
-      // Reset the form state after successful submission
-      dispatch(resetForm());
-
-      // Show appropriate success message
-      if (isEditMode) {
-        alert("Persona updated successfully!");
-      } else {
-        alert("Persona created successfully!");
-      }
-
-      // Navigate back to dashboard
-      router.push("/dashboard");
-    }
-  }, [isSuccess, router, dispatch, isEditMode]);
-
   const isLastStep = formStep === steps.length - 1;
   const isFirstStep = formStep === 0;
 
   const handleNext = () => {
-    // Log current state to help debugging
-    console.log("Current step:", formStep);
-    console.log("Current errors:", errors);
-
-    // Dispatch action to validate and move to next step
     dispatch(nextStep());
   };
 
@@ -91,27 +64,25 @@ export default function StepNavigation({
   };
 
   const handleSubmit = async () => {
+    setSubmitError(null);
     try {
       if (isEditMode && personaId) {
-        // Update existing persona
-        await updatePersona({
-          id: personaId,
-          personaData: formData,
-        }).unwrap();
+        await updatePersona({ id: personaId, personaData: formData }).unwrap();
       } else {
-        // Create new persona
-        await createPersona(formData).unwrap();
+        // Create the persona, then make it active so the feed personalises to
+        // it immediately (backend defaults new personas to isActive: false).
+        const created = await createPersona(formData).unwrap();
+        const newId = created?._id || created?.data?._id;
+        if (newId) {
+          await activatePersona(newId).unwrap();
+        }
       }
-      // Success is handled in the useEffect
+      dispatch(resetForm());
+      router.push("/dashboard");
     } catch (err) {
-      console.error(
-        `Error ${isEditMode ? "updating" : "creating"} persona:`,
-        err
-      );
-      alert(
-        `Error ${
-          isEditMode ? "updating" : "creating"
-        } persona. Please try again.`
+      console.error(`Error ${isEditMode ? "updating" : "creating"} persona:`, err);
+      setSubmitError(
+        `Couldn't ${isEditMode ? "update" : "create"} your persona. Please try again.`,
       );
     }
   };
@@ -120,6 +91,12 @@ export default function StepNavigation({
     <div className="mt-6 space-y-4">
       {/* Error summary */}
       <FormError errors={errors} visible={hasErrors} />
+
+      {submitError && (
+        <div className="rounded-lg border border-red-500/30 bg-red-500/10 px-3 py-2 text-sm text-red-300">
+          {submitError}
+        </div>
+      )}
 
       {/* Navigation buttons */}
       <div className="flex justify-between">

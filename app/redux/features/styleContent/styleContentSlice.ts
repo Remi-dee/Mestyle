@@ -9,6 +9,9 @@ export interface StyleFormData {
   season: string;
   categories: string[];
   tags: string[];
+  colors: string[];
+  flatteringBodyShapes: string[];
+  suitableSkinTones: string[];
   priceRange: string;
   imagesPreview: string; // JSON string of image previews
   [key: string]: any;
@@ -32,6 +35,9 @@ const initialState: StyleContentState = {
     season: "",
     categories: [],
     tags: [],
+    colors: [],
+    flatteringBodyShapes: [],
+    suitableSkinTones: [],
     priceRange: "",
     imagesPreview: "[]", // Initialize as empty JSON array string
   },
