@@ -19,11 +19,14 @@ const DashboardPage = () => {
   const [query, setQuery] = useState("");
   const router = useRouter();
 
-  // Redirect to sign-in if there's an authentication error
+  // Redirect to sign-in if not authenticated (guard rejects with 401/403).
   useEffect(() => {
-    if (isError && isFetchBaseQueryError(error) && error.status === 401) {
-      alert("Session expired. Please sign in again.");
-      router.push("/?view=signIn");
+    if (
+      isError &&
+      isFetchBaseQueryError(error) &&
+      (error.status === 401 || error.status === 403)
+    ) {
+      router.push("/?view=signin");
     }
   }, [isError, error, router]);
 

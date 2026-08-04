@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 import google from "@/public/icons/Google.png";
@@ -28,16 +28,6 @@ function SignIn(): JSX.Element {
   const dispatch = useDispatch();
   const [login, { isLoading }] = useLoginMutation();
 
-  // Google OAuth callback returns ?token= — store it and go to the feed.
-  useEffect(() => {
-    const token = new URLSearchParams(window.location.search).get("token");
-    if (token) {
-      localStorage.setItem("access_token", token);
-      dispatch(setCredentials({ access_token: token }));
-      router.push("/dashboard");
-    }
-  }, [router, dispatch]);
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -60,13 +50,9 @@ function SignIn(): JSX.Element {
     setError(null);
     try {
       const response = await login(formData).unwrap();
-      if (response?.access_token) {
-        localStorage.setItem("access_token", response.access_token);
-        dispatch(setCredentials({ access_token: response.access_token, user: response.user }));
-        router.push("/dashboard");
-      } else {
-        setError("Invalid email or password. Please try again.");
-      }
+      // Auth is now in httpOnly cookies set by the server; nothing to store.
+      dispatch(setCredentials({ user: response?.user }));
+      router.push("/dashboard");
     } catch (err) {
       console.error("Error during sign-in:", err);
       setError("Invalid email or password. Please try again.");

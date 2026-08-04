@@ -284,9 +284,17 @@ const ProfileSection: React.FC<ProfileSectionProps> = ({
               username={signedInProfile?.username || ""}
               profileImage={signedInProfile?.profileImage || ""}
               email={signedInProfile?.email || ""}
-              onLogout={() => {
-                console.log("Logout clicked");
-                // Handle logout logic here
+              onLogout={async () => {
+                // httpOnly cookies can only be cleared by the server.
+                try {
+                  await fetch(
+                    `${(process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:4000/").replace(/\/$/, "")}/auth/logout`,
+                    { method: "POST", credentials: "include" },
+                  );
+                } catch {
+                  /* ignore network error, still route out */
+                }
+                router.push("/");
               }}
             />
           </motion.div>
