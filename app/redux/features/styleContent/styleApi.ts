@@ -27,6 +27,15 @@ export const stylesApi = createApi({
     getRandomStyles: builder.query({
       query: () => "/styles/random",
     }),
+    getFeed: builder.query({
+      query: (params: { limit?: number; page?: number } = {}) => {
+        const search = new URLSearchParams();
+        if (params.limit) search.set("limit", String(params.limit));
+        if (params.page) search.set("page", String(params.page));
+        const qs = search.toString();
+        return `/styles/feed${qs ? `?${qs}` : ""}`;
+      },
+    }),
     createStyle: builder.mutation<Style, FormData>({
       query: (formData) => ({
         url: "/styles/create",
@@ -43,11 +52,16 @@ export const stylesApi = createApi({
     getStyleById: builder.query({
       query: (id: string) => `/styles/detail/${id}`,
     }),
+    getMyStyles: builder.query({
+      query: () => "/styles/mine",
+    }),
   }),
 });
 
 export const {
   useGetRandomStylesQuery,
+  useGetFeedQuery,
   useCreateStyleMutation,
   useGetStyleByIdQuery,
+  useGetMyStylesQuery,
 } = stylesApi;

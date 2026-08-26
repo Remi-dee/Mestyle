@@ -8,7 +8,6 @@ export default function StyleDetailedPage() {
   const router = useRouter();
   const { id } = useParams();
   const { data: style, isLoading, error } = useGetStyleByIdQuery(id as string);
-  console.log("here is style", style);
   if (isLoading)
     return (
       <div className="min-h-screen bg-grayDark flex items-center justify-center">
@@ -20,8 +19,25 @@ export default function StyleDetailedPage() {
         </div>
       </div>
     );
-  if (error) return <div>Error loading style details.</div>;
-  if (!style) return <div>No style found.</div>;
+  if (error || !style)
+    return (
+      <div className="min-h-screen bg-grayDark flex items-center justify-center px-4 font-lexend">
+        <div className="bg-white/[0.03] border border-white/10 rounded-2xl p-6 max-w-md text-center">
+          <h3 className="text-white text-lg font-semibold mb-2">
+            {error ? "Couldn't load this look" : "Look not found"}
+          </h3>
+          <p className="text-white/60 text-sm mb-5">
+            It may have been removed. Try heading back to explore.
+          </p>
+          <button
+            onClick={() => router.push("/explore")}
+            className="px-5 py-2.5 bg-burgundy-600 hover:bg-burgundy-700 text-white rounded-full text-sm transition-colors"
+          >
+            Back to Explore
+          </button>
+        </div>
+      </div>
+    );
 
   return <StyleDetailCard {...style} />;
 }

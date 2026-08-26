@@ -1,5 +1,6 @@
-import { useGetRandomStylesQuery } from "@/app/redux/features/styleContent/styleApi";
+import { useGetFeedQuery } from "@/app/redux/features/styleContent/styleApi";
 import StyleCard from "../styleComp/styleCard";
+import { matchesStyleQuery } from "../search/StyleSearch";
 
 interface Owner {
   avatar: string;
@@ -10,28 +11,29 @@ interface Owner {
 
 interface StyleItem {
   _id: string;
+  title?: string;
   description: string;
   imageUrl: string;
   posterIcon: string;
   posterName: string;
   coverImage: string;
   owner: Owner;
+  occasions?: string[];
+  categories?: string[];
+  tags?: string[];
+  colors?: string[];
+  matchScore: number | null;
+  matchReasons: string[];
 }
 
-const staticItems = [
-  {
-    id: 1,
-    styleImage: "/images/medium-shot-woman-with-yellow-suit-2.png",
-    description:
-      "Man on brown hat with oversized jacket street style, Man on brown hat with oversized jacket street style",
-    posterIcon: "/images/medium-shot-woman-with-yellow-suit-2.png",
-    posterName: "FashionMaker1",
-  },
-  // Additional items here
-];
+interface FeedResponse {
+  personalized: boolean;
+  persona: { id: string; name: string } | null;
+  items: StyleItem[];
+}
 
-function StyleGrid(): JSX.Element {
-  const { data, error, isLoading } = useGetRandomStylesQuery({});
+function StyleGrid({ query = "" }: { query?: string }): JSX.Element {
+  const { data, error, isLoading } = useGetFeedQuery({});
 
   if (isLoading) {
     return (
@@ -60,43 +62,86 @@ function StyleGrid(): JSX.Element {
     );
   }
 
-  const items = (data || []) as StyleItem[];
+  const feed = (data || {}) as Partial<FeedResponse>;
+  const allItems = feed.items ?? [];
+  const q = query.trim();
+  const items = q ? allItems.filter((it) => matchesStyleQuery(it, q)) : allItems;
 
   return (
     <section className="px-2 sm:px-4">
+      {/* Active-persona pill — "who we're styling for" */}
+      {feed.personalized && feed.persona && !q && (
+        <div className="mb-4 sm:mb-6 flex items-center gap-2">
+          <span className="inline-flex items-center gap-2 rounded-full bg-black/30 border border-white/15 px-3 py-1.5">
+            <span className="w-5 h-5 rounded-full bg-gradient-to-br from-burgundy-400 to-burgundy-800" />
+            <span className="text-white/70 text-xs sm:text-sm">
+              Styling for:{" "}
+              <span className="text-white font-semibold">
+                {feed.persona.name}
+              </span>
+            </span>
+          </span>
+        </div>
+      )}
+
+      {/* Search results count */}
+      {q && (
+        <p className="mb-4 sm:mb-6 text-sm text-white/60">
+          {items.length} result{items.length === 1 ? "" : "s"} for{" "}
+          <span className="text-white font-semibold">&ldquo;{q}&rdquo;</span>
+        </p>
+      )}
+
       <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 sm:gap-4 lg:gap-6 auto-rows-max">
-        {items.map(({ _id, description, coverImage, owner }) => (
-          <StyleCard
-            key={_id}
-            id={_id}
-            description={description}
-            image={
-              coverImage?.includes("example")
-                ? "/images/medium-shot-woman-with-yellow-suit-2.png"
-                : coverImage
-            }
-            ownerAvatar={owner?.profileImage}
-            ownerName={owner?.username}
-          />
-        ))}
+        {items.map(
+          ({ _id, title, description, coverImage, owner, matchScore, matchReasons }) => (
+            <StyleCard
+              key={_id}
+              id={_id}
+              description={title || description}
+              image={
+                coverImage?.includes("example")
+                  ? "/images/medium-shot-woman-with-yellow-suit-2.png"
+                  : coverImage
+              }
+              ownerAvatar={owner?.profileImage}
+              ownerName={owner?.username}
+              matchScore={q ? undefined : matchScore}
+              matchReasons={q ? [] : matchReasons}
+            />
+          ),
+        )}
       </div>
 
-      {/* Empty State */}
+      {/* Empty State — distinguishes "no results for search" vs "no styles yet" */}
       {items.length === 0 && (
         <div className="text-center py-8 sm:py-12">
           <div className="max-w-md mx-auto px-4">
-            <h3 className="text-lg sm:text-xl font-medium text-white mb-2">
-              No styles found
-            </h3>
-            <p className="text-white/60 text-sm sm:text-base mb-6">
-              Be the first to create and share your style inspiration!
-            </p>
-            <button
-              onClick={() => (window.location.href = "/creator")}
-              className="px-4 sm:px-6 py-2 sm:py-3 bg-burgundy-600 text-white rounded-[20px] hover:bg-burgundy-700 transition-colors text-sm sm:text-base"
-            >
-              Create Your First Style
-            </button>
+            {q ? (
+              <>
+                <h3 className="text-lg sm:text-xl font-medium text-white mb-2">
+                  No looks match &ldquo;{q}&rdquo;
+                </h3>
+                <p className="text-white/60 text-sm sm:text-base">
+                  Try a different occasion, colour, or creator.
+                </p>
+              </>
+            ) : (
+              <>
+                <h3 className="text-lg sm:text-xl font-medium text-white mb-2">
+                  No styles found
+                </h3>
+                <p className="text-white/60 text-sm sm:text-base mb-6">
+                  Be the first to create and share your style inspiration!
+                </p>
+                <button
+                  onClick={() => (window.location.href = "/creator")}
+                  className="px-4 sm:px-6 py-2 sm:py-3 bg-burgundy-600 text-white rounded-[20px] hover:bg-burgundy-700 transition-colors text-sm sm:text-base"
+                >
+                  Create Your First Style
+                </button>
+              </>
+            )}
           </div>
         </div>
       )}

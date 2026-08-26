@@ -143,6 +143,15 @@ const CreateStyleForm: React.FC = () => {
         submitData.append("season", formData.season);
         submitData.append("categories", JSON.stringify(formData.categories));
         submitData.append("tags", JSON.stringify(formData.tags));
+        submitData.append("colors", JSON.stringify(formData.colors));
+        submitData.append(
+          "flatteringBodyShapes",
+          JSON.stringify(formData.flatteringBodyShapes)
+        );
+        submitData.append(
+          "suitableSkinTones",
+          JSON.stringify(formData.suitableSkinTones)
+        );
         submitData.append("priceRange", formData.priceRange);
         submitData.append("createdAt", new Date().toISOString());
         if (activePersona?._id) {

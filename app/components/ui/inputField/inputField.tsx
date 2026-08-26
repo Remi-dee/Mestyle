@@ -16,10 +16,10 @@ function InputField({
   required?: boolean;
 }) {
   return (
-    <div className="flex flex-col gap-1">
+    <div className="flex flex-col gap-1.5">
       <label
         htmlFor={name}
-        className="block text-left text-sm font-medium text-gray-700"
+        className="block text-left text-sm font-medium text-white/80"
       >
         {label}
       </label>
@@ -30,7 +30,7 @@ function InputField({
         onChange={onChange}
         type={type}
         required={required}
-        className="text-zinc-400 text-base font-normal w-full bg-white border border-neutral-300"
+        className="w-full rounded-lg border border-white/15 bg-white/[0.04] px-4 py-3 text-base text-white placeholder:text-white/35 outline-none transition focus:border-burgundy-500 focus:ring-2 focus:ring-burgundy-500/30"
         placeholder={placeholder}
       />
     </div>

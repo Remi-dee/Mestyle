@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import PersonaliseScreen from "../components/ui/personaliseScreen/template";
+import PersonaliseScreen from "../components/personalize/PersonalizeScreen";
 
 import NavBar from "../components/landingPage/NavBar/NavBar";
 import Form from "../components/personalize/Form";

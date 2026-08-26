@@ -1,87 +1,62 @@
-import Image from "next/image";
+"use client";
 import Link from "next/link";
-import google from "../../../public/icons/Google.png";
-import arrowBack from "@/public/icons/arrowBack.png";
+import { useState } from "react";
 import Button from "../ui/button/Button";
+import InputField from "../ui/inputField/inputField";
+import AuthShell from "./AuthShell";
+
 function ForgotPassword() {
+  const [email, setEmail] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    // No password-reset endpoint yet — acknowledge honestly rather than
+    // implying an email was sent.
+    setSubmitted(true);
+  };
+
   return (
-    <form>
-      <div className="flex pb-4 relative font-lexend">
-        <div className="flex flex-col w-[439px]  py-[60px] h-auto bg-white items-center ">
-          <div className=" text-center ">
-            <div className="gap-[5px] ">
-              <div className="text-black text-center text-[32px] font-medium leading-10">
-                Forgot Password
-              </div>
-              <div className=" text-center text-neutral-600 text-base font-normal  leading-tight">
-                Enter your email to reset your password
-              </div>
-            </div>
-
-            <div className="space-y-[32px]">
-              <div className="flex flex-col gap-3 pt-6">
-                <div className="flex flex-col gap-1">
-                  <label
-                    htmlFor="username"
-                    className="block text-sm text-start font-medium text-gray-700"
-                  >
-                    Email Adress
-                  </label>
-
-                  <div className="w-full   gap-1 inline-flex">
-                    <input
-                      name="email"
-                      required
-                      id="email"
-                      type="text"
-                      autoComplete="on"
-                      className=" text-zinc-400  text-base font-normal w-full leading-normal bg-white border border-neutral-300"
-                      placeholder="Enter your email address"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div>
-                <Button variant="secondary" className=" w-full">
-                  Continue
-                </Button>
-              </div>
-
-              <div className="w-80 h-[19px] items-center justify-center  gap-3 inline-flex">
-                <div className="w-[130px] h-[0px] rotate-180 border border-neutral-300"></div>
-                <div className="text-black text-base font-normal  leading-tight">
-                  OR
-                </div>
-                <div className="w-[130px] h-[0px]  rotate-180 border border-neutral-300"></div>
-              </div>
-              <div className="flex justify-center gap-3 border border-spacing-2 mt-[22px] px-6 py-3">
-                <div className="">
-                  <Image
-                    width={25}
-                    height={25}
-                    alt="Sign in with Google"
-                    src={google}
-                  />
-                </div>
-                <div className="text-black text-lg font-normal leading-snug ">
-                  Sign up with Google
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-white absolute top-0 left-0 w-[40px] h-12 flex items-center justify-center ">
-              <Image
-                width={10}
-                height={25}
-                alt="Sign in with Google"
-                src={arrowBack}
-                className="w-[10px] h-[25px]"
+    <form onSubmit={handleSubmit}>
+      <AuthShell
+        title="Forgot password"
+        subtitle="Enter your email and we'll help you get back in."
+        footer={
+          <>
+            Remember it?{" "}
+            <Link href="/?view=signin" className="font-semibold text-burgundy-400 hover:underline">
+              Back to log in
+            </Link>
+          </>
+        }
+      >
+        {submitted ? (
+          <div className="rounded-lg border border-burgundy-500/30 bg-burgundy-500/10 px-4 py-3 text-sm text-white/80">
+            Password reset by email is coming soon. For now, reach us at{" "}
+            <span className="font-semibold text-burgundy-300">support@mestyle.app</span> and
+            we&apos;ll help you reset it.
+          </div>
+        ) : (
+          <>
+            <div className="flex flex-col gap-4">
+              <InputField
+                label="Email address"
+                name="email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter your email address"
+                required
               />
             </div>
-          </div>
-        </div>
-      </div>
+            <div className="mt-6">
+              <Button type="submit" variant="primary" className="w-full">
+                Continue
+              </Button>
+            </div>
+          </>
+        )}
+      </AuthShell>
     </form>
   );
 }

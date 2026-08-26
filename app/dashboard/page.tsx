@@ -1,8 +1,8 @@
 "use client";
 
-import { useGetRandomStylesQuery } from "@/app/redux/features/styleContent/styleApi";
+import { useGetFeedQuery } from "@/app/redux/features/styleContent/styleApi";
 import Image from "next/image";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import NavBar from "../components/landingPage/NavBar/NavBar";
 import waterMark from "@/public/icons/waterMark.png";
@@ -15,14 +15,18 @@ import {
   isFetchBaseQueryError,
 } from "../composables/dashboard/errorHandler";
 const DashboardPage = () => {
-  const { data, error, isLoading, isError } = useGetRandomStylesQuery({});
+  const { data, error, isLoading, isError } = useGetFeedQuery({});
+  const [query, setQuery] = useState("");
   const router = useRouter();
 
-  // Redirect to sign-in if there's an authentication error
+  // Redirect to sign-in if not authenticated (guard rejects with 401/403).
   useEffect(() => {
-    if (isError && isFetchBaseQueryError(error) && error.status === 401) {
-      alert("Session expired. Please sign in again.");
-      router.push("/?view=signIn");
+    if (
+      isError &&
+      isFetchBaseQueryError(error) &&
+      (error.status === 401 || error.status === 403)
+    ) {
+      router.push("/?view=signin");
     }
   }, [isError, error, router]);
 
@@ -70,9 +74,9 @@ const DashboardPage = () => {
     <main className="min-h-screen bg-grayDark font-lexend">
       <div className="relative max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
         <NavBar isProfile={true} />
-        <Header />
+        <Header query={query} setQuery={setQuery} />
         <div className="py-8">
-          <StyleGrid />
+          <StyleGrid query={query} />
         </div>
         <div className="pointer-events-none">
           <Image
