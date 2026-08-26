@@ -11,7 +11,6 @@ import { useTheme } from "next-themes";
 import userLight from "@/public/icons/user.png";
 import userDark from "@/public/icons/userDark.png";
 import Image from "next/image";
-import Search from "@/public/icons/search.svg";
 import { useGetCurrentUserQuery } from "@/app/redux/features/user/user.api";
 import {
   MdOutlineKeyboardArrowDown,
@@ -30,11 +29,6 @@ interface MobileNavProps {
   setOpenHamburger: (value: boolean) => void;
   pathname: string;
   router: ReturnType<typeof useRouter>;
-}
-
-interface SearchBarProps {
-  isSearch: boolean;
-  setIsSearch: (value: boolean) => void;
 }
 
 interface ProfileSectionProps {
@@ -168,45 +162,6 @@ const MobileNav: React.FC<MobileNavProps> = ({
   );
 };
 
-// Search Component
-const SearchBar: React.FC<SearchBarProps> = ({ isSearch, setIsSearch }) => {
-  return (
-    <div
-      className={`${
-        isSearch && "flex-grow"
-      } justify-between px-3 py-[4px] text-white bg-gray-800 bg-opacity-5 rounded-[15px] items-center gap-2.5 inline-flex`}
-    >
-      {isSearch ? (
-        <div className="flex items-center gap-2">
-          <button
-            onClick={() => setIsSearch(false)}
-            className="px-2 py-0.5 bg-black rounded-full text-white hover:bg-gray-950"
-            aria-label="Close search"
-          >
-            ✕
-          </button>
-          <input
-            name="search"
-            id="search"
-            type="text"
-            autoComplete="on"
-            className="px-4 py-3 text-white bg-gray-800 bg-opacity-5 rounded-[10px] border-none font-normal w-[1108px] leading-normal"
-            placeholder="Search your next outfit..."
-          />
-        </div>
-      ) : (
-        <button
-          className="bg-transparent w-[30px] rounded-full p-2 border border-zinc-600"
-          onClick={() => setIsSearch(true)}
-          aria-label="Open search"
-        >
-          <Image src={Search} alt="Search" className="w-[25px] h-auto" />
-        </button>
-      )}
-    </div>
-  );
-};
-
 // Profile Component
 const ProfileSection: React.FC<ProfileSectionProps> = ({
   signedInProfile,
@@ -306,7 +261,6 @@ const ProfileSection: React.FC<ProfileSectionProps> = ({
 
 function NavBar({ className, isExplore, isProfile }: NavBarProps): JSX.Element {
   const { theme } = useTheme();
-  const [isSearch, setIsSearch] = useState<boolean>(false);
   const [openHamburger, setOpenHamburger] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const router = useRouter();
