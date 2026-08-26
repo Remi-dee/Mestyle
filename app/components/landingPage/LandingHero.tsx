@@ -7,9 +7,9 @@ import { useRouter } from "next/navigation";
 import { oregano } from "../../localFonts/oregano/oregano";
 import Button from "../ui/button/Button";
 
-import heroLeft from "@/public/images/hero/heroImage_left.png";
-import heroCenter from "@/public/images/hero/heroImage_center.png";
-import heroRight from "@/public/images/hero/heroImage_right.png";
+import heroLeft from "@/public/images/hero/heroImage_left.jpg";
+import heroCenter from "@/public/images/hero/heroImage_center.jpg";
+import heroRight from "@/public/images/hero/heroImage_right.jpg";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
