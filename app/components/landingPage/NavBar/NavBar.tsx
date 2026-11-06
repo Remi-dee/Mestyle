@@ -57,7 +57,10 @@ const MobileNav: React.FC<MobileNavProps> = ({
 }) => {
   return (
     <nav className="block lg:hidden font-lexend">
-      <div className="flex backdrop-blur-md bg-opacity-50 justify-between items-center py-4  dark:bg-grayDark text-white mb-[50px] sticky top-0 z-[200]">
+      <div
+        className="flex backdrop-blur-md bg-opacity-50 justify-between items-center py-4  dark:bg-grayDark text-white mb-[50px] sticky top-0 z-[200]"
+        style={{ paddingTop: "calc(env(safe-area-inset-top, 0px) + 1rem)" }}
+      >
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
@@ -314,6 +317,7 @@ function NavBar({ className, isExplore, isProfile }: NavBarProps): JSX.Element {
         className={`hidden ${
           theme !== "dark" ? "bg-transparent" : ""
         } sticky backdrop-blur-md bg-opacity-50 top-0 z-[150] mx-auto py-6 lg:flex items-center justify-between bg-grayDark mb-[50px] ${className}`}
+        style={{ paddingTop: "calc(env(safe-area-inset-top, 0px) + 1.5rem)" }}
       >
         <motion.p
           whileHover={{ scale: 1.05 }}

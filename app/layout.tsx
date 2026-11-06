@@ -1,43 +1,44 @@
-"use client";
-
 import { ReactNode } from "react";
-
-import { Inter, Oregano } from "next/font/google";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { lexend } from "./localFonts/lexend/localFont";
-import { ThemeProvider } from "@/app/composables/provider";
-import Head from "next/head";
-import { Provider } from "react-redux";
-import { store } from "./redux/store";
+import Providers from "./providers";
 
-type Metadata = {
-  title: string;
-  description: string;
+export const metadata: Metadata = {
+  title: "Mestyle",
+  description:
+    "Looks that fit your body and your vibe — Nigeria-first style matching.",
+  applicationName: "Mestyle",
+  manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    title: "Mestyle",
+    statusBarStyle: "black-translucent",
+  },
+  icons: {
+    icon: "/icons/app/icon.svg",
+    apple: "/icons/app/icon.svg",
+  },
+};
+
+// viewport-fit=cover lets the app paint under the notch / dynamic island
+// instead of letterboxing; themeColor matches grayDark so the bar blends in.
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#121212",
 };
 
 type RootLayoutProps = {
   children: ReactNode;
 };
 
-// export const metadata: Metadata = {
-//   title: "MeStyle",
-//   description: "Get your confidence again",
-// };
-
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
-      <Head>
-        <title>MeStyle</title>
-        <meta name="description" content="Get your confidence again" />
-      </Head>
-
-      <body className={`${lexend.variable} overflow-x-hidden `}>
-        <Provider store={store}>
-          <ThemeProvider enableSystem={true} attribute="class">
-            {children}
-          </ThemeProvider>
-        </Provider>
+      <body className={`${lexend.variable}`}>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
