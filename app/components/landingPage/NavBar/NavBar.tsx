@@ -17,6 +17,7 @@ import {
   MdOutlineKeyboardArrowUp,
 } from "react-icons/md";
 import ProfileDropdown from "./ProfileDown";
+import Avatar from "@/app/components/ui/Avatar";
 
 interface NavBarProps {
   className?: string;
@@ -205,40 +206,21 @@ const ProfileSection: React.FC<ProfileSectionProps> = ({
       onMouseEnter={() => setDropdownOpen(true)}
       onMouseLeave={() => setDropdownOpen(false)}
     >
-      {signedInProfile?.profileImage ? (
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          onClick={() => router.push("/profile")}
-          aria-label="Go to profile"
-          className="overflow-hidden rounded-full"
-        >
-          <Image
-            src={signedInProfile.profileImage}
-            alt="Profile Image"
-            width={30}
-            height={30}
-            className="rounded-full border border-zinc-600 transition-transform duration-300 hover:scale-110"
-          />
-        </motion.button>
-      ) : (
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          aria-label="Default profile"
-          className="overflow-hidden rounded-full"
-        >
-          <div className="relative p-2 w-[40px] h-[40px] rounded-full border border-zinc-600 bg-zinc-800/50">
-            <Image
-              src={userLight}
-              alt="Default profile icon"
-              width={0}
-              height={0}
-              className="absolute w-[25px] bottom-1 left-[6px] transition-transform duration-300 hover:scale-110"
-            />
-          </div>
-        </motion.button>
-      )}
+      <motion.button
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        onClick={() => router.push("/profile")}
+        aria-label="Go to profile"
+        className="overflow-hidden rounded-full"
+      >
+        <Avatar
+          src={signedInProfile?.profileImage}
+          seed={signedInProfile?.username || signedInProfile?.email}
+          name={signedInProfile?.username}
+          size={34}
+          className="border border-zinc-600 transition-transform duration-300 hover:scale-110"
+        />
+      </motion.button>
       <motion.div
         animate={{ rotate: dropdownOpen ? 180 : 0 }}
         transition={{ duration: 0.3 }}
