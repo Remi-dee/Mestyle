@@ -29,6 +29,11 @@ interface MobileNavProps {
   setOpenHamburger: (value: boolean) => void;
   pathname: string;
   router: ReturnType<typeof useRouter>;
+  signedInProfile: {
+    username: string;
+    profileImage: string;
+    email: string;
+  } | null;
 }
 
 interface ProfileSectionProps {
@@ -48,6 +53,7 @@ const MobileNav: React.FC<MobileNavProps> = ({
   setOpenHamburger,
   pathname,
   router,
+  signedInProfile,
 }) => {
   return (
     <nav className="block lg:hidden font-lexend">
@@ -133,26 +139,47 @@ const MobileNav: React.FC<MobileNavProps> = ({
                 ))}
               </ul>
               <div className="absolute bottom-8 left-0 right-0 mx-auto space-y-4 text-sm text-bold px-4">
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <Button
-                    variant="secondary"
-                    onClick={() => router.push("/?view=signin")}
-                    className="w-full"
+                {signedInProfile ? (
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                   >
-                    Login
-                  </Button>
-                </motion.div>
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <Button variant="primary" className="w-full">
-                    Get Started
-                  </Button>
-                </motion.div>
+                    <Button
+                      variant="primary"
+                      onClick={() => router.push("/dashboard")}
+                      className="w-full"
+                    >
+                      Go to dashboard
+                    </Button>
+                  </motion.div>
+                ) : (
+                  <>
+                    <motion.div
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <Button
+                        variant="secondary"
+                        onClick={() => router.push("/?view=signin")}
+                        className="w-full"
+                      >
+                        Login
+                      </Button>
+                    </motion.div>
+                    <motion.div
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <Button
+                        variant="primary"
+                        onClick={() => router.push("/?view=signup")}
+                        className="w-full"
+                      >
+                        Get Started
+                      </Button>
+                    </motion.div>
+                  </>
+                )}
               </div>
             </div>
           </motion.div>
@@ -280,6 +307,7 @@ function NavBar({ className, isExplore, isProfile }: NavBarProps): JSX.Element {
         setOpenHamburger={setOpenHamburger}
         pathname={pathname}
         router={router}
+        signedInProfile={signedInProfile}
       />
 
       <nav
@@ -321,22 +349,52 @@ function NavBar({ className, isExplore, isProfile }: NavBarProps): JSX.Element {
 
         {!isProfile && (
           <div className="flex items-center justify-center space-x-6 text-sm text-bold">
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button
-                variant="secondary"
-                onClick={() => router.push("/?view=signin")}
-              >
-                Login
-              </Button>
-            </motion.div>
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button
-                variant="primary"
-                onClick={() => router.push("/?view=signup")}
-              >
-                Get Started
-              </Button>
-            </motion.div>
+            {signedInProfile ? (
+              <>
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Button
+                    variant="primary"
+                    onClick={() => router.push("/dashboard")}
+                  >
+                    Go to dashboard
+                  </Button>
+                </motion.div>
+                <ProfileSection
+                  signedInProfile={signedInProfile}
+                  dropdownOpen={dropdownOpen}
+                  setDropdownOpen={setDropdownOpen}
+                  router={router}
+                />
+              </>
+            ) : (
+              <>
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Button
+                    variant="secondary"
+                    onClick={() => router.push("/?view=signin")}
+                  >
+                    Login
+                  </Button>
+                </motion.div>
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Button
+                    variant="primary"
+                    onClick={() => router.push("/?view=signup")}
+                  >
+                    Get Started
+                  </Button>
+                </motion.div>
+              </>
+            )}
           </div>
         )}
 
