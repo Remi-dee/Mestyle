@@ -71,7 +71,7 @@ const DashboardPage = () => {
   }
 
   return (
-    <main className="min-h-screen bg-grayDark font-lexend">
+    <main className="min-h-screen w-full overflow-x-hidden bg-grayDark font-lexend">
       <div className="relative max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
         <NavBar isProfile={true} />
         <Header query={query} setQuery={setQuery} />
