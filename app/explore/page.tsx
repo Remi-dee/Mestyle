@@ -14,7 +14,7 @@ function ExplorePage() {
   const items = useMemo(() => (data ?? []) as any[], [data]);
 
   return (
-    <main className="min-h-screen bg-grayDark font-lexend flex justify-center">
+    <main className="min-h-screen w-full overflow-x-hidden bg-grayDark font-lexend flex justify-center">
       <div className="relative w-full max-w-screen-2xl px-4 sm:px-6 lg:px-8">
         <NavBar isExplore={true} />
 

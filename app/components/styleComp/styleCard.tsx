@@ -38,9 +38,9 @@ const StyleCard: React.FC<StyleCardProps> = ({
           <Image
             src={image}
             alt={description}
-            layout="fill"
-            objectFit="cover"
-            className={`transform transition-transform duration-500 ${
+            fill
+            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+            className={`object-cover transform transition-transform duration-500 ${
               isHovered ? "scale-105" : "scale-100"
             }`}
           />
@@ -129,7 +129,8 @@ const StyleCard: React.FC<StyleCardProps> = ({
             <Image
               src={ownerAvatar || "/images/default-avatar.png"}
               alt={ownerUsername}
-              layout="fill"
+              fill
+              sizes="24px"
               className="rounded-full object-cover"
             />
           </div>
