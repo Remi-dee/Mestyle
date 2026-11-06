@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Image from "next/image";
+import Avatar from "@/app/components/ui/Avatar";
 
 import Download from "@/public/icons/download.svg";
 import Heart from "@/public/icons/like.svg";
@@ -125,15 +126,12 @@ const StyleCard: React.FC<StyleCardProps> = ({
 
         {/* Owner Info */}
         <div className="mt-1.5 sm:mt-2 flex items-center space-x-1.5 sm:space-x-2">
-          <div className="relative w-5 h-5 sm:w-6 sm:h-6">
-            <Image
-              src={ownerAvatar || "/images/default-avatar.png"}
-              alt={ownerUsername}
-              fill
-              sizes="24px"
-              className="rounded-full object-cover"
-            />
-          </div>
+          <Avatar
+            src={ownerAvatar}
+            seed={ownerUsername}
+            name={ownerUsername}
+            size={24}
+          />
           <span className="text-white/60 text-[10px] sm:text-xs font-medium truncate">
             {ownerUsername}
           </span>
