@@ -1,0 +1,19 @@
+{
+  "name": "Mestyle",
+  "short_name": "Mestyle",
+  "description": "Looks that fit your body and your vibe — Nigeria-first style matching.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#121212",
+  "theme_color": "#121212",
+  "icons": [
+    {
+      "src": "/icons/app/icon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any",
+      "purpose": "any maskable"
+    }
+  ]
+}
