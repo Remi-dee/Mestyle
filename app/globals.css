@@ -3,4 +3,20 @@
 @tailwind components;
 @tailwind utilities;
 
+/* --- Mobile / PWA: dark full-bleed under the dynamic island, no sideways scroll --- */
+html,
+body {
+  /* stop the sideways rubber-band scroll (applied to html too, not just body) */
+  overflow-x: hidden;
+  max-width: 100%;
+  /* grayDark, so the area under the notch/island matches the app instead of
+     showing a white (light mode) or black (dark mode) letterbox bar */
+  background-color: #121212;
+}
+
+/* Push a sticky top bar below the status bar / dynamic island on notched phones */
+.safe-top {
+  padding-top: calc(env(safe-area-inset-top, 0px) + var(--safe-top-base, 0px));
+}
+
 
